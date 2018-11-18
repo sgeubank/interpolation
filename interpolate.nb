@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    524452,      10057]
-NotebookOptionsPosition[    512145,       9888]
-NotebookOutlinePosition[    512501,       9904]
-CellTagsIndexPosition[    512458,       9901]
+NotebookDataLength[    531302,      10140]
+NotebookOptionsPosition[    518686,       9963]
+NotebookOutlinePosition[    519042,       9979]
+CellTagsIndexPosition[    518999,       9976]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -66,18 +66,18 @@ Cell[BoxData[
          RowBox[{
           RowBox[{"-", "1"}], ",", 
           RowBox[{"-", "1"}]}], "}"}]}], ";", "\[IndentingNewLine]", 
-       RowBox[{"probChanged", " ", "=", " ", "True"}], ";"}]}], " ", 
+       RowBox[{"funcChanged", " ", "=", " ", "True"}], ";"}]}], " ", 
      RowBox[{"(*", " ", 
       RowBox[{
       "to", " ", "trigger", " ", "recomputation", " ", "of", " ", "vals"}], 
       " ", "*)"}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
     RowBox[{"If", "[", 
-     RowBox[{"probChanged", ",", "\[IndentingNewLine]", 
+     RowBox[{"funcChanged", ",", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"vals", "=", 
         RowBox[{"Table", "[", 
          RowBox[{
-          RowBox[{"prob", "[", 
+          RowBox[{"func", "[", 
            RowBox[{"k", "/", 
             RowBox[{"(", 
              RowBox[{"n", "-", "1"}], ")"}]}], "]"}], ",", 
@@ -89,7 +89,7 @@ Cell[BoxData[
         RowBox[{"msg", " ", "<>", "\"\<\\nNew vals: \>\"", "<>", 
          RowBox[{"TextString", "[", "vals", "]"}]}]}], ";", 
        "\[IndentingNewLine]", 
-       RowBox[{"probChanged", "=", "False"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"funcChanged", "=", "False"}], ";", "\[IndentingNewLine]", 
        RowBox[{"valsChanged", " ", "=", " ", "True"}], ";"}]}], 
      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
     RowBox[{"If", "[", 
@@ -252,7 +252,7 @@ Cell[BoxData[
                  RowBox[{
                   RowBox[{"Series", "[", 
                    RowBox[{
-                    RowBox[{"prob", "[", "x", "]"}], ",", 
+                    RowBox[{"func", "[", "x", "]"}], ",", 
                     RowBox[{"{", 
                     RowBox[{"x", ",", "0", ",", 
                     RowBox[{"leftM", "-", "1"}]}], "}"}]}], "]"}], ",", 
@@ -297,7 +297,7 @@ Cell[BoxData[
                  RowBox[{
                   RowBox[{"Series", "[", 
                    RowBox[{
-                    RowBox[{"prob", "[", 
+                    RowBox[{"func", "[", 
                     RowBox[{"1", "-", "y"}], "]"}], ",", 
                     RowBox[{"{", 
                     RowBox[{"y", ",", "0", ",", 
@@ -306,28 +306,7 @@ Cell[BoxData[
                 RowBox[{"k", "-", "1"}]}], "]"}], "//", "N"}], "]"}], ",", 
             RowBox[{"{", 
              RowBox[{"k", ",", "1", ",", "rightM"}], "}"}]}], "]"}]}], 
-         "\[IndentingNewLine]", 
-         RowBox[{"(*", 
-          RowBox[{"Table", "[", 
-           RowBox[{
-            RowBox[{"Normal", "[", 
-             RowBox[{
-              RowBox[{"SeriesCoefficient", "[", 
-               RowBox[{
-                RowBox[{"Refine", "[", 
-                 RowBox[{
-                  RowBox[{"Series", "[", 
-                   RowBox[{
-                    RowBox[{"prob", "[", "x", "]"}], ",", 
-                    RowBox[{"{", 
-                    RowBox[{"x", ",", "1", ",", 
-                    RowBox[{"rightM", "-", "1"}]}], "}"}]}], "]"}], ",", 
-                  RowBox[{"0", "<", "x", "<", "1"}]}], "]"}], ",", 
-                RowBox[{"k", "-", "1"}]}], "]"}], "//", "N"}], "]"}], ",", 
-            RowBox[{"{", 
-             RowBox[{"k", ",", "1", ",", "rightM"}], "}"}]}], "]"}], 
-          "\[IndentingNewLine]", "*)"}], "]"}]}], ";", "\[IndentingNewLine]", 
-       
+         "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
        RowBox[{"msg", " ", "=", " ", 
         RowBox[{"msg", " ", "<>", "\"\<\\nnew alpha bar \>\"", "<>", 
          RowBox[{"TextString", "[", "alphabar", "]"}]}]}], ";", 
@@ -345,7 +324,7 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"redrawPlots", " ", "=", " ", "False"}], ";", 
        "\[IndentingNewLine]", 
-       RowBox[{"probChanged", " ", "=", " ", "True"}], ";", 
+       RowBox[{"funcChanged", " ", "=", " ", "True"}], ";", 
        "\[IndentingNewLine]", 
        RowBox[{"oldWhichPlot", " ", "=", " ", "whichPlot"}], ";"}]}], 
      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
@@ -396,27 +375,28 @@ Cell[BoxData[
      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
     RowBox[{"Switch", "[", 
      RowBox[{
-      RowBox[{"func", "[", 
+      RowBox[{"funcName", "[", 
        RowBox[{"[", "1", "]"}], "]"}], ",", "\[IndentingNewLine]", 
       "\"\<binomial\>\"", ",", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"If", "[", 
         RowBox[{
-         RowBox[{"oldFunc", " ", "\[NotEqual]", " ", 
-          RowBox[{"func", "[", 
+         RowBox[{"oldFuncName", "\[NotEqual]", " ", 
+          RowBox[{"funcName", "[", 
            RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", "\[IndentingNewLine]", 
          
          RowBox[{
           RowBox[{"msg", " ", "=", " ", 
            RowBox[{
            "msg", " ", "<>", " ", "\"\<\\nchanged func to binomial from \>\"",
-             " ", "<>", " ", "oldFunc"}]}], ";", "\[IndentingNewLine]", 
+             " ", "<>", " ", "oldFuncName"}]}], ";", "\[IndentingNewLine]", 
           RowBox[{"mBinom", " ", "=", "oldMBinom"}], ";", " ", 
           RowBox[{"n", "=", "mBinom"}], ";", " ", "\[IndentingNewLine]", 
-          RowBox[{"oldFunc", " ", "=", " ", "\"\<binomial\>\""}], ";", " ", 
+          RowBox[{"oldFuncName", " ", "=", " ", "\"\<binomial\>\""}], ";", 
+          " ", 
           RowBox[{"isDiscrete", "=", "True"}], ";", " ", 
           "\[IndentingNewLine]", 
-          RowBox[{"probChanged", "=", "True"}], ";"}]}], 
+          RowBox[{"funcChanged", "=", "True"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
         RowBox[{
@@ -431,7 +411,7 @@ Cell[BoxData[
             " ", "<>", " ", 
             RowBox[{"TextString", "[", "oldP", "]"}]}]}], ";", 
           "\[IndentingNewLine]", 
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{"oldP", "=", "p"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
        ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
@@ -441,7 +421,7 @@ Cell[BoxData[
            RowBox[{"mBinom", ",", "oldMBinom"}], "]"}], "\[NotEqual]", 
           "mBinom"}], ",", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{"msg", " ", "=", " ", 
            RowBox[{"msg", " ", "<>", " ", "\"\<\\nchanged m to \>\"", "<>", 
             RowBox[{"TextString", "[", "mBinom", "]"}], "<>", 
@@ -452,7 +432,7 @@ Cell[BoxData[
           RowBox[{"oldMBinom", "=", "mBinom"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
-        RowBox[{"probChanged", ",", "\[IndentingNewLine]", 
+        RowBox[{"funcChanged", ",", "\[IndentingNewLine]", 
          RowBox[{
           RowBox[{"biases", "=", 
            RowBox[{"binom", "[", 
@@ -463,7 +443,7 @@ Cell[BoxData[
            RowBox[{
            "msg", " ", "<>", " ", "\"\<\\nnew biases \>\"", " ", "<>", " ", 
             RowBox[{"TextString", "[", "biases", "]"}]}]}], ";", 
-          RowBox[{"prob", "=", 
+          RowBox[{"func", "=", 
            RowBox[{"If", "[", 
             RowBox[{
              RowBox[{"whichPlot", "\[Equal]", "\"\<density\>\""}], ",", 
@@ -474,15 +454,15 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"If", "[", 
         RowBox[{
-         RowBox[{"oldFunc", " ", "\[NotEqual]", " ", 
-          RowBox[{"func", "[", 
+         RowBox[{"oldFuncName", " ", "\[NotEqual]", " ", 
+          RowBox[{"funcName", "[", 
            RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", " ", 
          
          RowBox[{
           RowBox[{"msg", " ", "=", " ", 
            RowBox[{
            "msg", " ", "<>", " ", "\"\<\\nchanged func to ensemble from \>\"",
-             " ", "<>", " ", "oldFunc"}]}], ";", "\[IndentingNewLine]", 
+             " ", "<>", " ", "oldFuncName"}]}], ";", "\[IndentingNewLine]", 
           RowBox[{"mEnsemble", " ", "=", "oldMEnsemble"}], ";", 
           RowBox[{"n", "=", 
            RowBox[{"mEnsemble", "+", "1"}]}], ";", "\[IndentingNewLine]", 
@@ -492,9 +472,9 @@ Cell[BoxData[
            RowBox[{"bSum", "[", 
             RowBox[{"mEnsemble", ",", "range"}], "]"}]}], ";", 
           "\[IndentingNewLine]", 
-          RowBox[{"oldFunc", " ", "=", " ", "\"\<ensemble\>\""}], ";", 
+          RowBox[{"oldFuncName", " ", "=", " ", "\"\<ensemble\>\""}], ";", 
           RowBox[{"isDiscrete", "=", "True"}], ";", " ", 
-          RowBox[{"probChanged", "=", "True"}], ";"}]}], 
+          RowBox[{"funcChanged", "=", "True"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
         RowBox[{
@@ -506,7 +486,7 @@ Cell[BoxData[
           RowBox[{"biases", "=", 
            RowBox[{"bSum", "[", 
             RowBox[{"mEnsemble", ",", "range"}], "]"}]}], ";", 
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{"oldRange", "=", "range"}], ";"}]}], "\[IndentingNewLine]", 
         "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
@@ -519,14 +499,14 @@ Cell[BoxData[
           RowBox[{"biases", "=", 
            RowBox[{"bSum", "[", 
             RowBox[{"mEnsemble", ",", "range"}], "]"}]}], ";", 
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{"n", "=", 
            RowBox[{"mEnsemble", "+", "1"}]}], ";", 
           RowBox[{"oldMEnsemble", "=", "mEnsemble"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
-        RowBox[{"probChanged", ",", 
-         RowBox[{"prob", "=", 
+        RowBox[{"funcChanged", ",", 
+         RowBox[{"func", "=", 
           RowBox[{"If", "[", 
            RowBox[{
             RowBox[{"whichPlot", "\[Equal]", "\"\<density\>\""}], ",", 
@@ -538,8 +518,8 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"If", "[", 
         RowBox[{
-         RowBox[{"oldFunc", " ", "\[NotEqual]", " ", 
-          RowBox[{"func", "[", 
+         RowBox[{"oldFuncName", " ", "\[NotEqual]", " ", 
+          RowBox[{"funcName", "[", 
            RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", " ", 
          
          RowBox[{
@@ -547,13 +527,14 @@ Cell[BoxData[
            RowBox[{
            "msg", "  ", "<>", " ", 
             "\"\<\\nchanged func to network reliability from \>\"", " ", "<>",
-             " ", "oldFunc"}]}], ";", "\[IndentingNewLine]", 
+             " ", "oldFuncName"}]}], ";", "\[IndentingNewLine]", 
           RowBox[{"mReliable", " ", "=", "oldmReliable"}], ";", 
           "\[IndentingNewLine]", 
-          RowBox[{"oldFunc", " ", "=", " ", "\"\<network reliability\>\""}], 
-          ";", 
+          RowBox[{
+          "oldFuncName", " ", "=", " ", "\"\<network reliability\>\""}], ";", 
+          
           RowBox[{"isDiscrete", "=", "False"}], ";", " ", 
-          RowBox[{"probChanged", "=", "True"}], ";"}]}], 
+          RowBox[{"funcChanged", "=", "True"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
         RowBox[{
@@ -566,15 +547,17 @@ Cell[BoxData[
            RowBox[{"mpair", "[", 
             RowBox[{"[", "1", "]"}], "]"}], "=", " ", 
            RowBox[{"1", "+", 
-            RowBox[{"If", "[", 
-             RowBox[{
-              RowBox[{"lorder", ">", "0"}], ",", 
-              RowBox[{"b", "+", 
+            RowBox[{"Switch", "[", 
+             RowBox[{"lorder", ",", "0", ",", "0", ",", "1", ",", "a", ",", 
+              RowBox[{"m", "+", "1"}], ",", 
+              RowBox[{"b", "+", "1", "+", 
                RowBox[{
                 RowBox[{"(", 
-                 RowBox[{"lorder", "-", "1"}], ")"}], 
-                RowBox[{"(", 
-                 RowBox[{"a", "-", "1"}], ")"}]}]}]}], "]"}]}]}], ";", 
+                 RowBox[{"a", "-", "1"}], ")"}], "mReliable"}]}], ",", "_", 
+              ",", 
+              RowBox[{"lorder", 
+               RowBox[{"(", 
+                RowBox[{"a", "-", "1"}], ")"}]}]}], "]"}]}]}], ";", 
           "\[IndentingNewLine]", 
           RowBox[{"oldLorder", "=", "lorder"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
@@ -589,18 +572,15 @@ Cell[BoxData[
            RowBox[{"mpair", "[", 
             RowBox[{"[", "2", "]"}], "]"}], "=", 
            RowBox[{"n", "+", "1", "-", " ", 
-            RowBox[{"Min", "[", 
-             RowBox[{"n", ",", 
-              RowBox[{"If", "[", 
-               RowBox[{
-                RowBox[{"rorder", "<=", "b"}], ",", 
-                RowBox[{"rorder", "+", "1"}], ",", 
-                RowBox[{"b", "+", "1", "+", "mReliable", "+", 
-                 RowBox[{"Ceiling", "[", 
-                  RowBox[{
-                   RowBox[{"(", 
-                    RowBox[{"rorder", "-", "b"}], ")"}], "/", "b"}], 
-                  "]"}]}]}], "]"}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{
+              RowBox[{"rorder", ">", 
+               RowBox[{"a", "-", "1"}]}], ",", "n", ",", 
+              RowBox[{
+               RowBox[{"rorder", " ", "mReliable"}], "+", 
+               RowBox[{"Min", "[", 
+                RowBox[{"rorder", ",", "b"}], "]"}]}]}], "]"}]}]}], ";", 
+          "\[IndentingNewLine]", 
           RowBox[{"oldRorder", "=", "rorder"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
@@ -613,7 +593,7 @@ Cell[BoxData[
           RowBox[{"len", "[", 
            RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{"b", "=", 
            RowBox[{"len", "[", 
             RowBox[{"[", "1", "]"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
@@ -628,7 +608,7 @@ Cell[BoxData[
           RowBox[{"len", "[", 
            RowBox[{"[", "2", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{"a", "=", 
            RowBox[{"len", "[", 
             RowBox[{"[", "2", "]"}], "]"}]}], ";"}]}], "\[IndentingNewLine]", 
@@ -640,11 +620,11 @@ Cell[BoxData[
            RowBox[{"mReliable", ",", "oldmReliable"}], "]"}], "\[NotEqual]", 
           "mReliable"}], ",", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{"oldmReliable", "=", "mReliable"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
-        RowBox[{"probChanged", ",", "\[IndentingNewLine]", 
+        RowBox[{"funcChanged", ",", "\[IndentingNewLine]", 
          RowBox[{
           RowBox[{"n", " ", "=", " ", 
            RowBox[{"b", " ", "+", " ", "1", " ", "+", " ", 
@@ -652,7 +632,7 @@ Cell[BoxData[
              RowBox[{"(", 
               RowBox[{"a", "-", "1"}], ")"}], " ", "mReliable"}]}]}], ";", 
           "\[IndentingNewLine]", 
-          RowBox[{"prob", "=", 
+          RowBox[{"func", "=", 
            RowBox[{"If", "[", 
             RowBox[{
              RowBox[{"whichPlot", "\[Equal]", "\"\<density\>\""}], ",", 
@@ -666,22 +646,22 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"If", "[", 
         RowBox[{
-         RowBox[{"oldFunc", " ", "\[NotEqual]", " ", 
-          RowBox[{"func", "[", 
+         RowBox[{"oldFuncName", " ", "\[NotEqual]", " ", 
+          RowBox[{"funcName", "[", 
            RowBox[{"[", "1", "]"}], "]"}]}], ",", " ", "\[IndentingNewLine]", 
          " ", 
          RowBox[{
           RowBox[{"msg", " ", "=", " ", 
            RowBox[{
            "msg", " ", "<>", " ", "\"\<\\nchanged func to pole from \>\"", 
-            " ", "<>", " ", "oldFunc"}]}], ";", "\[IndentingNewLine]", 
+            " ", "<>", " ", "oldFuncName"}]}], ";", "\[IndentingNewLine]", 
           RowBox[{"mPole", " ", "=", "n"}], ";", "\[IndentingNewLine]", 
           RowBox[{"oldMPole", " ", "=", " ", "mPole"}], ";", 
           "\[IndentingNewLine]", 
           RowBox[{"pt", "=", "oldPt"}], ";", "\[IndentingNewLine]", 
-          RowBox[{"oldFunc", " ", "=", " ", "\"\<pole\>\""}], ";", 
+          RowBox[{"oldFuncName", " ", "=", " ", "\"\<pole\>\""}], ";", 
           RowBox[{"isDiscrete", "=", "False"}], ";", " ", 
-          RowBox[{"probChanged", "=", "True"}], ";"}]}], 
+          RowBox[{"funcChanged", "=", "True"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
         RowBox[{
@@ -695,7 +675,7 @@ Cell[BoxData[
           RowBox[{"pt", "[", 
            RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{
            RowBox[{"oldPt", "[", 
             RowBox[{"[", "1", "]"}], "]"}], " ", "=", " ", 
@@ -714,7 +694,7 @@ Cell[BoxData[
           RowBox[{"pt", "[", 
            RowBox[{"[", "2", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{
            RowBox[{"oldPt", "[", 
             RowBox[{"[", "2", "]"}], "]"}], "=", 
@@ -733,8 +713,8 @@ Cell[BoxData[
           RowBox[{"valsChanged", "=", "True"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
-        RowBox[{"probChanged", ",", "\[IndentingNewLine]", 
-         RowBox[{"prob", "=", 
+        RowBox[{"funcChanged", ",", "\[IndentingNewLine]", 
+         RowBox[{"func", "=", 
           RowBox[{"If", "[", 
            RowBox[{
             RowBox[{"whichPlot", "\[Equal]", "\"\<density\>\""}], ",", 
@@ -756,16 +736,16 @@ Cell[BoxData[
       RowBox[{
        RowBox[{"If", "[", 
         RowBox[{
-         RowBox[{"oldFunc", " ", "\[NotEqual]", " ", 
-          RowBox[{"func", "[", 
+         RowBox[{"oldFuncName", " ", "\[NotEqual]", " ", 
+          RowBox[{"funcName", "[", 
            RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
          RowBox[{
           RowBox[{"mIsing", " ", "=", " ", "oldMIsing"}], ";", 
           "\[IndentingNewLine]", 
           RowBox[{"hFrac", "=", "oldHFrac"}], ";", "\[IndentingNewLine]", 
-          RowBox[{"oldFunc", "=", "\"\<Ising\>\""}], ";", 
+          RowBox[{"oldFuncName", "=", "\"\<Ising\>\""}], ";", 
           RowBox[{"isDiscrete", "=", "False"}], ";", 
-          RowBox[{"probChanged", "=", "True"}], ";"}]}], 
+          RowBox[{"funcChanged", "=", "True"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
         RowBox[{
@@ -774,7 +754,7 @@ Cell[BoxData[
            RowBox[{"hFrac", ",", "oldHFrac"}], "]"}], "\[NotEqual]", 
           "hFrac"}], ",", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{"oldHFrac", "=", "hFrac"}], ";"}]}], "\[IndentingNewLine]", 
         "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
@@ -784,7 +764,7 @@ Cell[BoxData[
            RowBox[{"mIsing", ",", "oldMIsing"}], "]"}], "\[NotEqual]", 
           "mIsing"}], ",", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"probChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"funcChanged", "=", "True"}], ";", "\[IndentingNewLine]", 
           RowBox[{"dos", "=", 
            RowBox[{"isingDoS1D", "[", 
             RowBox[{"mIsing", ",", "dos"}], "]"}]}], ";", 
@@ -795,8 +775,8 @@ Cell[BoxData[
           RowBox[{"oldMIsing", "=", "mIsing"}], ";"}]}], 
         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
        RowBox[{"If", "[", 
-        RowBox[{"probChanged", ",", "\[IndentingNewLine]", 
-         RowBox[{"prob", "=", 
+        RowBox[{"funcChanged", ",", "\[IndentingNewLine]", 
+         RowBox[{"func", "=", 
           RowBox[{"If", "[", 
            RowBox[{
             RowBox[{"whichPlot", "\[Equal]", "\"\<density\>\""}], ",", 
@@ -810,10 +790,6 @@ Cell[BoxData[
               RowBox[{"dos", "[", 
                RowBox[{"[", "mIsing", "]"}], "]"}], ",", "hFrac"}], "]"}]}], 
            "]"}]}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
-     "\[IndentingNewLine]", 
-     RowBox[{"(*", 
-      RowBox[{
-       RowBox[{"prob", " ", "=", " ", "testDensity"}], ";"}], "*)"}], 
      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
     RowBox[{"tmpMat", " ", ":=", " ", 
      RowBox[{
@@ -954,23 +930,24 @@ Cell[BoxData[
          RowBox[{
           RowBox[{"buildPlot1", "[", 
            RowBox[{
-           "leftM", ",", "rightM", ",", "vals", ",", "prob", ",", "alpha", 
+           "leftM", ",", "rightM", ",", "vals", ",", "func", ",", "alpha", 
             ",", "alphabar"}], "]"}], ",", 
           RowBox[{"buildPlot2", "[", 
            RowBox[{
            "leftM", ",", "rightM", ",", "vals", ",", "coefs", ",", "d2b", ",",
-             "show", ",", "whichPlot", ",", "matchData"}], "]"}]}], "}"}], 
-        "]"}], "}"}], ",", 
+             "show", ",", "matchData", ",", 
+            RowBox[{"whichPlot", "\[Equal]", "\"\<density\>\""}]}], "]"}]}], 
+         "}"}], "]"}], "}"}], ",", 
       RowBox[{"Spacings", "\[Rule]", "5"}]}], "]"}]}], "\[IndentingNewLine]", 
    ",", "\[IndentingNewLine]", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
-      RowBox[{"func", ",", 
+      RowBox[{"funcName", ",", 
        RowBox[{"Tooltip", "[", 
         RowBox[{"\"\<binomial\>\"", ",", 
          RowBox[{"ttips", "[", "\"\<binomial\>\"", "]"}]}], "]"}], ",", 
-       "\"\<underlying probability function:\>\""}], "}"}], ",", 
+       "\"\<underlying function:\>\""}], "}"}], ",", 
      RowBox[{"{", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"Tooltip", "[", 
@@ -1000,7 +977,7 @@ Cell[BoxData[
      RowBox[{"{", 
       RowBox[{
       "whichPlot", ",", "\"\<density\>\"", ",", 
-       "\"\<Plot probability densities or cumulative probabilities?\>\""}], 
+       "\"\<Plot positive, normed function or its monotonic integral?\>\""}], 
       "}"}], ",", 
      RowBox[{"{", 
       RowBox[{"\"\<density\>\"", ",", "\"\<cumulative\>\""}], "}"}], ",", 
@@ -1008,10 +985,10 @@ Cell[BoxData[
    "\[IndentingNewLine]", 
    RowBox[{"Row", "[", 
     RowBox[{"{", 
-     RowBox[{"\"\<polynomial coefficients known: left \>\"", ",", 
+     RowBox[{"\"\<polynomial coefficients known: left \>\"", ",", " ", 
       RowBox[{"Dynamic", "[", 
        RowBox[{"mpair", "[", 
-        RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", 
+        RowBox[{"[", "1", "]"}], "]"}], "]"}], ",", " ", 
       RowBox[{"Control", "[", 
        RowBox[{"{", 
         RowBox[{
@@ -1026,7 +1003,7 @@ Cell[BoxData[
          RowBox[{"Enabled", "\[Rule]", 
           RowBox[{"(", 
            RowBox[{
-            RowBox[{"func", "[", 
+            RowBox[{"funcName", "[", 
              RowBox[{"[", "1", "]"}], "]"}], "\[NotEqual]", 
             "\"\<network reliability\>\""}], ")"}]}]}], "}"}], "]"}], ",", 
       RowBox[{"Dynamic", "[", 
@@ -1121,7 +1098,7 @@ Cell[BoxData[
    RowBox[{"Dynamic", "[", "\[IndentingNewLine]", 
     RowBox[{"Switch", "[", 
      RowBox[{
-      RowBox[{"func", "[", 
+      RowBox[{"funcName", "[", 
        RowBox[{"[", "1", "]"}], "]"}], ",", "\"\<pole\>\"", ",", 
       "\[IndentingNewLine]", 
       RowBox[{"Row", "[", 
@@ -1232,7 +1209,6 @@ Cell[BoxData[
        RowBox[{"{", "\[IndentingNewLine]", 
         RowBox[{
          RowBox[{"Spacer", "[", "20", "]"}], ",", "\[IndentingNewLine]", 
-         "\[IndentingNewLine]", 
          RowBox[{"Panel", "[", "\[IndentingNewLine]", 
           RowBox[{
            RowBox[{"Row", "[", 
@@ -1279,12 +1255,9 @@ Cell[BoxData[
                     RowBox[{"{", 
                     RowBox[{
                     "lorder", ",", "oldLorder", ",", " ", 
-                    "\"\< strut(s)\>\""}], "}"}], ",", "1", ",", 
-                    RowBox[{"Min", "[", 
-                    RowBox[{"5", ",", 
-                    RowBox[{"mReliable", "+", "1"}]}], "]"}], ",", "1"}], 
-                    "}"}], "]"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
-                  
+                    "\"\< strut(s)\>\""}], "}"}], ",", "0", ",", 
+                    RowBox[{"mReliable", "+", "1"}], ",", "1"}], "}"}], 
+                    "]"}]}], "}"}], "]"}], ",", "\[IndentingNewLine]", 
                   RowBox[{"Row", "[", 
                    RowBox[{"{", 
                     RowBox[{"\"\<consider unions of \>\"", ",", 
@@ -1295,9 +1268,10 @@ Cell[BoxData[
                     RowBox[{"{", 
                     RowBox[{
                     "rorder", ",", "oldRorder", ",", " ", "\"\< cut(s)\>\""}],
-                     "}"}], ",", "1", ",", 
+                     "}"}], ",", "0", ",", 
                     RowBox[{"Min", "[", 
-                    RowBox[{"5", ",", 
+                    RowBox[{
+                    RowBox[{"a", "-", "1"}], ",", 
                     RowBox[{"b", 
                     RowBox[{"(", 
                     RowBox[{"1", "+", 
@@ -1368,8 +1342,8 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
-      RowBox[{"oldFunc", ",", "\"\<none\>\""}], "}"}], ",", "None"}], "}"}], 
-   ",", 
+      RowBox[{"oldFuncName", ",", "\"\<none\>\""}], "}"}], ",", "None"}], 
+    "}"}], ",", 
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
@@ -1408,7 +1382,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
-      RowBox[{"prob", ",", 
+      RowBox[{"func", ",", 
        RowBox[{"Function", "[", 
         RowBox[{"x", ",", "1"}], "]"}]}], "}"}], ",", "None"}], "}"}], ",", 
    RowBox[{"{", 
@@ -1439,7 +1413,7 @@ Cell[BoxData[
    RowBox[{"{", 
     RowBox[{
      RowBox[{"{", 
-      RowBox[{"probChanged", ",", "True"}], "}"}], ",", "None"}], "}"}], ",", 
+      RowBox[{"funcChanged", ",", "True"}], "}"}], ",", "None"}], "}"}], ",", 
    
    RowBox[{"{", 
     RowBox[{
@@ -1680,7 +1654,7 @@ Cell[BoxData[
    RowBox[{"Initialization", "\[RuleDelayed]", " ", 
     RowBox[{"(", "\[IndentingNewLine]", 
      RowBox[{
-      RowBox[{"prob", "=", 
+      RowBox[{"func", "=", 
        RowBox[{"discreteDensity", "[", "biases", "]"}]}], ";", 
       "\[IndentingNewLine]", 
       RowBox[{"tmp", "=", 
@@ -1692,10 +1666,10 @@ Cell[BoxData[
    RowBox[{"TrackedSymbols", "\[RuleDelayed]", 
     RowBox[{"{", 
      RowBox[{
-     "func", ",", "whichPlot", ",", "mpair", ",", "n", ",", "show", ",", 
-      "isDiscrete", ",", "matchData", ",", "prob", ",", "p", ",", "mPole", 
+     "funcName", ",", "whichPlot", ",", "mpair", ",", "n", ",", "show", ",", 
+      "isDiscrete", ",", "matchData", ",", "func", ",", "p", ",", "mPole", 
       ",", "mBinom", ",", "mEnsemble", ",", "mReliable", ",", "mIsing", ",", 
-      "pt", ",", "range", ",", "probChanged", ",", "len", ",", "lorder", ",", 
+      "pt", ",", "range", ",", "funcChanged", ",", "len", ",", "lorder", ",", 
       "rorder", ",", "hFrac"}], "}"}]}]}], "\[IndentingNewLine]", 
   RowBox[{"(*", " ", 
    RowBox[{"SaveDefinitions", "\[Rule]", "True"}], "*)"}], 
@@ -2296,139 +2270,115 @@ Cell[BoxData[
    3.751496235291149*^9}, {3.751500258883885*^9, 3.75150029059533*^9}, {
    3.751500339868764*^9, 3.751500361273357*^9}, {3.751501336666408*^9, 
    3.751501364521573*^9}, {3.751501427617628*^9, 3.75150144088948*^9}, 
-   3.7515023020039387`*^9},
- CellLabel->
-  "In[123]:=",ExpressionUUID->"29bc60ee-6616-47ed-bdfa-7d135642a877"],
+   3.7515023020039387`*^9, {3.751544303899797*^9, 3.75154449100766*^9}, {
+   3.751544566852551*^9, 3.7515446262322607`*^9}, {3.7515447906091022`*^9, 
+   3.751544802313377*^9}, {3.751544853176393*^9, 3.751544950266217*^9}, 
+   3.751545028891819*^9, {3.751545150023253*^9, 3.7515451505489817`*^9}, 
+   3.7515452108731403`*^9, 3.7515454553147163`*^9, {3.751545538726372*^9, 
+   3.7515456077392807`*^9}, 3.751545749361664*^9, {3.7515461587828074`*^9, 
+   3.751546229370285*^9}, {3.751546287775136*^9, 3.751546408087384*^9}, {
+   3.7515464622243633`*^9, 3.751546501937745*^9}, {3.75154665239802*^9, 
+   3.751546667029038*^9}, {3.751546707686902*^9, 3.7515467096841927`*^9}, {
+   3.75154696318172*^9, 3.751546967211232*^9}, {3.751546998959661*^9, 
+   3.751546999365562*^9}, {3.751547066491044*^9, 3.751547066827104*^9}, {
+   3.7515471551130323`*^9, 3.751547217563505*^9}, {3.75154725455088*^9, 
+   3.7515472559555473`*^9}, {3.751547306810193*^9, 3.751547381877203*^9}, {
+   3.751547472841761*^9, 3.751547488222123*^9}, {3.751547604876109*^9, 
+   3.751547640363544*^9}, {3.751547725932337*^9, 3.751547809335772*^9}, {
+   3.7515478506820593`*^9, 3.7515478700975437`*^9}, {3.751548205575552*^9, 
+   3.751548205966792*^9}, {3.751548240984*^9, 3.751548241543971*^9}, {
+   3.7515483022630377`*^9, 3.751548313593556*^9}, {3.751548346471261*^9, 
+   3.751548364006566*^9}, {3.7515485040105743`*^9, 3.751548527329975*^9}, {
+   3.751548585254485*^9, 3.7515485896678267`*^9}, {3.75154862064288*^9, 
+   3.751548641215089*^9}, {3.751548754453659*^9, 3.751548755771061*^9}, {
+   3.751548910620434*^9, 3.751548913935947*^9}, {3.751549150305698*^9, 
+   3.751549151554152*^9}, {3.7515496196762447`*^9, 3.751549626016919*^9}, {
+   3.751549667185154*^9, 
+   3.751549678856324*^9}},ExpressionUUID->"29bc60ee-6616-47ed-bdfa-\
+7d135642a877"],
 
 Cell[BoxData[
  TagBox[
   StyleBox[
-   DynamicModuleBox[{$CellContext`a$$ = 3, $CellContext`alpha$$ = {0., 2., 
-    6.}, $CellContext`alphabar$$ = {0., 4., 21., -80., 90., -42., 
-    7.}, $CellContext`b$$ = 2, $CellContext`biases$$ = {0.125, 0.375, 0.375, 
-    0.125}, $CellContext`coefs$$ = {0., 0.3333333333333333, 
-    1.0666666666666667`, 2.7333333333333334`, 0.6666666666666666, 
-    0.}, $CellContext`d2b$$ = CompressedData["
+   DynamicModuleBox[{$CellContext`a$$ = 3, $CellContext`alpha$$ = {0., 2., 6.,
+     0.}, $CellContext`alphabar$$ = {0., 4., 21.}, $CellContext`b$$ = 
+    2, $CellContext`biases$$ = {0.125, 0.375, 0.375, 
+    0.125}, $CellContext`coefs$$ = {{0., 0.3333333333333333, 
+    1.0666666666666667`, 2.2, 1.1, 2.7333333333333334`, 0.6666666666666666, 
+    0.}}, $CellContext`d2b$$ = CompressedData["
 1:eJxTTMoPSmViYGBgh2II+GDPQCIwBoPv+yE8CQcILXdg9SoQkILy+Q5A1H22
 DwWDo/vNL2QyzzX7YX/4q0ZM/yHFA7NmAoGkiUNnBwiYQPgzNRyCdsi1vg4U
 ONB/CKTwkb1mDIj1ab8t1/XFBbZyDmfPAMEbkwMQe+zgfJg8TD1MP8w8mPko
 9gHth7kH5j6Ye2Huh/kH1X9yB2D+Rw0PUsEHewA/e3Uc
     
-    "], $CellContext`d2bLeft$$ = {{1, 0, 0}, {
+    "], $CellContext`d2bLeft$$ = {{1, 0, 0, 0}, {
+      Rational[-5, 6], 3, 
+      Rational[-3, 2], 
+      Rational[1, 3]}, {
+      Rational[-4, 15], 0, 
+      Rational[9, 5], 
+      Rational[-8, 15]}, {
+      Rational[9, 10], 
+      Rational[-18, 5], 
+      Rational[9, 2], 
+      Rational[-4, 5]}}, $CellContext`d2bRight$$ = {{1, 0, 0}, {
       Rational[-1, 2], 2, 
       Rational[-1, 2]}, {
       Rational[-4, 5], 
       Rational[8, 5], 
-      Rational[1, 5]}}, $CellContext`d2bRight$$ = {{1, 0, 0, 0, 0, 0, 0}, {
-      Rational[-29, 20], 6, 
-      Rational[-15, 2], 
-      Rational[20, 3], 
-      Rational[-15, 4], 
-      Rational[6, 5], 
-      Rational[-1, 6]}, {
-      Rational[227, 150], 
-      Rational[-222, 25], 
-      Rational[201, 10], 
-      Rational[-308, 15], 
-      Rational[123, 10], 
-      Rational[-102, 25], 
-      Rational[29, 50]}, {
-      Rational[-227, 200], 
-      Rational[189, 25], 
-      Rational[-837, 40], 30, 
-      Rational[-837, 40], 
-      Rational[189, 25], 
-      Rational[-227, 200]}, {
-      Rational[29, 50], 
-      Rational[-102, 25], 
-      Rational[123, 10], 
-      Rational[-308, 15], 
-      Rational[201, 10], 
-      Rational[-222, 25], 
-      Rational[227, 150]}, {
-      Rational[-1, 6], 
-      Rational[6, 5], 
-      Rational[-15, 4], 
-      Rational[20, 3], 
-      Rational[-15, 2], 6, 
-      Rational[-29, 20]}, {0, 0, 0, 0, 0, 0, 1}}, $CellContext`d2tLeft$$ = {{
-    1, 0, 0}, {-9, 12, -3}, {18, -36, 
-    18}}, $CellContext`d2tRight$$ = {{1, 0, 0, 0, 0, 0, 0}, {
-      Rational[147, 10], -36, 45, -40, 
-      Rational[45, 2], 
-      Rational[-36, 5], 1}, {
-      Rational[406, 5], 
-      Rational[-1566, 5], 
-      Rational[1053, 2], -508, 297, 
-      Rational[-486, 5], 
-      Rational[137, 10]}, {
-      Rational[441, 2], -1044, 
-      Rational[4149, 2], -2232, 
-      Rational[2763, 2], -468, 
-      Rational[135, 2]}, {315, -1674, 3699, -4356, 2889, -1026, 153}, {
-      Rational[1134, 5], -1296, 3078, -3888, 2754, 
-      Rational[-5184, 5], 162}, {
-      Rational[324, 5], 
-      Rational[-1944, 5], 972, -1296, 972, 
-      Rational[-1944, 5], 
-      Rational[324, 5]}}, $CellContext`dos$$ = {{{1}, {
+      Rational[1, 5]}}, $CellContext`d2tLeft$$ = {{1, 0, 0, 0}, {-11, 18, -9, 
+    2}, {36, -90, 72, -18}, {-36, 108, -108, 
+    36}}, $CellContext`d2tRight$$ = {{1, 0, 0}, {9, -12, 3}, {18, -36, 
+    18}}, $CellContext`dos$$ = {{{1}, {
      1}}, {{1, 0}, {0, Null}, {1, Null}, {0, Null}}, {{1, 0, 0}, {
       0, Null, Null}, {0, Null, Null}, {1, Null, Null}, {0, Null, Null}}, {{1,
        0, 0, 0}, {0, Null, Null, Null}, {0, Null, Null, Null}, {
       0, Null, Null, Null}, {1, Null, Null, Null}, {
-      0, Null, Null, Null}}}, $CellContext`eval$$ = 34, $CellContext`func$$ = 
-    Tooltip["network reliability", 
+      0, Null, Null, Null}}}, $CellContext`eval$$ = 33, $CellContext`func$$ = 
+    Function[$CellContext`x$, 
+     Derivative[1][
+      $CellContext`toyCumul[
+      2, 3, 2]][$CellContext`x$]], $CellContext`funcChanged$$ = 
+    False, $CellContext`funcName$$ = Tooltip[
+    "network reliability", 
      "the two terminal Moore-Shannon network reliability for the toy network \
 illustrated. \nI.e., the probability of getting a message from Source to \
 Terminus when the probability of transmitting over each edge is x"], \
 $CellContext`hFrac$$ = 0.5, $CellContext`isDiscrete$$ = 
     False, $CellContext`isMonotonic$$ = True, $CellContext`leftM$$ = 
-    3, $CellContext`leftTaylorChanged$$ = False, $CellContext`len$$ = {2, 
+    4, $CellContext`leftTaylorChanged$$ = False, $CellContext`len$$ = {2, 
     3}, $CellContext`lorder$$ = 1, $CellContext`matchData$$ = 
     True, $CellContext`mBinom$$ = 4, $CellContext`mEnsemble$$ = 
-    2, $CellContext`mIsing$$ = 3, $CellContext`mpair$$ = {3, 
-    1}, $CellContext`mPole$$ = 4, $CellContext`mReliable$$ = 
-    2, $CellContext`msg$$ = "\nEval 34\n", $CellContext`n$$ = 
-    7, $CellContext`norm$$ = 1, $CellContext`oldFunc$$ = 
+    2, $CellContext`mIsing$$ = 3, $CellContext`mpair$$ = {4, 
+    5}, $CellContext`mPole$$ = 4, $CellContext`mReliable$$ = 
+    2, $CellContext`msg$$ = "\nEval 33\n", $CellContext`n$$ = 
+    7, $CellContext`norm$$ = 1, $CellContext`oldFuncName$$ = 
     "network reliability", $CellContext`oldHFrac$$ = 
     0., $CellContext`oldLorder$$ = 1, $CellContext`oldMatchData$$ = 
     True, $CellContext`oldMBinom$$ = 4, $CellContext`oldMEnsemble$$ = 
-    2, $CellContext`oldMIsing$$ = 4, $CellContext`oldMpair$$ = {3, 
-    1}, $CellContext`oldMPole$$ = 4, $CellContext`oldmReliable$$ = 
+    2, $CellContext`oldMIsing$$ = 4, $CellContext`oldMpair$$ = {4, 
+    5}, $CellContext`oldMPole$$ = 4, $CellContext`oldmReliable$$ = 
     2, $CellContext`oldN$$ = 7, $CellContext`oldP$$ = 
     0.5, $CellContext`oldPt$$ = {0.5, 0.5}, $CellContext`oldRange$$ = {0.5, 
-    0.5}, $CellContext`oldRorder$$ = 5, $CellContext`oldShow$$ = 
+    0.5}, $CellContext`oldRorder$$ = 1, $CellContext`oldShow$$ = 
     "", $CellContext`oldWhichPlot$$ = "density", $CellContext`p$$ = 
-    0.5, $CellContext`plotChanged$$ = True, $CellContext`prob$$ = 
-    Function[$CellContext`x$, 
-     Derivative[1][
-      $CellContext`toyCumul[
-      2, 3, 2]][$CellContext`x$]], $CellContext`probChanged$$ = 
-    False, $CellContext`pt$$ = $CellContext`oldPt$$, $CellContext`range$$ = \
+    0.5, $CellContext`plotChanged$$ = 
+    True, $CellContext`pt$$ = $CellContext`oldPt$$, $CellContext`range$$ = \
 $CellContext`oldRange$$, $CellContext`redrawPlots$$ = 
-    False, $CellContext`rightM$$ = 7, $CellContext`rightTaylorChanged$$ = 
-    False, $CellContext`rorder$$ = 5, $CellContext`show$$ = {
+    False, $CellContext`rightM$$ = 3, $CellContext`rightTaylorChanged$$ = 
+    False, $CellContext`rorder$$ = 1, $CellContext`show$$ = {
      Style[
      "uniform", FontColor -> 
-      RGBColor[0., 0., 0.]]}, $CellContext`t2bLeft$$ = {{1, 0, 0}, {1, 
+      RGBColor[0., 0., 0.]]}, $CellContext`t2bLeft$$ = {{1, 0, 0, 0}, {1, 
+      Rational[1, 6], 0, 0}, {1, 
+      Rational[1, 3], 
+      Rational[1, 15], 0}, {1, 
+      Rational[1, 2], 
+      Rational[1, 5], 
+      Rational[1, 20]}}, $CellContext`t2bRight$$ = {{1, 0, 0}, {1, 
       Rational[1, 6], 0}, {1, 
       Rational[1, 3], 
-      Rational[1, 15]}}, $CellContext`t2bRight$$ = {{1, 0, 0, 0, 0, 0, 0}, {1, 
-      Rational[1, 6], 0, 0, 0, 0, 0}, {1, 
-      Rational[1, 3], 
-      Rational[1, 15], 0, 0, 0, 0}, {1, 
-      Rational[1, 2], 
-      Rational[1, 5], 
-      Rational[1, 20], 0, 0, 0}, {1, 
-      Rational[2, 3], 
-      Rational[2, 5], 
-      Rational[1, 5], 
-      Rational[1, 15], 0, 0}, {1, 
-      Rational[5, 6], 
-      Rational[2, 3], 
-      Rational[1, 2], 
-      Rational[1, 3], 
-      Rational[1, 6], 0}, {1, 1, 1, 1, 1, 1, 1}}, $CellContext`vals$$ = {0, 
+      Rational[1, 15]}}, $CellContext`vals$$ = {0, 
      Rational[22795, 46656], 
      Rational[844, 729], 
      Rational[107, 64], 
@@ -2438,9 +2388,9 @@ $CellContext`oldRange$$, $CellContext`redrawPlots$$ =
     Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
     Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
     "\"untitled\"", Typeset`specs$$ = {{{
-       Hold[$CellContext`func$$], 
+       Hold[$CellContext`funcName$$], 
        Tooltip["binomial", "a binomial distribution with parameters N and p"],
-        "underlying probability function:"}, {
+        "underlying function:"}, {
        Tooltip["binomial", "a binomial distribution with parameters N and p"], 
        Tooltip[
        "ensemble", 
@@ -2463,7 +2413,7 @@ on a circle in an external field:\n ``(T) =`` n(s,f) exp{`` [s+``f]}",
          2 $CellContext`J/$CellContext`kT, $CellContext`H/$CellContext`J]]}}, \
 {{
        Hold[$CellContext`whichPlot$$], "density", 
-       "Plot probability densities or cumulative probabilities?"}, {
+       "Plot positive, normed function or its monotonic integral?"}, {
       "density", "cumulative"}}, {{
        Hold[$CellContext`mpair$$], {1, 4}, ""}, 1, 
       Dynamic[$CellContext`n$$], 1}, {
@@ -2544,13 +2494,12 @@ $CellContext`rightM$$]]]]]}}, Frame -> True]}]],
        "number of long parallel paths"}, 2, 20, 1}, {{
        Hold[$CellContext`len$$], {2, 3}, "length of short and long paths"}, 2,
        20, 1}, {{
-       Hold[$CellContext`lorder$$], $CellContext`oldLorder$$, " strut(s)"}, 1, 
+       Hold[$CellContext`lorder$$], $CellContext`oldLorder$$, " strut(s)"}, 0, 
+      Dynamic[$CellContext`mReliable$$ + 1], 1}, {{
+       Hold[$CellContext`rorder$$], $CellContext`oldRorder$$, " cut(s)"}, 0, 
       Dynamic[
-       Min[5, $CellContext`mReliable$$ + 1]], 1}, {{
-       Hold[$CellContext`rorder$$], $CellContext`oldRorder$$, " cut(s)"}, 1, 
-      Dynamic[
-       Min[
-       5, $CellContext`b$$ (
+       Min[$CellContext`a$$ - 
+        1, $CellContext`b$$ (
          1 + ($CellContext`a$$ - 1)^$CellContext`mReliable$$)]], 1}, {{
        Hold[$CellContext`hFrac$$], $CellContext`oldHFrac$$, 
        "ratio of internal to total field J/(H+|J|)"}, -1, 1}, {{
@@ -2559,7 +2508,7 @@ $CellContext`rightM$$]]]]]}}, Frame -> True]}]],
       Hold[
        Dynamic[
         Switch[
-         Part[$CellContext`func$$, 1], "pole", 
+         Part[$CellContext`funcName$$, 1], "pole", 
          Row[{
            Spacer[50], 
            Panel[
@@ -2607,7 +2556,7 @@ $CellContext`a$$, $CellContext`b$$]]}], "network reliability parameters", Top,
               Manipulate`Place[13], "x in plots is exp[-2(H+|J|)/(kT)]"}], 
             "Ising parameters", Top, Alignment -> Center]}]]]], 
       Manipulate`Dump`ThisIsNotAControl}, {{
-       Hold[$CellContext`oldFunc$$], "none"}, 0}, {{
+       Hold[$CellContext`oldFuncName$$], "none"}, 0}, {{
        Hold[$CellContext`eval$$], 0}, 0}, {{
        Hold[$CellContext`n$$], 4}, 0}, {{
        Hold[$CellContext`oldN$$], 1}, 0}, {{
@@ -2615,14 +2564,14 @@ $CellContext`a$$, $CellContext`b$$]]}], "network reliability parameters", Top,
        Hold[$CellContext`rightM$$], 1}, 0}, {{
        Hold[$CellContext`oldMpair$$], {0, 0}}, 0}, {{
        Hold[$CellContext`mpair$$], {1, 4}}, 0}, {{
-       Hold[$CellContext`prob$$], 
+       Hold[$CellContext`func$$], 
        Function[$CellContext`x, 1]}, 0}, {{
        Hold[$CellContext`vals$$], {1, 1, 1, 1}}, 0}, {{
        Hold[$CellContext`norm$$], 1}, 0}, {{
        Hold[$CellContext`isDiscrete$$], True}, 0}, {{
        Hold[$CellContext`isMonotonic$$], True}, 0}, {{
        Hold[$CellContext`oldMatchData$$], True}, 0}, {{
-       Hold[$CellContext`probChanged$$], True}, 0}, {{
+       Hold[$CellContext`funcChanged$$], True}, 0}, {{
        Hold[$CellContext`valsChanged$$], True}, 0}, {{
        Hold[$CellContext`plotChanged$$], True}, 0}, {{
        Hold[$CellContext`leftTaylorChanged$$], True}, 0}, {{
@@ -2673,15 +2622,15 @@ $CellContext`a$$, $CellContext`b$$]]}], "network reliability parameters", Top,
        Hold[$CellContext`alpha$$], {1}}, 0}, {{
        Hold[$CellContext`alphabar$$], {1}}, 0}, {{
        Hold[$CellContext`coefs$$], {{1}}}, 0}}, Typeset`size$$ = {
-    670., {116.134033203125, 121.865966796875}}, Typeset`update$$ = 0, 
+    671., {126.634033203125, 132.365966796875}}, Typeset`update$$ = 0, 
     Typeset`initDone$$, Typeset`skipInitDone$$ = 
-    False, $CellContext`func$68747$$ = 0, $CellContext`whichPlot$68748$$ = 
-    False, $CellContext`mpair$68749$$ = 0, $CellContext`matchData$68750$$ = 
-    False, $CellContext`show$68751$$ = 0, $CellContext`pt$68752$$ = 
-    0, $CellContext`mPole$68753$$ = 0, $CellContext`p$68754$$ = 
-    0, $CellContext`mBinom$68755$$ = 0, $CellContext`range$68756$$ = 
-    0, $CellContext`mEnsemble$68757$$ = 0, $CellContext`mReliable$68758$$ = 
-    0}, 
+    False, $CellContext`funcName$170271$$ = 
+    0, $CellContext`whichPlot$170272$$ = False, $CellContext`mpair$170273$$ = 
+    0, $CellContext`matchData$170274$$ = False, $CellContext`show$170275$$ = 
+    0, $CellContext`pt$170276$$ = 0, $CellContext`mPole$170277$$ = 
+    0, $CellContext`p$170278$$ = 0, $CellContext`mBinom$170279$$ = 
+    0, $CellContext`range$170280$$ = 0, $CellContext`mEnsemble$170281$$ = 
+    0, $CellContext`mReliable$170282$$ = 0}, 
     DynamicBox[Manipulate`ManipulateBoxes[
      3, StandardForm, 
       "Variables" :> {$CellContext`a$$ = 
@@ -2698,6 +2647,8 @@ $CellContext`a$$, $CellContext`b$$]]}], "network reliability parameters", Top,
            0, Null, Null, Null}, {0, Null, Null, Null}, {
            1, Null, Null, Null}, {0, Null, Null, Null}}}, $CellContext`eval$$ = 
         0, $CellContext`func$$ = 
+        Function[$CellContext`x, 1], $CellContext`funcChanged$$ = 
+        True, $CellContext`funcName$$ = 
         Tooltip["binomial", 
           "a binomial distribution with parameters N and p"], \
 $CellContext`hFrac$$ = 0.5, $CellContext`isDiscrete$$ = 
@@ -2709,7 +2660,7 @@ $CellContext`hFrac$$ = 0.5, $CellContext`isDiscrete$$ =
         3, $CellContext`mpair$$ = {1, 4}, $CellContext`mPole$$ = 
         4, $CellContext`mReliable$$ = 2, $CellContext`msg$$ = 
         "", $CellContext`n$$ = 4, $CellContext`norm$$ = 
-        1, $CellContext`oldFunc$$ = "none", $CellContext`oldHFrac$$ = 
+        1, $CellContext`oldFuncName$$ = "none", $CellContext`oldHFrac$$ = 
         0., $CellContext`oldLorder$$ = 1, $CellContext`oldMatchData$$ = 
         True, $CellContext`oldMBinom$$ = 4, $CellContext`oldMEnsemble$$ = 
         2, $CellContext`oldMIsing$$ = 
@@ -2719,8 +2670,7 @@ $CellContext`hFrac$$ = 0.5, $CellContext`isDiscrete$$ =
         0.5, $CellContext`oldPt$$ = {0.5, 0.5}, $CellContext`oldRange$$ = {
          0.5, 0.5}, $CellContext`oldRorder$$ = 1, $CellContext`oldShow$$ = 
         "", $CellContext`oldWhichPlot$$ = "density", $CellContext`p$$ = 
-        0.5, $CellContext`plotChanged$$ = True, $CellContext`prob$$ = 
-        Function[$CellContext`x, 1], $CellContext`probChanged$$ = 
+        0.5, $CellContext`plotChanged$$ = 
         True, $CellContext`pt$$ = $CellContext`oldPt$$, $CellContext`range$$ = \
 $CellContext`oldRange$$, $CellContext`redrawPlots$$ = 
         True, $CellContext`rightM$$ = 1, $CellContext`rightTaylorChanged$$ = 
@@ -2731,18 +2681,20 @@ $CellContext`oldRange$$, $CellContext`redrawPlots$$ =
          1}}, $CellContext`t2bRight$$ = {{1}}, $CellContext`vals$$ = {1, 1, 1,
           1}, $CellContext`valsChanged$$ = True, $CellContext`whichPlot$$ = 
         "density"}, "ControllerVariables" :> {
-        Hold[$CellContext`func$$, $CellContext`func$68747$$, 0], 
-        Hold[$CellContext`whichPlot$$, $CellContext`whichPlot$68748$$, False], 
-        Hold[$CellContext`mpair$$, $CellContext`mpair$68749$$, 0], 
-        Hold[$CellContext`matchData$$, $CellContext`matchData$68750$$, False], 
-        Hold[$CellContext`show$$, $CellContext`show$68751$$, 0], 
-        Hold[$CellContext`pt$$, $CellContext`pt$68752$$, 0], 
-        Hold[$CellContext`mPole$$, $CellContext`mPole$68753$$, 0], 
-        Hold[$CellContext`p$$, $CellContext`p$68754$$, 0], 
-        Hold[$CellContext`mBinom$$, $CellContext`mBinom$68755$$, 0], 
-        Hold[$CellContext`range$$, $CellContext`range$68756$$, 0], 
-        Hold[$CellContext`mEnsemble$$, $CellContext`mEnsemble$68757$$, 0], 
-        Hold[$CellContext`mReliable$$, $CellContext`mReliable$68758$$, 0]}, 
+        Hold[$CellContext`funcName$$, $CellContext`funcName$170271$$, 0], 
+        Hold[$CellContext`whichPlot$$, $CellContext`whichPlot$170272$$, 
+         False], 
+        Hold[$CellContext`mpair$$, $CellContext`mpair$170273$$, 0], 
+        Hold[$CellContext`matchData$$, $CellContext`matchData$170274$$, 
+         False], 
+        Hold[$CellContext`show$$, $CellContext`show$170275$$, 0], 
+        Hold[$CellContext`pt$$, $CellContext`pt$170276$$, 0], 
+        Hold[$CellContext`mPole$$, $CellContext`mPole$170277$$, 0], 
+        Hold[$CellContext`p$$, $CellContext`p$170278$$, 0], 
+        Hold[$CellContext`mBinom$$, $CellContext`mBinom$170279$$, 0], 
+        Hold[$CellContext`range$$, $CellContext`range$170280$$, 0], 
+        Hold[$CellContext`mEnsemble$$, $CellContext`mEnsemble$170281$$, 0], 
+        Hold[$CellContext`mReliable$$, $CellContext`mReliable$170282$$, 0]}, 
       "OtherVariables" :> {
        Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
         Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
@@ -2763,13 +2715,13 @@ $CellContext`n$$]]; $CellContext`msg$$ =
             Max[
             1, $CellContext`n$$ + 
              1 - $CellContext`rightM$$]}; $CellContext`oldMpair$$ = {-1, -1}; \
-$CellContext`probChanged$$ = True; Null]; 
-       If[$CellContext`probChanged$$, $CellContext`vals$$ = Table[
-            $CellContext`prob$$[$CellContext`k/($CellContext`n$$ - 
+$CellContext`funcChanged$$ = True; Null]; 
+       If[$CellContext`funcChanged$$, $CellContext`vals$$ = Table[
+            $CellContext`func$$[$CellContext`k/($CellContext`n$$ - 
              1)], {$CellContext`k, 0, $CellContext`n$$ - 
              1}]; $CellContext`msg$$ = 
           StringJoin[$CellContext`msg$$, "\nNew vals: ", 
-            TextString[$CellContext`vals$$]]; $CellContext`probChanged$$ = 
+            TextString[$CellContext`vals$$]]; $CellContext`funcChanged$$ = 
           False; $CellContext`valsChanged$$ = True; Null]; If[
          Or[$CellContext`n$$ != $CellContext`oldN$$, 
           Part[$CellContext`mpair$$, 1] != 
@@ -2841,7 +2793,7 @@ $CellContext`alpha$$ = If[$CellContext`isDiscrete$$,
                SeriesCoefficient[
                 Refine[
                  Series[
-                  $CellContext`prob$$[$CellContext`x], {$CellContext`x, 
+                  $CellContext`func$$[$CellContext`x], {$CellContext`x, 
                    0, $CellContext`leftM$$ - 1}], 0 < $CellContext`x < 
                  1], $CellContext`k - 1]]], {$CellContext`k, 
               1, $CellContext`leftM$$}]]; $CellContext`msg$$ = 
@@ -2862,7 +2814,7 @@ $CellContext`alphabar$$ = If[$CellContext`isDiscrete$$,
                SeriesCoefficient[
                 Refine[
                  Series[
-                  $CellContext`prob$$[
+                  $CellContext`func$$[
                   1 - $CellContext`y], {$CellContext`y, 
                    0, $CellContext`rightM$$ - 1}], 0 < $CellContext`y < 
                  1], $CellContext`k - 1]]], {$CellContext`k, 
@@ -2873,7 +2825,7 @@ $CellContext`alphabar$$ = If[$CellContext`isDiscrete$$,
 $CellContext`rightTaylorChanged$$ = False; $CellContext`redrawPlots$$ = 
           True; $CellContext`valsChanged$$ = False; Null]; 
        If[$CellContext`oldWhichPlot$$ != $CellContext`whichPlot$$, \
-$CellContext`redrawPlots$$ = False; $CellContext`probChanged$$ = 
+$CellContext`redrawPlots$$ = False; $CellContext`funcChanged$$ = 
           True; $CellContext`oldWhichPlot$$ = $CellContext`whichPlot$$; Null]; 
        If[$CellContext`redrawPlots$$, 
          Print[$CellContext`func$$, $CellContext`isDiscrete$$, \
@@ -2898,132 +2850,132 @@ $CellContext`norm$$, $CellContext`isMonotonic$$]; Null]; $CellContext`msg$$ =
             
             TextString[$CellContext`show$$]]; $CellContext`oldShow$$ = \
 $CellContext`show$$; Null]; Switch[
-         Part[$CellContext`func$$, 1], "binomial", 
-         If[$CellContext`oldFunc$$ != 
-           Part[$CellContext`func$$, 1], $CellContext`msg$$ = 
+         Part[$CellContext`funcName$$, 1], "binomial", 
+         If[$CellContext`oldFuncName$$ != 
+           Part[$CellContext`funcName$$, 1], $CellContext`msg$$ = 
             StringJoin[$CellContext`msg$$, 
-              "\nchanged func to binomial from ", $CellContext`oldFunc$$]; \
+              "\nchanged func to binomial from ", $CellContext`oldFuncName$$]; \
 $CellContext`mBinom$$ = $CellContext`oldMBinom$$; $CellContext`n$$ = \
-$CellContext`mBinom$$; $CellContext`oldFunc$$ = 
+$CellContext`mBinom$$; $CellContext`oldFuncName$$ = 
             "binomial"; $CellContext`isDiscrete$$ = 
-            True; $CellContext`probChanged$$ = True; Null]; 
+            True; $CellContext`funcChanged$$ = True; Null]; 
          If[ControlActive[$CellContext`p$$, $CellContext`oldP$$] != \
 $CellContext`p$$, $CellContext`msg$$ = 
             StringJoin[$CellContext`msg$$, "\nchanged p to ", 
               TextString[$CellContext`p$$], " from ", 
-              TextString[$CellContext`oldP$$]]; $CellContext`probChanged$$ = 
+              TextString[$CellContext`oldP$$]]; $CellContext`funcChanged$$ = 
             True; $CellContext`oldP$$ = $CellContext`p$$; Null]; 
          If[ControlActive[$CellContext`mBinom$$, $CellContext`oldMBinom$$] != \
-$CellContext`mBinom$$, $CellContext`probChanged$$ = True; $CellContext`msg$$ = 
+$CellContext`mBinom$$, $CellContext`funcChanged$$ = True; $CellContext`msg$$ = 
             StringJoin[$CellContext`msg$$, "\nchanged m to ", 
               TextString[$CellContext`mBinom$$], " from ", 
               
               TextString[$CellContext`oldMBinom$$]]; $CellContext`n$$ = \
 $CellContext`mBinom$$; $CellContext`oldMBinom$$ = $CellContext`mBinom$$; 
-           Null]; If[$CellContext`probChanged$$, $CellContext`biases$$ = \
+           Null]; If[$CellContext`funcChanged$$, $CellContext`biases$$ = \
 $CellContext`binom[$CellContext`mBinom$$ - 
               1, $CellContext`p$$]; $CellContext`msg$$ = 
             StringJoin[$CellContext`msg$$, "\nnew biases ", 
-              TextString[$CellContext`biases$$]]; $CellContext`prob$$ = 
+              TextString[$CellContext`biases$$]]; $CellContext`func$$ = 
             If[$CellContext`whichPlot$$ == "density", 
               $CellContext`discreteDensity[$CellContext`biases$$], 
               $CellContext`discreteCumul[$CellContext`biases$$]]]; Null, 
          "ensemble", 
-         If[$CellContext`oldFunc$$ != 
-           Part[$CellContext`func$$, 1], $CellContext`msg$$ = 
+         If[$CellContext`oldFuncName$$ != 
+           Part[$CellContext`funcName$$, 1], $CellContext`msg$$ = 
             StringJoin[$CellContext`msg$$, 
-              "\nchanged func to ensemble from ", $CellContext`oldFunc$$]; \
+              "\nchanged func to ensemble from ", $CellContext`oldFuncName$$]; \
 $CellContext`mEnsemble$$ = $CellContext`oldMEnsemble$$; $CellContext`n$$ = \
 $CellContext`mEnsemble$$ + 
              1; $CellContext`range$$ = $CellContext`oldRange$$; \
 $CellContext`biases$$ = $CellContext`bSum[$CellContext`mEnsemble$$, \
-$CellContext`range$$]; $CellContext`oldFunc$$ = 
+$CellContext`range$$]; $CellContext`oldFuncName$$ = 
             "ensemble"; $CellContext`isDiscrete$$ = 
-            True; $CellContext`probChanged$$ = True; Null]; 
+            True; $CellContext`funcChanged$$ = True; Null]; 
          If[ControlActive[$CellContext`range$$, $CellContext`oldRange$$] != \
 $CellContext`range$$, $CellContext`biases$$ = \
 $CellContext`bSum[$CellContext`mEnsemble$$, $CellContext`range$$]; \
-$CellContext`probChanged$$ = 
+$CellContext`funcChanged$$ = 
             True; $CellContext`oldRange$$ = $CellContext`range$$; Null]; 
          If[ControlActive[$CellContext`mEnsemble$$, \
 $CellContext`oldMEnsemble$$] != $CellContext`mEnsemble$$, \
 $CellContext`biases$$ = $CellContext`bSum[$CellContext`mEnsemble$$, \
-$CellContext`range$$]; $CellContext`probChanged$$ = 
+$CellContext`range$$]; $CellContext`funcChanged$$ = 
             True; $CellContext`n$$ = $CellContext`mEnsemble$$ + 
              1; $CellContext`oldMEnsemble$$ = $CellContext`mEnsemble$$; Null]; 
-         If[$CellContext`probChanged$$, $CellContext`prob$$ = 
+         If[$CellContext`funcChanged$$, $CellContext`func$$ = 
            If[$CellContext`whichPlot$$ == "density", 
              $CellContext`discreteDensity[$CellContext`biases$$], 
              $CellContext`discreteCumul[$CellContext`biases$$]]]; Null, 
          "network reliability", 
-         If[$CellContext`oldFunc$$ != 
-           Part[$CellContext`func$$, 1], $CellContext`msg$$ = 
+         If[$CellContext`oldFuncName$$ != 
+           Part[$CellContext`funcName$$, 1], $CellContext`msg$$ = 
             StringJoin[$CellContext`msg$$, 
               "\nchanged func to network reliability from ", \
-$CellContext`oldFunc$$]; $CellContext`mReliable$$ = \
-$CellContext`oldmReliable$$; $CellContext`oldFunc$$ = 
+$CellContext`oldFuncName$$]; $CellContext`mReliable$$ = \
+$CellContext`oldmReliable$$; $CellContext`oldFuncName$$ = 
             "network reliability"; $CellContext`isDiscrete$$ = 
-            False; $CellContext`probChanged$$ = True; Null]; 
+            False; $CellContext`funcChanged$$ = True; Null]; 
          If[ControlActive[$CellContext`lorder$$, $CellContext`oldLorder$$] != \
 $CellContext`lorder$$, 
            Part[$CellContext`mpair$$, 1] = 
-            1 + If[$CellContext`lorder$$ > 
-               0, $CellContext`b$$ + ($CellContext`lorder$$ - 
-                 1) ($CellContext`a$$ - 
-                 1)]; $CellContext`oldLorder$$ = $CellContext`lorder$$; Null]; 
+            1 + Switch[$CellContext`lorder$$, 0, 0, 
+               1, $CellContext`a$$, $CellContext`m + 1, $CellContext`b$$ + 
+               1 + ($CellContext`a$$ - 1) $CellContext`mReliable$$, 
+               
+               Blank[], $CellContext`lorder$$ ($CellContext`a$$ - 
+                1)]; $CellContext`oldLorder$$ = $CellContext`lorder$$; Null]; 
          If[ControlActive[$CellContext`rorder$$, $CellContext`oldRorder$$] != \
 $CellContext`rorder$$, 
            Part[$CellContext`mpair$$, 2] = $CellContext`n$$ + 1 - 
-             Min[$CellContext`n$$, 
-              
-              If[$CellContext`rorder$$ <= $CellContext`b$$, \
-$CellContext`rorder$$ + 1, $CellContext`b$$ + 1 + $CellContext`mReliable$$ + 
-               Ceiling[($CellContext`rorder$$ - \
-$CellContext`b$$)/$CellContext`b$$]]]; $CellContext`oldRorder$$ = \
-$CellContext`rorder$$; Null]; If[ControlActive[
+             If[$CellContext`rorder$$ > $CellContext`a$$ - 
+               1, $CellContext`n$$, $CellContext`rorder$$ \
+$CellContext`mReliable$$ + 
+              Min[$CellContext`rorder$$, $CellContext`b$$]]; \
+$CellContext`oldRorder$$ = $CellContext`rorder$$; Null]; If[ControlActive[
              Part[$CellContext`len$$, 1], $CellContext`b$$] != 
-           Part[$CellContext`len$$, 1], $CellContext`probChanged$$ = 
+           Part[$CellContext`len$$, 1], $CellContext`funcChanged$$ = 
             True; $CellContext`b$$ = Part[$CellContext`len$$, 1]; Null]; 
          If[ControlActive[
              Part[$CellContext`len$$, 2], $CellContext`a$$] != 
-           Part[$CellContext`len$$, 2], $CellContext`probChanged$$ = 
+           Part[$CellContext`len$$, 2], $CellContext`funcChanged$$ = 
             True; $CellContext`a$$ = Part[$CellContext`len$$, 2]; Null]; 
          If[ControlActive[$CellContext`mReliable$$, \
 $CellContext`oldmReliable$$] != $CellContext`mReliable$$, \
-$CellContext`probChanged$$ = 
+$CellContext`funcChanged$$ = 
             True; $CellContext`oldmReliable$$ = $CellContext`mReliable$$; 
-           Null]; If[$CellContext`probChanged$$, $CellContext`n$$ = \
-$CellContext`b$$ + 
+           Null]; 
+         If[$CellContext`funcChanged$$, $CellContext`n$$ = $CellContext`b$$ + 
              1 + ($CellContext`a$$ - 
-               1) $CellContext`mReliable$$; $CellContext`prob$$ = 
+               1) $CellContext`mReliable$$; $CellContext`func$$ = 
             If[$CellContext`whichPlot$$ == "density", 
               $CellContext`toyDensity[$CellContext`mReliable$$, \
 $CellContext`a$$, $CellContext`b$$], 
               $CellContext`toyCumul[$CellContext`mReliable$$, \
 $CellContext`a$$, $CellContext`b$$]]]; Null, "pole", 
-         If[$CellContext`oldFunc$$ != 
-           Part[$CellContext`func$$, 1], $CellContext`msg$$ = 
+         If[$CellContext`oldFuncName$$ != 
+           Part[$CellContext`funcName$$, 1], $CellContext`msg$$ = 
             StringJoin[$CellContext`msg$$, 
-              "\nchanged func to pole from ", $CellContext`oldFunc$$]; \
+              "\nchanged func to pole from ", $CellContext`oldFuncName$$]; \
 $CellContext`mPole$$ = $CellContext`n$$; $CellContext`oldMPole$$ = \
 $CellContext`mPole$$; $CellContext`pt$$ = $CellContext`oldPt$$; \
-$CellContext`oldFunc$$ = "pole"; $CellContext`isDiscrete$$ = 
-            False; $CellContext`probChanged$$ = True; Null]; 
+$CellContext`oldFuncName$$ = "pole"; $CellContext`isDiscrete$$ = 
+            False; $CellContext`funcChanged$$ = True; Null]; 
          If[ControlActive[
              Part[$CellContext`pt$$, 1], 
              Part[$CellContext`oldPt$$, 1]] != 
-           Part[$CellContext`pt$$, 1], $CellContext`probChanged$$ = True; 
+           Part[$CellContext`pt$$, 1], $CellContext`funcChanged$$ = True; 
            Part[$CellContext`oldPt$$, 1] = Part[$CellContext`pt$$, 1]; Null]; 
          If[ControlActive[
              Part[$CellContext`pt$$, 2], 
              Part[$CellContext`oldPt$$, 2]] != 
-           Part[$CellContext`pt$$, 2], $CellContext`probChanged$$ = True; 
+           Part[$CellContext`pt$$, 2], $CellContext`funcChanged$$ = True; 
            Part[$CellContext`oldPt$$, 2] = Part[$CellContext`pt$$, 2]; Null]; 
          If[ControlActive[$CellContext`mPole$$, $CellContext`oldMPole$$] != \
 $CellContext`mPole$$, $CellContext`n$$ = $CellContext`mPole$$; \
 $CellContext`oldMPole$$ = $CellContext`mPole$$; $CellContext`valsChanged$$ = 
             True; Null]; 
-         If[$CellContext`probChanged$$, $CellContext`prob$$ = 
+         If[$CellContext`funcChanged$$, $CellContext`func$$ = 
            If[$CellContext`whichPlot$$ == "density", 
              $CellContext`poleDensity[
               Part[$CellContext`pt$$, 1], 
@@ -3031,22 +2983,22 @@ $CellContext`oldMPole$$ = $CellContext`mPole$$; $CellContext`valsChanged$$ =
              $CellContext`poleCumul[
               Part[$CellContext`pt$$, 1], 
               Part[$CellContext`pt$$, 2]]]]; Null, "Ising", 
-         If[$CellContext`oldFunc$$ != 
-           Part[$CellContext`func$$, 
+         If[$CellContext`oldFuncName$$ != 
+           Part[$CellContext`funcName$$, 
              1], $CellContext`mIsing$$ = $CellContext`oldMIsing$$; \
-$CellContext`hFrac$$ = $CellContext`oldHFrac$$; $CellContext`oldFunc$$ = 
+$CellContext`hFrac$$ = $CellContext`oldHFrac$$; $CellContext`oldFuncName$$ = 
             "Ising"; $CellContext`isDiscrete$$ = 
-            False; $CellContext`probChanged$$ = True; Null]; 
+            False; $CellContext`funcChanged$$ = True; Null]; 
          If[ControlActive[$CellContext`hFrac$$, $CellContext`oldHFrac$$] != \
-$CellContext`hFrac$$, $CellContext`probChanged$$ = 
+$CellContext`hFrac$$, $CellContext`funcChanged$$ = 
             True; $CellContext`oldHFrac$$ = $CellContext`hFrac$$; Null]; 
          If[ControlActive[$CellContext`mIsing$$, $CellContext`oldMIsing$$] != \
-$CellContext`mIsing$$, $CellContext`probChanged$$ = 
+$CellContext`mIsing$$, $CellContext`funcChanged$$ = 
             True; $CellContext`dos$$ = \
 $CellContext`isingDoS1D[$CellContext`mIsing$$, $CellContext`dos$$]; \
 $CellContext`n$$ = $CellContext`mIsing$$ + 
              2; $CellContext`oldMIsing$$ = $CellContext`mIsing$$; Null]; 
-         If[$CellContext`probChanged$$, $CellContext`prob$$ = 
+         If[$CellContext`funcChanged$$, $CellContext`func$$ = 
            If[$CellContext`whichPlot$$ == "density", 
              $CellContext`isingDensity[
               
@@ -3135,16 +3087,16 @@ $CellContext`rightM$$]];
             MatrixForm[$CellContext`coefs$$]]]]]; Grid[{
           Flatten[{
             $CellContext`buildPlot1[$CellContext`leftM$$, \
-$CellContext`rightM$$, $CellContext`vals$$, $CellContext`prob$$, \
+$CellContext`rightM$$, $CellContext`vals$$, $CellContext`func$$, \
 $CellContext`alpha$$, $CellContext`alphabar$$], 
             $CellContext`buildPlot2[$CellContext`leftM$$, \
 $CellContext`rightM$$, $CellContext`vals$$, $CellContext`coefs$$, \
 $CellContext`d2b$$, $CellContext`show$$, $CellContext`whichPlot$$, \
 $CellContext`matchData$$]}]}, Spacings -> 5]), 
-      "Specifications" :> {{{$CellContext`func$$, 
+      "Specifications" :> {{{$CellContext`funcName$$, 
           Tooltip[
           "binomial", "a binomial distribution with parameters N and p"], 
-          "underlying probability function:"}, {
+          "underlying function:"}, {
           Tooltip[
           "binomial", "a binomial distribution with parameters N and p"], 
           Tooltip[
@@ -3168,12 +3120,12 @@ sites on a circle in an external field:\n ``(T) =`` n(s,f) exp{`` [s+``f]}",
             2 $CellContext`J/$CellContext`kT, \
 $CellContext`H/$CellContext`J]]}, ControlType -> 
          RadioButton}, {{$CellContext`whichPlot$$, "density", 
-          "Plot probability densities or cumulative probabilities?"}, {
+          "Plot positive, normed function or its monotonic integral?"}, {
          "density", "cumulative"}, ControlType -> 
          RadioButton}, {{$CellContext`mpair$$, {1, 4}, ""}, 1, 
          Dynamic[$CellContext`n$$], 1, ControlType -> IntervalSlider, 
          Appearance -> {"Paired"}, Enabled -> 
-         Dynamic[Part[$CellContext`func$$, 1] != "network reliability"], 
+         Dynamic[Part[$CellContext`funcName$$, 1] != "network reliability"], 
          ControlPlacement -> 1}, 
         Row[{"polynomial coefficients known: left ", 
           Dynamic[
@@ -3260,14 +3212,14 @@ $CellContext`rightM$$]]]]]}}, Frame -> True]}], {{$CellContext`matchData$$,
          Method -> "Push", Appearance -> {"Labeled", "Paired"}, 
          ControlPlacement -> 
          9}, {{$CellContext`lorder$$, $CellContext`oldLorder$$, " strut(s)"}, 
-         1, 
-         Dynamic[
-          Min[5, $CellContext`mReliable$$ + 1]], 1, ControlPlacement -> 
+         0, 
+         Dynamic[$CellContext`mReliable$$ + 1], 1, ControlPlacement -> 
          10}, {{$CellContext`rorder$$, $CellContext`oldRorder$$, " cut(s)"}, 
-         1, 
+         0, 
          Dynamic[
-          Min[
-          5, $CellContext`b$$ (
+          
+          Min[$CellContext`a$$ - 
+           1, $CellContext`b$$ (
             1 + ($CellContext`a$$ - 1)^$CellContext`mReliable$$)]], 1, 
          ControlPlacement -> 
          11}, {{$CellContext`hFrac$$, $CellContext`oldHFrac$$, 
@@ -3277,7 +3229,7 @@ $CellContext`rightM$$]]]]]}}, Frame -> True]}], {{$CellContext`matchData$$,
          1, Appearance -> "Labeled", ControlPlacement -> 13}, 
         Dynamic[
          Switch[
-          Part[$CellContext`func$$, 1], "pole", 
+          Part[$CellContext`funcName$$, 1], "pole", 
           Row[{
             Spacer[50], 
             Panel[
@@ -3324,22 +3276,22 @@ $CellContext`a$$, $CellContext`b$$]]}], "network reliability parameters", Top,
                Manipulate`Place[12], 
                Manipulate`Place[13], "x in plots is exp[-2(H+|J|)/(kT)]"}], 
              "Ising parameters", Top, Alignment -> 
-             Center]}]]], {{$CellContext`oldFunc$$, "none"}, 0, ControlType -> 
-         None}, {{$CellContext`eval$$, 0}, 0, ControlType -> 
+             Center]}]]], {{$CellContext`oldFuncName$$, "none"}, 0, 
+         ControlType -> None}, {{$CellContext`eval$$, 0}, 0, ControlType -> 
          None}, {{$CellContext`n$$, 4}, 0, ControlType -> 
          None}, {{$CellContext`oldN$$, 1}, 0, ControlType -> 
          None}, {{$CellContext`leftM$$, 1}, 0, ControlType -> 
          None}, {{$CellContext`rightM$$, 1}, 0, ControlType -> 
          None}, {{$CellContext`oldMpair$$, {0, 0}}, 0, ControlType -> 
          None}, {{$CellContext`mpair$$, {1, 4}}, 0, ControlType -> 
-         None}, {{$CellContext`prob$$, 
+         None}, {{$CellContext`func$$, 
           Function[$CellContext`x, 1]}, 0, ControlType -> 
          None}, {{$CellContext`vals$$, {1, 1, 1, 1}}, 0, ControlType -> 
          None}, {{$CellContext`norm$$, 1}, 0, ControlType -> 
          None}, {{$CellContext`isDiscrete$$, True}, 0, ControlType -> 
          None}, {{$CellContext`isMonotonic$$, True}, 0, ControlType -> 
          None}, {{$CellContext`oldMatchData$$, True}, 0, ControlType -> 
-         None}, {{$CellContext`probChanged$$, True}, 0, ControlType -> 
+         None}, {{$CellContext`funcChanged$$, True}, 0, ControlType -> 
          None}, {{$CellContext`valsChanged$$, True}, 0, ControlType -> 
          None}, {{$CellContext`plotChanged$$, True}, 0, ControlType -> 
          None}, {{$CellContext`leftTaylorChanged$$, True}, 0, ControlType -> 
@@ -3392,19 +3344,19 @@ $CellContext`a$$, $CellContext`b$$]]}], "network reliability parameters", Top,
          None}, {{$CellContext`alphabar$$, {1}}, 0, ControlType -> 
          None}, {{$CellContext`coefs$$, {{1}}}, 0, ControlType -> None}}, 
       "Options" :> {
-       TrackedSymbols :> {$CellContext`func$$, $CellContext`whichPlot$$, \
+       TrackedSymbols :> {$CellContext`funcName$$, $CellContext`whichPlot$$, \
 $CellContext`mpair$$, $CellContext`n$$, $CellContext`show$$, \
-$CellContext`isDiscrete$$, $CellContext`matchData$$, $CellContext`prob$$, \
+$CellContext`isDiscrete$$, $CellContext`matchData$$, $CellContext`func$$, \
 $CellContext`p$$, $CellContext`mPole$$, $CellContext`mBinom$$, \
 $CellContext`mEnsemble$$, $CellContext`mReliable$$, $CellContext`mIsing$$, \
-$CellContext`pt$$, $CellContext`range$$, $CellContext`probChanged$$, \
+$CellContext`pt$$, $CellContext`range$$, $CellContext`funcChanged$$, \
 $CellContext`len$$, $CellContext`lorder$$, $CellContext`rorder$$, \
 $CellContext`hFrac$$}}, "DefaultOptions" :> {}],
-     ImageSizeCache->{715., {300., 306.}},
+     ImageSizeCache->{716., {339., 345.}},
      SingleEvaluation->True],
     Deinitialization:>None,
     DynamicModuleValues:>{},
-    Initialization:>(($CellContext`prob$$ = \
+    Initialization:>(($CellContext`func$$ = \
 $CellContext`discreteDensity[$CellContext`biases$$]; $CellContext`tmp = {}; \
 $CellContext`dos$$ = $CellContext`isingDoS1D[4, $CellContext`tmp]; Null); 
      Typeset`initDone$$ = True),
@@ -3415,27 +3367,47 @@ $CellContext`dos$$ = $CellContext`isingDoS1D[4, $CellContext`tmp]; Null);
    Deployed->True,
    StripOnInput->False],
   Manipulate`InterpretManipulate[1]]], "Output",
- CellChangeTimes->{3.751501720571611*^9, 3.751502458934741*^9},
+ CellChangeTimes->{
+  3.751545617239648*^9, 3.751546511919222*^9, 3.75154654590976*^9, 
+   3.751546756491994*^9, 3.7515478760567017`*^9, 3.7515482106554337`*^9, 
+   3.751548367246862*^9, 3.7515484113951902`*^9, {3.751548644130632*^9, 
+   3.751548657036318*^9}, {3.751548759587843*^9, 3.75154881467027*^9}, 
+   3.75154886669258*^9, {3.751548918373556*^9, 3.751548933154348*^9}, 
+   3.75154897561446*^9},
  CellLabel->
-  "Out[123]=",ExpressionUUID->"94304a52-bca8-4e0e-9b02-337fc10d13ee"],
+  "Out[144]=",ExpressionUUID->"5b3ba652-bc6c-4075-9d9b-42a62b3cd5b9"],
 
 Cell[CellGroupData[{
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{
-   TagBox[
-    TooltipBox["\<\"binomial\"\>",
-     "\"a binomial distribution with parameters N and p\"",
-     TooltipStyle->"TextStyling"],
-    Annotation[#, "a binomial distribution with parameters N and p", 
-     "Tooltip"]& ], "\[InvisibleSpace]", "True", "\[InvisibleSpace]", "True"}],
+   RowBox[{"Function", "[", 
+    RowBox[{"x$", ",", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"0.125`", ",", "0.375`", ",", "0.375`", ",", "0.125`"}], "}"}],
+       "\[LeftDoubleBracket]", 
+      RowBox[{
+       RowBox[{"Ceiling", "[", 
+        RowBox[{
+         RowBox[{"x$", " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"Length", "[", 
+             RowBox[{"{", 
+              RowBox[{"0.125`", ",", "0.375`", ",", "0.375`", ",", "0.125`"}],
+               "}"}], "]"}], "-", "1"}], ")"}]}], "-", "0.5`"}], "]"}], "+", 
+       "1"}], "\[RightDoubleBracket]"}]}], "]"}], "\[InvisibleSpace]", "True",
+    "\[InvisibleSpace]", "True"}],
   SequenceForm[
-   Tooltip["binomial", "a binomial distribution with parameters N and p"], 
-   True, True],
+   Function[$CellContext`x$, 
+    Part[{0.125, 0.375, 0.375, 0.125}, 
+     Ceiling[$CellContext`x$ (Length[{0.125, 0.375, 0.375, 0.125}] - 1) - 
+       0.5] + 1]], True, True],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502459724922*^9},
- CellLabel->"",ExpressionUUID->"f21a1bc1-4e99-4b21-9d17-d5a92dc29afe"],
+ CellChangeTimes->{3.751548919234713*^9},
+ CellLabel->"",ExpressionUUID->"e67591c0-1a3a-4649-ad2e-bc847ae6c626"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3445,16 +3417,16 @@ Cell[BoxData[
    "\[InvisibleSpace]", "1", "\[InvisibleSpace]", "1"}],
   SequenceForm["vals:", {0.125, 0.375, 0.375, 0.125}, 1, 1],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502459743724*^9},
- CellLabel->"",ExpressionUUID->"e1e38f5a-a714-46d2-b649-1d0d7d7d4ad0"],
+ CellChangeTimes->{3.751548919251233*^9},
+ CellLabel->"",ExpressionUUID->"10729da4-66ae-4eb6-8fc5-73464837d1bf"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"dof:\"\>", "\[InvisibleSpace]", "2"}],
   SequenceForm["dof:", 2],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502459759551*^9},
- CellLabel->"",ExpressionUUID->"5e6e87a6-ac23-4f1e-86a8-f905ba0fde63"],
+ CellChangeTimes->{3.7515489192654037`*^9},
+ CellLabel->"",ExpressionUUID->"be0aa06c-3b40-4927-a4d9-e4709f23b357"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3462,8 +3434,8 @@ Cell[BoxData[
    RowBox[{"{", "0.125`", "}"}]}],
   SequenceForm["leftCoefs:", {0.125}],
   Editable->False]], "Print",
- CellChangeTimes->{3.7515024597695503`*^9},
- CellLabel->"",ExpressionUUID->"be85e286-6173-477e-8383-cde3e1f467c8"],
+ CellChangeTimes->{3.751548919274259*^9},
+ CellLabel->"",ExpressionUUID->"8f47e9e7-8c95-42a6-b497-a8374c87f7ff"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3471,8 +3443,8 @@ Cell[BoxData[
    RowBox[{"{", "0.125`", "}"}]}],
   SequenceForm["rightCoefs:", {0.125}],
   Editable->False]], "Print",
- CellChangeTimes->{3.7515024597783937`*^9},
- CellLabel->"",ExpressionUUID->"0e1867c2-ef29-4b9f-bb27-4dc471572b83"],
+ CellChangeTimes->{3.751548919283304*^9},
+ CellLabel->"",ExpressionUUID->"3aa39e67-3dba-4b02-bed5-7982cbea2449"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3481,24 +3453,24 @@ Cell[BoxData[
     RowBox[{"0.125`", ",", "0", ",", "0", ",", "0.125`"}], "}"}]}],
   SequenceForm["emptyCoefs:, ", {0.125, 0, 0, 0.125}],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502459787133*^9},
- CellLabel->"",ExpressionUUID->"b01d6244-ca08-49d4-b891-780eac049ace"],
+ CellChangeTimes->{3.751548919292375*^9},
+ CellLabel->"",ExpressionUUID->"66628d93-9614-4f9f-bdb7-d68d0f0052cd"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"sumVals:\"\>", "\[InvisibleSpace]", "0.25`"}],
   SequenceForm["sumVals:", 0.25],
   Editable->False]], "Print",
- CellChangeTimes->{3.7515024597956448`*^9},
- CellLabel->"",ExpressionUUID->"c836d083-944b-47bb-80f1-01ef5a0c0d5b"],
+ CellChangeTimes->{3.751548919301579*^9},
+ CellLabel->"",ExpressionUUID->"3d8898f9-8094-4ad0-b176-8783e8f5cfa0"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"Remainder: \"\>", "\[InvisibleSpace]", "0.75`"}],
   SequenceForm["Remainder: ", 0.75],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502459804261*^9},
- CellLabel->"",ExpressionUUID->"c098592b-9b97-4344-9075-cf9d7362822f"],
+ CellChangeTimes->{3.751548919310623*^9},
+ CellLabel->"",ExpressionUUID->"57049d80-5653-47b0-be26-54b190a88d70"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3507,8 +3479,8 @@ Cell[BoxData[
     RowBox[{"0.125`", ",", "0.375`", ",", "0.375`", ",", "0.125`"}], "}"}]}],
   SequenceForm["tmpVals 1", {0.125, 0.375, 0.375, 0.125}],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502459812757*^9},
- CellLabel->"",ExpressionUUID->"43aef6ed-31a0-4074-8e84-5fb78f3c0de7"],
+ CellChangeTimes->{3.751548919319746*^9},
+ CellLabel->"",ExpressionUUID->"8030c8d9-12dc-4797-958c-e8d63a1c5d1f"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3517,34 +3489,27 @@ Cell[BoxData[
     RowBox[{"0.`", ",", "0.`", ",", "0.`", ",", "0.`"}], "}"}]}],
   SequenceForm["tmpVals 2", {0., 0., 0., 0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502459821473*^9},
- CellLabel->"",ExpressionUUID->"e110a335-34db-4661-8fae-b9088990e08f"],
+ CellChangeTimes->{3.751548919328951*^9},
+ CellLabel->"",ExpressionUUID->"53c43752-5aa2-4b9a-ac6f-fbc83e209e5f"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{
-   TagBox[
-    TooltipBox["\<\"network reliability\"\>",
-     "\"the two terminal Moore-Shannon network reliability for the toy \
-network illustrated. \\nI.e., the probability of getting a message from \
-Source to Terminus when the probability of transmitting over each edge is x\"",
-     TooltipStyle->"TextStyling"],
-    Annotation[#, 
-     "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x", 
-     "Tooltip"]& ], "\[InvisibleSpace]", "False", "\[InvisibleSpace]", 
-   "True"}],
+   RowBox[{"Function", "[", 
+    RowBox[{"x$", ",", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"toyCumul", "[", 
+        RowBox[{"2", ",", "3", ",", "2"}], "]"}], "\[Prime]",
+       MultilineFunction->None], "[", "x$", "]"}]}], "]"}], 
+   "\[InvisibleSpace]", "False", "\[InvisibleSpace]", "True"}],
   SequenceForm[
-   Tooltip[
-   "network reliability", 
-    "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x"], False, 
-   True],
+   Function[$CellContext`x$, 
+    Derivative[1][
+     $CellContext`toyCumul[2, 3, 2]][$CellContext`x$]], False, True],
   Editable->False]], "Print",
- CellChangeTimes->{3.75150246706752*^9},
- CellLabel->"",ExpressionUUID->"50fc131a-b559-4107-ab7b-3da514d3a24f"],
+ CellChangeTimes->{3.751548928114048*^9},
+ CellLabel->"",ExpressionUUID->"43d9001a-af3a-4b78-9d16-f933cb74bb7e"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3554,8 +3519,8 @@ Cell[BoxData[
    RowBox[{"{", "0.`", "}"}]}],
   SequenceForm["alpha:", {0.}, " alphabar:", {0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502467078397*^9},
- CellLabel->"",ExpressionUUID->"d8ca46d0-f5c8-4e6a-b98c-81da7e90d1e0"],
+ CellChangeTimes->{3.7515489281221733`*^9},
+ CellLabel->"",ExpressionUUID->"eed10ccf-0722-4599-9d48-3470d03b78ee"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3564,8 +3529,8 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\" rightm:\"\>", "\[InvisibleSpace]", "1"}],
   SequenceForm["m:", 7, " leftm:", 1, " rightm:", 1],
   Editable->False]], "Print",
- CellChangeTimes->{3.7515024670863333`*^9},
- CellLabel->"",ExpressionUUID->"97c50c1f-f129-4ccf-9ab5-ccceb5ab5cdc"],
+ CellChangeTimes->{3.7515489281301517`*^9},
+ CellLabel->"",ExpressionUUID->"1a5e20f2-8980-482d-b667-6128f8109ef0"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3574,8 +3539,8 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\" monotonic:\"\>", "\[InvisibleSpace]", "True"}],
   SequenceForm["dof:", 6, " norm:", 1, " monotonic:", True],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502467094102*^9},
- CellLabel->"",ExpressionUUID->"115fca8a-cfba-4e33-b0be-9d31c7f14dff"],
+ CellChangeTimes->{3.751548928137514*^9},
+ CellLabel->"",ExpressionUUID->"6d38d1d3-2a89-4dbc-9263-f207b3861b37"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3583,8 +3548,8 @@ Cell[BoxData[
    RowBox[{"{", "0.`", "}"}]}],
   SequenceForm["leftCoefs:", {0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502467101643*^9},
- CellLabel->"",ExpressionUUID->"a45785e7-4693-4ed7-b973-febf576d5c0e"],
+ CellChangeTimes->{3.751548928144703*^9},
+ CellLabel->"",ExpressionUUID->"44699208-6d29-42a8-92f6-7fa9eddaa610"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3592,8 +3557,8 @@ Cell[BoxData[
    RowBox[{"{", "0.`", "}"}]}],
   SequenceForm["rightCoefs:", {0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502467109556*^9},
- CellLabel->"",ExpressionUUID->"7a7fbd42-d6d5-4177-8f4d-6c4ef42cb0e6"],
+ CellChangeTimes->{3.751548928151676*^9},
+ CellLabel->"",ExpressionUUID->"86e294c7-d5b6-4c20-aa36-1947528d7b4f"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3604,16 +3569,16 @@ Cell[BoxData[
      "0.`"}], "}"}]}],
   SequenceForm["emptyCoefs:", {0., 0, 0, 0, 0, 0, 0, 0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502467116819*^9},
- CellLabel->"",ExpressionUUID->"b6f52c93-a292-4eb0-98de-e905c385b287"],
+ CellChangeTimes->{3.7515489281588297`*^9},
+ CellLabel->"",ExpressionUUID->"50b84c51-18b9-4a9e-88dc-9d6e881338aa"],
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"Remainder: \"\>", "\[InvisibleSpace]", "remainder$70782"}],
-  SequenceForm["Remainder: ", $CellContext`remainder$70782],
+  RowBox[{"\<\"Remainder: \"\>", "\[InvisibleSpace]", "remainder$171847"}],
+  SequenceForm["Remainder: ", $CellContext`remainder$171847],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502467123269*^9},
- CellLabel->"",ExpressionUUID->"6205ea86-800c-4f80-80f2-68df5b0f52b8"],
+ CellChangeTimes->{3.7515489281656513`*^9},
+ CellLabel->"",ExpressionUUID->"0130e6b2-feb9-427c-874d-cf225445856b"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3624,56 +3589,201 @@ Cell[BoxData[
      "0.`", ",", "0.`"}], "}"}]}],
   SequenceForm["tmpCoefs:", {0., 0., 0., 0., 0., 0., 0., 0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502467129965*^9},
- CellLabel->"",ExpressionUUID->"4053b5d9-1aab-4730-ad8d-b204633732c1"],
+ CellChangeTimes->{3.751548928172477*^9},
+ CellLabel->"",ExpressionUUID->"17b4526b-f6df-4840-8b3a-d56af52642f8"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{
-   TagBox[
-    TooltipBox["\<\"network reliability\"\>",
-     "\"the two terminal Moore-Shannon network reliability for the toy \
-network illustrated. \\nI.e., the probability of getting a message from \
-Source to Terminus when the probability of transmitting over each edge is x\"",
-     TooltipStyle->"TextStyling"],
-    Annotation[#, 
-     "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x", 
-     "Tooltip"]& ], "\[InvisibleSpace]", "False", "\[InvisibleSpace]", 
-   "True"}],
+   RowBox[{"Function", "[", 
+    RowBox[{"x$", ",", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"toyCumul", "[", 
+        RowBox[{"2", ",", "3", ",", "2"}], "]"}], "\[Prime]",
+       MultilineFunction->None], "[", "x$", "]"}]}], "]"}], 
+   "\[InvisibleSpace]", "False", "\[InvisibleSpace]", "True"}],
   SequenceForm[
-   Tooltip[
-   "network reliability", 
-    "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x"], False, 
-   True],
+   Function[$CellContext`x$, 
+    Derivative[1][
+     $CellContext`toyCumul[2, 3, 2]][$CellContext`x$]], False, True],
   Editable->False]], "Print",
- CellChangeTimes->{3.7515024727409477`*^9},
- CellLabel->"",ExpressionUUID->"ac94c944-5a0f-440e-ab23-28ffcffb8bd0"],
+ CellChangeTimes->{3.751548952294115*^9},
+ CellLabel->"",ExpressionUUID->"ff4dfe7c-279c-4e45-aeda-4c17098a35c8"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"alpha:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "0.`", "}"}], "\[InvisibleSpace]", "\<\" alphabar:\"\>", 
-   "\[InvisibleSpace]", 
    RowBox[{"{", 
-    RowBox[{"0.`", ",", "4.`", ",", "21.`"}], "}"}]}],
-  SequenceForm["alpha:", {0.}, " alphabar:", {0., 4., 21.}],
+    RowBox[{"0.`", ",", "2.`", ",", "6.`", ",", "0.`"}], "}"}], 
+   "\[InvisibleSpace]", "\<\" alphabar:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "0.`", "}"}]}],
+  SequenceForm["alpha:", {0., 2., 6., 0.}, " alphabar:", {0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.75150247274829*^9},
- CellLabel->"",ExpressionUUID->"25e84e62-e745-4a35-9f13-f315e260456f"],
+ CellChangeTimes->{3.751548952301262*^9},
+ CellLabel->"",ExpressionUUID->"e2f66cf5-be56-4d7b-a674-f7006073ff7f"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"m:\"\>", "\[InvisibleSpace]", "7", 
-   "\[InvisibleSpace]", "\<\" leftm:\"\>", "\[InvisibleSpace]", "1", 
-   "\[InvisibleSpace]", "\<\" rightm:\"\>", "\[InvisibleSpace]", "3"}],
-  SequenceForm["m:", 7, " leftm:", 1, " rightm:", 3],
+   "\[InvisibleSpace]", "\<\" leftm:\"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\" rightm:\"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm["m:", 7, " leftm:", 4, " rightm:", 1],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502472754096*^9},
- CellLabel->"",ExpressionUUID->"02eaa2a9-9112-4cf6-88c0-ada52f10fb87"],
+ CellChangeTimes->{3.7515489523074017`*^9},
+ CellLabel->"",ExpressionUUID->"003b5032-ead7-4609-92a8-baf3be973c9c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"dof:\"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\" norm:\"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\" monotonic:\"\>", "\[InvisibleSpace]", "True"}],
+  SequenceForm["dof:", 3, " norm:", 1, " monotonic:", True],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7515489523132*^9},
+ CellLabel->"",ExpressionUUID->"5338990d-d27a-44f4-9311-1c8c4c2187f0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"leftCoefs:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`", ",", 
+     "2.2`"}], "}"}]}],
+  SequenceForm[
+  "leftCoefs:", {0., 0.3333333333333333, 1.0666666666666667`, 2.2}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751548952318632*^9},
+ CellLabel->"",ExpressionUUID->"1d843839-d89e-4635-ae37-b3f3ed9ed860"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rightCoefs:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "0.`", "}"}]}],
+  SequenceForm["rightCoefs:", {0.}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751548952323638*^9},
+ CellLabel->"",ExpressionUUID->"f488c029-60e3-4784-8dfe-1781ba505035"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"emptyCoefs:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`", ",", 
+     "2.2`", ",", "0", ",", "0", ",", "0", ",", "0.`"}], "}"}]}],
+  SequenceForm[
+  "emptyCoefs:", {
+   0., 0.3333333333333333, 1.0666666666666667`, 2.2, 0, 0, 0, 0.}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7515489523286333`*^9},
+ CellLabel->"",ExpressionUUID->"5bfa0a99-bcd4-4e54-a981-84690e0829e1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Remainder: \"\>", "\[InvisibleSpace]", "remainder$173997"}],
+  SequenceForm["Remainder: ", $CellContext`remainder$173997],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7515489523336487`*^9},
+ CellLabel->"",ExpressionUUID->"558e659a-2a8b-4af7-b4f3-4afa769a3c95"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"tmpCoefs:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`", ",", 
+     "2.2`", ",", "1.6500000000000001`", ",", "1.1`", ",", "0.55`", ",", 
+     "0.`"}], "}"}]}],
+  SequenceForm[
+  "tmpCoefs:", {0., 0.3333333333333333, 1.0666666666666667`, 2.2, 
+   1.6500000000000001`, 1.1, 0.55, 0.}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751548952338517*^9},
+ CellLabel->"",ExpressionUUID->"66850ace-7d70-4882-9d32-332f46a5af7d"]
+}, Open  ]],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SingularValueList","matrix",
+   "\"Argument \\!\\(\\*RowBox[{\\\"{\\\", \\\"}\\\"}]\\) at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) is not a non-empty rectangular matrix.\"",2,
+   145,136,17440818353028633820,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.751549073416995*^9},
+ CellLabel->"",ExpressionUUID->"5250d0a0-0ba3-48f8-899b-e2cb02282fc6"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "SingularValueList","matrix",
+   "\"Argument \\!\\(\\*RowBox[{\\\"0.`\\\"}]\\) at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) is not a non-empty rectangular matrix.\"",2,
+   145,137,17440818353028633820,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.751549073439152*^9},
+ CellLabel->"",ExpressionUUID->"ccb3ac9a-d380-41ee-99ba-dc921e72b8c3"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Power","infy",
+   "\"Infinite expression \\!\\(\\*FractionBox[\\\"1\\\", \\\"0.`\\\"]\\) \
+encountered.\"",2,145,138,17440818353028633820,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.75154907345446*^9},
+ CellLabel->"",ExpressionUUID->"1a0fb4a6-87d6-4466-a456-086321e2a1fd"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Infinity","indet",
+   "\"Indeterminate expression \\!\\(\\*RowBox[{\\\"0.`\\\", \\\" \\\", \
+\\\"ComplexInfinity\\\"}]\\) encountered.\"",2,145,139,17440818353028633820,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7515490734698477`*^9},
+ CellLabel->"",ExpressionUUID->"6e753f54-9645-4f09-be36-306c6bba3bbd"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"Function", "[", 
+    RowBox[{"x$", ",", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"toyCumul", "[", 
+        RowBox[{"2", ",", "3", ",", "2"}], "]"}], "\[Prime]",
+       MultilineFunction->None], "[", "x$", "]"}]}], "]"}], 
+   "\[InvisibleSpace]", "False", "\[InvisibleSpace]", "True"}],
+  SequenceForm[
+   Function[$CellContext`x$, 
+    Derivative[1][
+     $CellContext`toyCumul[2, 3, 2]][$CellContext`x$]], False, True],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751549073486217*^9},
+ CellLabel->"",ExpressionUUID->"2b140a23-bcb9-479a-be9a-8d57e5d5839a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"alpha:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"0.`", ",", "2.`", ",", "6.`", ",", "0.`"}], "}"}], 
+   "\[InvisibleSpace]", "\<\" alphabar:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "}"}]}],
+  SequenceForm["alpha:", {0., 2., 6., 0.}, " alphabar:", {}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7515490734914303`*^9},
+ CellLabel->"",ExpressionUUID->"e0e429d3-5600-4c0e-a366-5aaf808141aa"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"m:\"\>", "\[InvisibleSpace]", "7", 
+   "\[InvisibleSpace]", "\<\" leftm:\"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\" rightm:\"\>", "\[InvisibleSpace]", "0"}],
+  SequenceForm["m:", 7, " leftm:", 4, " rightm:", 0],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751549073499501*^9},
+ CellLabel->"",ExpressionUUID->"1813ca69-a20e-4f40-a190-c8013a080e0f"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3682,17 +3792,354 @@ Cell[BoxData[
    "\[InvisibleSpace]", "\<\" monotonic:\"\>", "\[InvisibleSpace]", "True"}],
   SequenceForm["dof:", 4, " norm:", 1, " monotonic:", True],
   Editable->False]], "Print",
- CellChangeTimes->{3.7515024727598743`*^9},
- CellLabel->"",ExpressionUUID->"72489987-bfaa-4e62-b193-c42007e6b947"],
+ CellChangeTimes->{3.7515490735046062`*^9},
+ CellLabel->"",ExpressionUUID->"4db2de6d-1487-4457-bc91-687ab50da621"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"leftCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "0.`", "}"}]}],
-  SequenceForm["leftCoefs:", {0.}],
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`", ",", 
+     "2.2`"}], "}"}]}],
+  SequenceForm[
+  "leftCoefs:", {0., 0.3333333333333333, 1.0666666666666667`, 2.2}],
   Editable->False]], "Print",
- CellChangeTimes->{3.75150247276569*^9},
- CellLabel->"",ExpressionUUID->"674f98f9-cbcb-4a96-bae2-faee8f2cacc6"],
+ CellChangeTimes->{3.75154907350996*^9},
+ CellLabel->"",ExpressionUUID->"518d262c-4db4-4778-b287-e882c9b510af"]
+}, Open  ]],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Reverse","normal",
+   "\"Nonatomic expression expected at position \
+\\!\\(\\*RowBox[{\\\"1\\\"}]\\) in \\!\\(\\*RowBox[{\\\"Reverse\\\", \
+\\\"[\\\", \\\"0\\\", \\\"]\\\"}]\\).\"",2,145,140,17440818353028633820,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7515490735150013`*^9},
+ CellLabel->"",ExpressionUUID->"637dee2b-d05b-41e3-8984-daaba1fcba34"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"rightCoefs:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"Reverse", "[", "0", "]"}]}],
+  SequenceForm["rightCoefs:", 
+   Reverse[0]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7515490735770397`*^9},
+ CellLabel->"",ExpressionUUID->"5d652da7-c85e-45cf-a627-bfaaf4d0841b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Part","partw",
+   "\"Part \\!\\(\\*RowBox[{\\\"1\\\"}]\\) of \\!\\(\\*RowBox[{\\\"{\\\", \
+\\\"}\\\"}]\\) does not exist.\"",2,145,141,17440818353028633820,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.7515490735832987`*^9},
+ CellLabel->"",ExpressionUUID->"a8b640f5-ccc4-4fa4-9492-b60021c8e229"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Reverse","argt",
+   "\"\\!\\(\\*RowBox[{\\\"Reverse\\\"}]\\) called with \
+\\!\\(\\*RowBox[{\\\"0\\\"}]\\) arguments; \\!\\(\\*RowBox[{\\\"1\\\"}]\\) or \
+\\!\\(\\*RowBox[{\\\"2\\\"}]\\) arguments are expected.\"",2,145,142,
+   17440818353028633820,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.751549073633477*^9},
+ CellLabel->"",ExpressionUUID->"f3c80874-4c8f-41dc-9808-765dfdcbf10a"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"emptyCoefs:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`", ",", 
+     "2.2`", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+     RowBox[{"Reverse", "[", "]"}]}], "}"}]}],
+  SequenceForm[
+  "emptyCoefs:", {
+   0., 0.3333333333333333, 1.0666666666666667`, 2.2, 0, 0, 0, 0, 
+    Reverse[]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751549073689273*^9},
+ CellLabel->"",ExpressionUUID->"ec177cba-b596-4a4a-8535-9cb2edde559d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Remainder: \"\>", "\[InvisibleSpace]", "remainder$175344"}],
+  SequenceForm["Remainder: ", $CellContext`remainder$175344],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751549073695586*^9},
+ CellLabel->"",ExpressionUUID->"e9afad3e-df93-4811-86bb-753f07e12f04"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"tmpCoefs:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`", ",", 
+     "2.2`", ",", 
+     RowBox[{"2.2`", "\[VeryThinSpace]", "+", 
+      RowBox[{
+       FractionBox["1", "5"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "2.2`"}], "+", 
+         RowBox[{"Min", "[", 
+          RowBox[{"List", ",", 
+           RowBox[{
+            RowBox[{"{", "}"}], "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}]}], "]"}]}], ")"}]}]}], ",", 
+     RowBox[{"2.2`", "\[VeryThinSpace]", "+", 
+      RowBox[{
+       FractionBox["2", "5"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "2.2`"}], "+", 
+         RowBox[{"Min", "[", 
+          RowBox[{"List", ",", 
+           RowBox[{
+            RowBox[{"{", "}"}], "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}]}], "]"}]}], ")"}]}]}], ",", 
+     RowBox[{"2.2`", "\[VeryThinSpace]", "+", 
+      RowBox[{
+       FractionBox["3", "5"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "2.2`"}], "+", 
+         RowBox[{"Min", "[", 
+          RowBox[{"List", ",", 
+           RowBox[{
+            RowBox[{"{", "}"}], "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}]}], "]"}]}], ")"}]}]}], ",", 
+     RowBox[{"2.2`", "\[VeryThinSpace]", "+", 
+      RowBox[{
+       FractionBox["4", "5"], " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "2.2`"}], "+", 
+         RowBox[{"Min", "[", 
+          RowBox[{"List", ",", 
+           RowBox[{
+            RowBox[{"{", "}"}], "\[LeftDoubleBracket]", "1", 
+            "\[RightDoubleBracket]"}]}], "]"}]}], ")"}]}]}], ",", 
+     RowBox[{"Reverse", "[", "]"}]}], "}"}]}],
+  SequenceForm[
+  "tmpCoefs:", {
+   0., 0.3333333333333333, 1.0666666666666667`, 2.2, 2.2 + 
+    Rational[1, 5] (-2.2 + Min[List, 
+        Part[{}, 1]]), 2.2 + Rational[2, 5] (-2.2 + Min[List, 
+        Part[{}, 1]]), 2.2 + Rational[3, 5] (-2.2 + Min[List, 
+        Part[{}, 1]]), 2.2 + Rational[4, 5] (-2.2 + Min[List, 
+        Part[{}, 1]]), 
+    Reverse[]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7515490737054253`*^9},
+ CellLabel->"",ExpressionUUID->"52ffa58b-7039-44e5-add7-acdeac701787"]
+}, Open  ]],
+
+Cell[BoxData[
+ TemplateBox[{
+  "BezierFunction","invcpts",
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.`\\\", \\\",\\\", \\\"0.`\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"0.125`\\\", \\\",\\\", \\\"0.3333333333333333`\
+\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.25`\\\", \
+\\\",\\\", \\\"1.0666666666666667`\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"0.375`\\\", \\\",\\\", \\\"2.2`\\\"}], \\\"}\\\
+\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.5`\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"2.2`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\
+\\\"0.2`\\\", \\\" \\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"2.2`\\\"}], \\\"+\\\", RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\
+\", \\\",\\\", RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\
+\\\"}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.625`\\\", \\\",\\\", RowBox[{RowBox[{\\\"2.2`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"0.4`\\\", \\\" \\\", \
+RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \\\"2.2`\\\"}], \\\"+\\\", \
+RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\
+\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\\\"}]}], \\\")\\\"}]}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.75`\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"2.2`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\
+\\\"0.6`\\\", \\\" \\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"2.2`\\\"}], \\\"+\\\", RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\
+\", \\\",\\\", RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\
+\\\"}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.875`\\\", \\\",\\\", RowBox[{RowBox[{\\\"2.2`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"0.8`\\\", \\\" \\\", \
+RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \\\"2.2`\\\"}], \\\"+\\\", \
+RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\
+\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\\\"}]}], \\\")\\\"}]}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"1.`\\\", \\\",\\\", \
+RowBox[{\\\"Reverse\\\", \\\"[\\\", \\\"]\\\"}]}], \\\"}\\\"}]}], \\\"}\\\"}]\
+\\) should be a rectangular array of machine-sized real numbers of any depth, \
+whose dimensions are greater than 1.\"",2,145,148,17440818353028633820,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.751549074719136*^9},
+ CellLabel->"",ExpressionUUID->"4b8e71ef-eb94-4cb2-b254-47ab6971d005"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "BezierFunction","invcpts",
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.`\\\", \\\",\\\", \\\"0.`\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"0.125`\\\", \\\",\\\", \\\"0.3333333333333333`\
+\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.25`\\\", \
+\\\",\\\", \\\"1.0666666666666667`\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"0.375`\\\", \\\",\\\", \\\"2.2`\\\"}], \\\"}\\\
+\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.5`\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"2.2`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\
+\\\"0.2`\\\", \\\" \\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"2.2`\\\"}], \\\"+\\\", RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\
+\", \\\",\\\", RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\
+\\\"}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.625`\\\", \\\",\\\", RowBox[{RowBox[{\\\"2.2`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"0.4`\\\", \\\" \\\", \
+RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \\\"2.2`\\\"}], \\\"+\\\", \
+RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\
+\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\\\"}]}], \\\")\\\"}]}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.75`\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"2.2`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\
+\\\"0.6`\\\", \\\" \\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"2.2`\\\"}], \\\"+\\\", RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\
+\", \\\",\\\", RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\
+\\\"}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.875`\\\", \\\",\\\", RowBox[{RowBox[{\\\"2.2`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"0.8`\\\", \\\" \\\", \
+RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \\\"2.2`\\\"}], \\\"+\\\", \
+RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\
+\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\\\"}]}], \\\")\\\"}]}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"1.`\\\", \\\",\\\", \
+RowBox[{\\\"Reverse\\\", \\\"[\\\", \\\"]\\\"}]}], \\\"}\\\"}]}], \\\"}\\\"}]\
+\\) should be a rectangular array of machine-sized real numbers of any depth, \
+whose dimensions are greater than 1.\"",2,145,154,17440818353028633820,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.75154907577988*^9},
+ CellLabel->"",ExpressionUUID->"f3af4a8c-3660-406c-9dc5-949c8ff1b3f9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "BezierFunction","invcpts",
+   "\"\\!\\(\\*RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.`\\\", \\\",\\\", \\\"0.`\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"0.125`\\\", \\\",\\\", \\\"0.3333333333333333`\
+\\\"}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.25`\\\", \
+\\\",\\\", \\\"1.0666666666666667`\\\"}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{\\\"0.375`\\\", \\\",\\\", \\\"2.2`\\\"}], \\\"}\\\
+\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.5`\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"2.2`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\
+\\\"0.2`\\\", \\\" \\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"2.2`\\\"}], \\\"+\\\", RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\
+\", \\\",\\\", RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\
+\\\"}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.625`\\\", \\\",\\\", RowBox[{RowBox[{\\\"2.2`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"0.4`\\\", \\\" \\\", \
+RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \\\"2.2`\\\"}], \\\"+\\\", \
+RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\
+\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\\\"}]}], \\\")\\\"}]}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"0.75`\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"2.2`\\\", \\\"\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\
+\\\"0.6`\\\", \\\" \\\", RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \
+\\\"2.2`\\\"}], \\\"+\\\", RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\
+\", \\\",\\\", RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\
+\[LeftDoubleBracket]\\\", \\\"1\\\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\
+\\\"}]}], \\\")\\\"}]}]}]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", \
+RowBox[{\\\"0.875`\\\", \\\",\\\", RowBox[{RowBox[{\\\"2.2`\\\", \\\"\
+\[VeryThinSpace]\\\"}], \\\"+\\\", RowBox[{\\\"0.8`\\\", \\\" \\\", \
+RowBox[{\\\"(\\\", RowBox[{RowBox[{\\\"-\\\", \\\"2.2`\\\"}], \\\"+\\\", \
+RowBox[{\\\"Min\\\", \\\"[\\\", RowBox[{\\\"List\\\", \\\",\\\", \
+RowBox[{RowBox[{\\\"{\\\", \\\"}\\\"}], \\\"\[LeftDoubleBracket]\\\", \\\"1\\\
+\", \\\"\[RightDoubleBracket]\\\"}]}], \\\"]\\\"}]}], \\\")\\\"}]}]}]}], \
+\\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\", RowBox[{\\\"1.`\\\", \\\",\\\", \
+RowBox[{\\\"Reverse\\\", \\\"[\\\", \\\"]\\\"}]}], \\\"}\\\"}]}], \\\"}\\\"}]\
+\\) should be a rectangular array of machine-sized real numbers of any depth, \
+whose dimensions are greater than 1.\"",2,145,156,17440818353028633820,
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.751549081389181*^9},
+ CellLabel->"",ExpressionUUID->"a5c096e3-db76-4b47-8ac6-0c366aa2d1aa"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   RowBox[{"Function", "[", 
+    RowBox[{"x$", ",", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"toyCumul", "[", 
+        RowBox[{"2", ",", "3", ",", "2"}], "]"}], "\[Prime]",
+       MultilineFunction->None], "[", "x$", "]"}]}], "]"}], 
+   "\[InvisibleSpace]", "False", "\[InvisibleSpace]", "True"}],
+  SequenceForm[
+   Function[$CellContext`x$, 
+    Derivative[1][
+     $CellContext`toyCumul[2, 3, 2]][$CellContext`x$]], False, True],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7515490816365633`*^9},
+ CellLabel->"",ExpressionUUID->"4ce4ba82-160d-4058-a4b4-311db0b8cc26"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"alpha:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"0.`", ",", "2.`", ",", "6.`", ",", "0.`"}], "}"}], 
+   "\[InvisibleSpace]", "\<\" alphabar:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"0.`", ",", "4.`", ",", "21.`"}], "}"}]}],
+  SequenceForm["alpha:", {0., 2., 6., 0.}, " alphabar:", {0., 4., 21.}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.7515490816439734`*^9},
+ CellLabel->"",ExpressionUUID->"6c6e02d2-a21c-4fc2-b538-e2eb6475276a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"m:\"\>", "\[InvisibleSpace]", "7", 
+   "\[InvisibleSpace]", "\<\" leftm:\"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\" rightm:\"\>", "\[InvisibleSpace]", "3"}],
+  SequenceForm["m:", 7, " leftm:", 4, " rightm:", 3],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751549081653574*^9},
+ CellLabel->"",ExpressionUUID->"abdfb698-ec7e-43d8-baf5-6272b09c573b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"dof:\"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\" norm:\"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\" monotonic:\"\>", "\[InvisibleSpace]", "True"}],
+  SequenceForm["dof:", 1, " norm:", 1, " monotonic:", True],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751549081659397*^9},
+ CellLabel->"",ExpressionUUID->"f75834c4-b642-467c-ada2-000443284062"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"leftCoefs:\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+    "0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`", ",", 
+     "2.2`"}], "}"}]}],
+  SequenceForm[
+  "leftCoefs:", {0., 0.3333333333333333, 1.0666666666666667`, 2.2}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751549081665238*^9},
+ CellLabel->"",ExpressionUUID->"79799c67-318a-4ba3-a4a8-9249389db53a"],
 
 Cell[BoxData[
  InterpretationBox[
@@ -3702,442 +4149,54 @@ Cell[BoxData[
     "}"}]}],
   SequenceForm["rightCoefs:", {2.7333333333333334`, 0.6666666666666666, 0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.75150247277127*^9},
- CellLabel->"",ExpressionUUID->"99199b36-e1d8-4018-848b-781f202362f3"],
+ CellChangeTimes->{3.751549081670311*^9},
+ CellLabel->"",ExpressionUUID->"be3f5190-a0f8-4569-bd81-ba96b2a6f30e"],
 
 Cell[BoxData[
  InterpretationBox[
   RowBox[{"\<\"emptyCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "0.`", ",", "0", ",", "0", ",", "0", ",", "0", ",", "2.7333333333333334`",
-      ",", "0.6666666666666666`", ",", "0.`"}], "}"}]}],
-  SequenceForm[
-  "emptyCoefs:", {
-   0., 0, 0, 0, 0, 2.7333333333333334`, 0.6666666666666666, 0.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502472776266*^9},
- CellLabel->"",ExpressionUUID->"f1e96091-627f-49e2-b411-3830332472ae"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Remainder: \"\>", "\[InvisibleSpace]", "remainder$72706"}],
-  SequenceForm["Remainder: ", $CellContext`remainder$72706],
-  Editable->False]], "Print",
- CellChangeTimes->{3.7515024727809963`*^9},
- CellLabel->"",ExpressionUUID->"5d04061f-819c-4e65-ac56-da342dcaba30"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"tmpCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", "0.`", ",", 
-     "2.7333333333333334`", ",", "0.6666666666666666`", ",", "0.`"}], "}"}]}],
-  
-  SequenceForm[
-  "tmpCoefs:", {0., 0., 0., 0., 0., 2.7333333333333334`, 0.6666666666666666, 
-   0.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.7515024727856493`*^9},
- CellLabel->"",ExpressionUUID->"3e59d169-51a7-4ca5-9c26-2a56e6729873"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{
-   TagBox[
-    TooltipBox["\<\"network reliability\"\>",
-     "\"the two terminal Moore-Shannon network reliability for the toy \
-network illustrated. \\nI.e., the probability of getting a message from \
-Source to Terminus when the probability of transmitting over each edge is x\"",
-     TooltipStyle->"TextStyling"],
-    Annotation[#, 
-     "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x", 
-     "Tooltip"]& ], "\[InvisibleSpace]", "False", "\[InvisibleSpace]", 
-   "True"}],
-  SequenceForm[
-   Tooltip[
-   "network reliability", 
-    "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x"], False, 
-   True],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502479190816*^9},
- CellLabel->"",ExpressionUUID->"d3484fd1-1a66-4375-9223-e50286b3c2e2"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"alpha:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "0.`", "}"}], "\[InvisibleSpace]", "\<\" alphabar:\"\>", 
-   "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"0.`", ",", "4.`", ",", "21.`", ",", 
-     RowBox[{"-", "80.`"}], ",", "90.`", ",", 
-     RowBox[{"-", "42.`"}]}], "}"}]}],
-  SequenceForm["alpha:", {0.}, " alphabar:", {0., 4., 21., -80., 90., -42.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502479198147*^9},
- CellLabel->"",ExpressionUUID->"1308902e-fca3-40fa-a067-edf5d2836a91"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"m:\"\>", "\[InvisibleSpace]", "7", 
-   "\[InvisibleSpace]", "\<\" leftm:\"\>", "\[InvisibleSpace]", "1", 
-   "\[InvisibleSpace]", "\<\" rightm:\"\>", "\[InvisibleSpace]", "6"}],
-  SequenceForm["m:", 7, " leftm:", 1, " rightm:", 6],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502479203792*^9},
- CellLabel->"",ExpressionUUID->"87083b03-81df-4dcd-aa8d-51841ac48d58"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"dof:\"\>", "\[InvisibleSpace]", "1", 
-   "\[InvisibleSpace]", "\<\" norm:\"\>", "\[InvisibleSpace]", "1", 
-   "\[InvisibleSpace]", "\<\" monotonic:\"\>", "\[InvisibleSpace]", "True"}],
-  SequenceForm["dof:", 1, " norm:", 1, " monotonic:", True],
-  Editable->False]], "Print",
- CellChangeTimes->{3.7515024792094584`*^9},
- CellLabel->"",ExpressionUUID->"85feef04-d407-4176-93da-2be97532b9d6"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"leftCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", "0.`", "}"}]}],
-  SequenceForm["leftCoefs:", {0.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.7515024792151117`*^9},
- CellLabel->"",ExpressionUUID->"3e1d05f3-9b42-4a1c-b25b-01915d5811a6"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"rightCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "0.33333333333333215`", ",", "1.0666666666666664`", ",", "2.2`", ",", 
-     "2.7333333333333334`", ",", "0.6666666666666666`", ",", "0.`"}], "}"}]}],
-  
-  SequenceForm[
-  "rightCoefs:", {0.33333333333333215`, 1.0666666666666664`, 2.2, 
-   2.7333333333333334`, 0.6666666666666666, 0.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502479220648*^9},
- CellLabel->"",ExpressionUUID->"7bb5baa1-7eb2-459a-8b1e-ee6ff62208c4"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"emptyCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "0.`", ",", "0", ",", "0.33333333333333215`", ",", "1.0666666666666664`", 
-     ",", "2.2`", ",", "2.7333333333333334`", ",", "0.6666666666666666`", ",",
-      "0.`"}], "}"}]}],
-  SequenceForm[
-  "emptyCoefs:", {
-   0., 0, 0.33333333333333215`, 1.0666666666666664`, 2.2, 2.7333333333333334`,
-     0.6666666666666666, 0.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502479225946*^9},
- CellLabel->"",ExpressionUUID->"935aca87-6136-48f2-a7ac-948073bfe23b"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"Remainder: \"\>", "\[InvisibleSpace]", "remainder$74244"}],
-  SequenceForm["Remainder: ", $CellContext`remainder$74244],
-  Editable->False]], "Print",
- CellChangeTimes->{3.7515024792307158`*^9},
- CellLabel->"",ExpressionUUID->"03bb502b-36ca-4d74-925c-d1a1191a7def"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"tmpCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "0.`", ",", "0.`", ",", "0.33333333333333215`", ",", 
-     "1.0666666666666664`", ",", "2.2`", ",", "2.7333333333333334`", ",", 
-     "0.6666666666666666`", ",", "0.`"}], "}"}]}],
-  SequenceForm[
-  "tmpCoefs:", {0., 0., 0.33333333333333215`, 1.0666666666666664`, 2.2, 
-   2.7333333333333334`, 0.6666666666666666, 0.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502479235437*^9},
- CellLabel->"",ExpressionUUID->"4597a4b6-297d-4c99-bb02-afbf90087110"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{
-   TagBox[
-    TooltipBox["\<\"network reliability\"\>",
-     "\"the two terminal Moore-Shannon network reliability for the toy \
-network illustrated. \\nI.e., the probability of getting a message from \
-Source to Terminus when the probability of transmitting over each edge is x\"",
-     TooltipStyle->"TextStyling"],
-    Annotation[#, 
-     "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x", 
-     "Tooltip"]& ], "\[InvisibleSpace]", "False", "\[InvisibleSpace]", 
-   "True"}],
-  SequenceForm[
-   Tooltip[
-   "network reliability", 
-    "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x"], False, 
-   True],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502491249092*^9},
- CellLabel->"",ExpressionUUID->"5a304d46-ddd1-4d67-92d3-81d11b2af42e"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"alpha:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"0.`", ",", "2.`", ",", "6.`", ",", "0.`", ",", 
-     RowBox[{"-", "15.`"}]}], "}"}], 
-   "\[InvisibleSpace]", "\<\" alphabar:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"0.`", ",", "4.`", ",", "21.`", ",", 
-     RowBox[{"-", "80.`"}], ",", "90.`", ",", 
-     RowBox[{"-", "42.`"}]}], "}"}]}],
-  SequenceForm[
-  "alpha:", {0., 2., 6., 0., -15.}, " alphabar:", {0., 4., 21., -80., 
-   90., -42.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502491256588*^9},
- CellLabel->"",ExpressionUUID->"ec895b8c-58b3-48d1-b3ec-5a0f6cd20cdf"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"m:\"\>", "\[InvisibleSpace]", "7", 
-   "\[InvisibleSpace]", "\<\" leftm:\"\>", "\[InvisibleSpace]", "5", 
-   "\[InvisibleSpace]", "\<\" rightm:\"\>", "\[InvisibleSpace]", "6"}],
-  SequenceForm["m:", 7, " leftm:", 5, " rightm:", 6],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502491262766*^9},
- CellLabel->"",ExpressionUUID->"95910299-f4ac-4507-847b-985e858cbff8"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"dof:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"-", "3"}], "\[InvisibleSpace]", "\<\" norm:\"\>", 
-   "\[InvisibleSpace]", "1", "\[InvisibleSpace]", "\<\" monotonic:\"\>", 
-   "\[InvisibleSpace]", "True"}],
-  SequenceForm["dof:", -3, " norm:", 1, " monotonic:", True],
-  Editable->False]], "Print",
- CellChangeTimes->{3.7515024912684526`*^9},
- CellLabel->"",ExpressionUUID->"364ee1d6-8590-4f82-9289-aee623b2765c"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"leftCoefs:\"\>", "\[InvisibleSpace]", 
    RowBox[{"{", 
     RowBox[{
     "0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`", ",", 
-     "2.2`", ",", "2.7333333333333334`"}], "}"}]}],
+     "2.2`", ",", "0", ",", "2.7333333333333334`", ",", "0.6666666666666666`",
+      ",", "0.`"}], "}"}]}],
   SequenceForm[
-  "leftCoefs:", {0., 0.3333333333333333, 1.0666666666666667`, 2.2, 
-   2.7333333333333334`}],
+  "emptyCoefs:", {
+   0., 0.3333333333333333, 1.0666666666666667`, 2.2, 0, 2.7333333333333334`, 
+    0.6666666666666666, 0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.7515024912739353`*^9},
- CellLabel->"",ExpressionUUID->"45d3de30-6218-43bd-a625-348e44868793"],
+ CellChangeTimes->{3.751549081675458*^9},
+ CellLabel->"",ExpressionUUID->"01e971e7-2bbc-4b84-b236-617f075cb3fe"],
 
 Cell[BoxData[
  InterpretationBox[
-  RowBox[{"\<\"rightCoefs:\"\>", "\[InvisibleSpace]", 
+  RowBox[{"\<\"Remainder: \"\>", "\[InvisibleSpace]", "remainder$176456"}],
+  SequenceForm["Remainder: ", $CellContext`remainder$176456],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.751549081680538*^9},
+ CellLabel->"",ExpressionUUID->"93dce2cb-a91f-4653-a54a-67e9ef769bbc"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"tmpCoefs:\"\>", "\[InvisibleSpace]", 
    RowBox[{"{", 
     RowBox[{
-    "0.33333333333333215`", ",", "1.0666666666666664`", ",", "2.2`", ",", 
-     "2.7333333333333334`", ",", "0.6666666666666666`", ",", "0.`"}], "}"}]}],
-  
+    "0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`", ",", 
+     "2.2`", ",", "1.1`", ",", "2.7333333333333334`", ",", 
+     "0.6666666666666666`", ",", "0.`"}], "}"}]}],
   SequenceForm[
-  "rightCoefs:", {0.33333333333333215`, 1.0666666666666664`, 2.2, 
+  "tmpCoefs:", {0., 0.3333333333333333, 1.0666666666666667`, 2.2, 1.1, 
    2.7333333333333334`, 0.6666666666666666, 0.}],
   Editable->False]], "Print",
- CellChangeTimes->{3.751502491279686*^9},
- CellLabel->"",ExpressionUUID->"41c88c05-7874-4865-8193-120ccd7a7eed"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{
-   TagBox[
-    TooltipBox["\<\"network reliability\"\>",
-     "\"the two terminal Moore-Shannon network reliability for the toy \
-network illustrated. \\nI.e., the probability of getting a message from \
-Source to Terminus when the probability of transmitting over each edge is x\"",
-     TooltipStyle->"TextStyling"],
-    Annotation[#, 
-     "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x", 
-     "Tooltip"]& ], "\[InvisibleSpace]", "False", "\[InvisibleSpace]", 
-   "True"}],
-  SequenceForm[
-   Tooltip[
-   "network reliability", 
-    "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x"], False, 
-   True],
-  Editable->False]], "Print",
- CellChangeTimes->{3.75150252109958*^9},
- CellLabel->"",ExpressionUUID->"341744a0-7a40-410a-bb40-48db52627e2e"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"alpha:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"0.`", ",", "2.`", ",", "6.`"}], "}"}], 
-   "\[InvisibleSpace]", "\<\" alphabar:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"0.`", ",", "4.`", ",", "21.`", ",", 
-     RowBox[{"-", "80.`"}], ",", "90.`", ",", 
-     RowBox[{"-", "42.`"}]}], "}"}]}],
-  SequenceForm[
-  "alpha:", {0., 2., 6.}, " alphabar:", {0., 4., 21., -80., 90., -42.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.7515025211092997`*^9},
- CellLabel->"",ExpressionUUID->"b2031a42-f2b8-41fb-b975-9050d375f70b"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"m:\"\>", "\[InvisibleSpace]", "7", 
-   "\[InvisibleSpace]", "\<\" leftm:\"\>", "\[InvisibleSpace]", "3", 
-   "\[InvisibleSpace]", "\<\" rightm:\"\>", "\[InvisibleSpace]", "6"}],
-  SequenceForm["m:", 7, " leftm:", 3, " rightm:", 6],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502521115131*^9},
- CellLabel->"",ExpressionUUID->"024049c8-184d-4b6b-8722-886d487ab2f3"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"dof:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"-", "1"}], "\[InvisibleSpace]", "\<\" norm:\"\>", 
-   "\[InvisibleSpace]", "1", "\[InvisibleSpace]", "\<\" monotonic:\"\>", 
-   "\[InvisibleSpace]", "True"}],
-  SequenceForm["dof:", -1, " norm:", 1, " monotonic:", True],
-  Editable->False]], "Print",
- CellChangeTimes->{3.7515025211208143`*^9},
- CellLabel->"",ExpressionUUID->"489765d7-c4df-4567-990d-32f2e1e06fa7"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"leftCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`"}], 
-    "}"}]}],
-  SequenceForm["leftCoefs:", {0., 0.3333333333333333, 1.0666666666666667`}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502521126275*^9},
- CellLabel->"",ExpressionUUID->"04e5c680-6767-42ec-9908-bd3b89d3e37d"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"rightCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "0.33333333333333215`", ",", "1.0666666666666664`", ",", "2.2`", ",", 
-     "2.7333333333333334`", ",", "0.6666666666666666`", ",", "0.`"}], "}"}]}],
-  
-  SequenceForm[
-  "rightCoefs:", {0.33333333333333215`, 1.0666666666666664`, 2.2, 
-   2.7333333333333334`, 0.6666666666666666, 0.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502521131729*^9},
- CellLabel->"",ExpressionUUID->"c27acfd0-3739-4374-b4ea-5d14695e52c8"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{
-   TagBox[
-    TooltipBox["\<\"network reliability\"\>",
-     "\"the two terminal Moore-Shannon network reliability for the toy \
-network illustrated. \\nI.e., the probability of getting a message from \
-Source to Terminus when the probability of transmitting over each edge is x\"",
-     TooltipStyle->"TextStyling"],
-    Annotation[#, 
-     "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x", 
-     "Tooltip"]& ], "\[InvisibleSpace]", "False", "\[InvisibleSpace]", 
-   "True"}],
-  SequenceForm[
-   Tooltip[
-   "network reliability", 
-    "the two terminal Moore-Shannon network reliability for the toy network \
-illustrated. \nI.e., the probability of getting a message from Source to \
-Terminus when the probability of transmitting over each edge is x"], False, 
-   True],
-  Editable->False]], "Print",
- CellChangeTimes->{3.7515025406894627`*^9},
- CellLabel->"",ExpressionUUID->"b58d6404-9012-4e51-9aa7-24d97181d2d1"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"alpha:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"0.`", ",", "2.`", ",", "6.`"}], "}"}], 
-   "\[InvisibleSpace]", "\<\" alphabar:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"0.`", ",", "4.`", ",", "21.`", ",", 
-     RowBox[{"-", "80.`"}], ",", "90.`", ",", 
-     RowBox[{"-", "42.`"}], ",", "7.`"}], "}"}]}],
-  SequenceForm[
-  "alpha:", {0., 2., 6.}, " alphabar:", {0., 4., 21., -80., 90., -42., 7.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502540695772*^9},
- CellLabel->"",ExpressionUUID->"ea71b5a5-959d-464b-b671-5f77bb5f52bc"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"m:\"\>", "\[InvisibleSpace]", "7", 
-   "\[InvisibleSpace]", "\<\" leftm:\"\>", "\[InvisibleSpace]", "3", 
-   "\[InvisibleSpace]", "\<\" rightm:\"\>", "\[InvisibleSpace]", "7"}],
-  SequenceForm["m:", 7, " leftm:", 3, " rightm:", 7],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502540701704*^9},
- CellLabel->"",ExpressionUUID->"146925a0-21c7-4f8f-ba69-5b46509bc6c7"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"dof:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"-", "2"}], "\[InvisibleSpace]", "\<\" norm:\"\>", 
-   "\[InvisibleSpace]", "1", "\[InvisibleSpace]", "\<\" monotonic:\"\>", 
-   "\[InvisibleSpace]", "True"}],
-  SequenceForm["dof:", -2, " norm:", 1, " monotonic:", True],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502540707841*^9},
- CellLabel->"",ExpressionUUID->"952351e5-d5d5-4706-ba54-355fec03c6ef"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"leftCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{"0.`", ",", "0.3333333333333333`", ",", "1.0666666666666667`"}], 
-    "}"}]}],
-  SequenceForm["leftCoefs:", {0., 0.3333333333333333, 1.0666666666666667`}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502540713373*^9},
- CellLabel->"",ExpressionUUID->"7c0722d6-ea17-4fe2-9c86-41907ec4c920"],
-
-Cell[BoxData[
- InterpretationBox[
-  RowBox[{"\<\"rightCoefs:\"\>", "\[InvisibleSpace]", 
-   RowBox[{"{", 
-    RowBox[{
-    "0.`", ",", "0.33333333333333215`", ",", "1.0666666666666664`", ",", 
-     "2.2`", ",", "2.7333333333333334`", ",", "0.6666666666666666`", ",", 
-     "0.`"}], "}"}]}],
-  SequenceForm[
-  "rightCoefs:", {0., 0.33333333333333215`, 1.0666666666666664`, 2.2, 
-   2.7333333333333334`, 0.6666666666666666, 0.}],
-  Editable->False]], "Print",
- CellChangeTimes->{3.751502540718936*^9},
- CellLabel->"",ExpressionUUID->"4941d51c-e88d-4c5d-a5dc-ab5ae670128d"]
+ CellChangeTimes->{3.751549081685439*^9},
+ CellLabel->"",ExpressionUUID->"6c0c909b-e6e0-47d6-a274-de010be452d9"]
 }, Open  ]]
 }, Open  ]],
+
+Cell[BoxData["\[AliasDelimiter]"], "Input",
+ CellChangeTimes->{
+  3.7515490204535437`*^9},ExpressionUUID->"3208b5e5-9466-4a34-84d1-\
+b995ad42bf02"],
 
 Cell[CellGroupData[{
 
@@ -8279,7 +8338,7 @@ sites on a circle in an external field:\\n ``(T) =`` n(s,f) exp{`` [s+``f]}\>\
      RowBox[{
       RowBox[{"leftm_Integer", "?", "NonNegative"}], ",", 
       RowBox[{"rightm_Integer", "?", "NonNegative"}], ",", "vals_List", ",", 
-      "prob_", ",", "alpha_", ",", "alphabar_"}], "]"}], ":=", 
+      "func_", ",", "alpha_", ",", "alphabar_"}], "]"}], ":=", 
     RowBox[{"Module", "[", 
      RowBox[{
       RowBox[{"{", 
@@ -8287,7 +8346,9 @@ sites on a circle in an external field:\\n ``(T) =`` n(s,f) exp{`` [s+``f]}\>\
        ",", "\[IndentingNewLine]", 
       RowBox[{
        RowBox[{"m", "=", 
-        RowBox[{"Length", "[", "vals", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"Length", "[", "vals", "]"}], "-", "1"}]}], ";", 
+       "\[IndentingNewLine]", 
        RowBox[{"leftTaylor", " ", "=", 
         RowBox[{"getTaylor", "[", 
          RowBox[{"alpha", "[", 
@@ -8300,67 +8361,77 @@ sites on a circle in an external field:\\n ``(T) =`` n(s,f) exp{`` [s+``f]}\>\
           RowBox[{"[", 
            RowBox[{"1", ";;", "rightm"}], "]"}], "]"}], "]"}]}], ";", 
        "\[IndentingNewLine]", 
-       RowBox[{"p1", "=", 
+       RowBox[{"p1", "=", "\[IndentingNewLine]", 
         RowBox[{"{", 
-         RowBox[{
-          RowBox[{"ListStepPlot", "[", 
-           RowBox[{
-            RowBox[{"Table", "[", 
+         RowBox[{"Plot", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"func", "[", "x", "]"}], ",", 
+             RowBox[{"leftTaylor", "[", "x", "]"}], ",", 
+             RowBox[{"rightTaylor", "[", 
+              RowBox[{"1", "-", "x"}], "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"PlotStyle", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"Green", ",", "Blue", ",", "Red", ",", "Thick"}], 
+             "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"PlotLegends", "\[Rule]", "\[IndentingNewLine]", 
+            RowBox[{"Placed", "[", 
              RowBox[{
-              RowBox[{"{", 
+              RowBox[{"LineLegend", "[", 
                RowBox[{
-                RowBox[{"k", "/", 
-                 RowBox[{"(", 
-                  RowBox[{"m", "-", "1"}], ")"}]}], ",", 
-                RowBox[{"vals", "[", 
-                 RowBox[{"[", 
-                  RowBox[{"k", "+", "1"}], " ", "]"}], "]"}]}], "}"}], ",", 
-              RowBox[{"{", 
-               RowBox[{"k", ",", "0", ",", 
-                RowBox[{"m", "-", "1"}]}], "}"}]}], "]"}], ",", "Center", ",", 
-            RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}], ",", 
-          "\[IndentingNewLine]", 
-          RowBox[{"Plot", "[", 
-           RowBox[{
-            RowBox[{"{", 
-             RowBox[{
-              RowBox[{"leftTaylor", "[", "x", "]"}], ",", 
-              RowBox[{"rightTaylor", "[", 
-               RowBox[{"1", "-", "x"}], "]"}]}], "}"}], ",", 
-            RowBox[{"{", 
-             RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
-            "\[IndentingNewLine]", 
-            RowBox[{"PlotStyle", "\[Rule]", 
-             RowBox[{"{", 
-              RowBox[{"Blue", ",", "Red"}], "}"}]}], ",", 
-            "\[IndentingNewLine]", 
-            RowBox[{"PlotLegends", "\[Rule]", "\[IndentingNewLine]", 
-             RowBox[{"Placed", "[", 
-              RowBox[{
-               RowBox[{"LineLegend", "[", 
-                RowBox[{
-                 RowBox[{"{", 
-                  RowBox[{"Blue", ",", "Red"}], "}"}], ",", 
-                 RowBox[{"{", 
+                RowBox[{"{", 
+                 RowBox[{"Green", ",", "Blue", ",", "Red"}], "}"}], ",", 
+                RowBox[{"{", "\[IndentingNewLine]", 
+                 RowBox[{
+                 "\"\<function to approximate\>\"", ",", 
+                  "\[IndentingNewLine]", 
                   RowBox[{
-                   RowBox[{
-                    RowBox[{"ToString", "[", "leftm", "]"}], "<>", 
-                    "\"\< term Taylor series at 0\>\""}], ",", 
-                   RowBox[{
-                    RowBox[{"ToString", "[", "rightm", "]"}], " ", "<>", 
-                    "\"\< term Taylor series at 1\>\""}]}], "}"}], ",", 
-                 RowBox[{"LegendLayout", "\[Rule]", "\"\<Column\>\""}]}], 
-                "]"}], ",", "Above"}], "]"}]}]}], "]"}], ",", 
-          "\[IndentingNewLine]", 
-          RowBox[{"Plot", "[", 
+                   RowBox[{"ToString", "[", "leftm", "]"}], "<>", 
+                   "\"\< term Taylor series at 0\>\""}], ",", 
+                  "\[IndentingNewLine]", 
+                  RowBox[{
+                   RowBox[{"ToString", "[", "rightm", "]"}], " ", "<>", 
+                   "\"\< term Taylor series at 1\>\""}]}], "}"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"LegendLayout", "\[Rule]", "\"\<Column\>\""}]}], 
+               "]"}], ",", "Above"}], "]"}]}]}], "]"}], "}"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{
+          RowBox[{",", "\[IndentingNewLine]", 
            RowBox[{
-            RowBox[{"prob", "[", "x", "]"}], ",", 
-            RowBox[{"{", 
-             RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
-            RowBox[{"PlotStyle", "\[Rule]", 
-             RowBox[{"{", 
-              RowBox[{"Green", ",", "Thick"}], "}"}]}]}], "]"}]}], "}"}]}], 
-       ";", "\[IndentingNewLine]", 
+            RowBox[{"If", "[", 
+             RowBox[{"isDiscrete", ",", "\[IndentingNewLine]", 
+              RowBox[{"Plot", "[", 
+               RowBox[{
+                RowBox[{"func", "[", "x", "]"}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+                RowBox[{"PlotStyle", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{"Green", ",", "Thin"}], "}"}]}]}], "]"}]}], "]"}], 
+            ";", "\[IndentingNewLine]", 
+            RowBox[{"ListStepPlot", "[", 
+             RowBox[{
+              RowBox[{"Table", "[", 
+               RowBox[{
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"k", "/", "m"}], ",", 
+                  RowBox[{"vals", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"k", "+", "1"}], " ", "]"}], "]"}]}], "}"}], ",", 
+                
+                RowBox[{"{", 
+                 RowBox[{"k", ",", "0", ",", "m"}], "}"}]}], "]"}], ",", 
+              "Center", ",", 
+              RowBox[{"Filling", "\[Rule]", "Axis"}]}], "]"}]}]}], "}"}], 
+         ","}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
        RowBox[{"Show", "[", 
         RowBox[{"p1", ",", 
          RowBox[{"PlotRange", "\[Rule]", 
@@ -8977,7 +9048,7 @@ sites on a circle in an external field:\\n ``(T) =`` n(s,f) exp{`` [s+``f]}\>\
   RowBox[{"buildPlot2", "[", 
    RowBox[{
    "leftm_", ",", "rightm_", ",", "vals_", ",", "allCoefs_", ",", "d2b_", ",",
-     "show_", ",", "name_", ",", "matchData_"}], "]"}], ":=", 
+     "show_", ",", "matchData_", ",", "isDensity_"}], "]"}], ":=", 
   RowBox[{"Module", "[", 
    RowBox[{
     RowBox[{"{", 
@@ -8998,10 +9069,6 @@ sites on a circle in an external field:\\n ``(T) =`` n(s,f) exp{`` [s+``f]}\>\
       RowBox[{"Length", "[", "vals", "]"}]}], ";", "\[IndentingNewLine]", 
      RowBox[{"numChoices", " ", "=", " ", 
       RowBox[{"Length", "[", "selectionNames", "]"}]}], ";", 
-     "\[IndentingNewLine]", 
-     RowBox[{"isDensity", "=", 
-      RowBox[{"(", 
-       RowBox[{"name", "\[Equal]", "\"\<density\>\""}], ")"}]}], ";", 
      "\[IndentingNewLine]", 
      RowBox[{"includes", " ", "=", " ", "\[IndentingNewLine]", 
       RowBox[{"Table", "[", 
@@ -9268,8 +9335,7 @@ sites on a circle in an external field:\\n ``(T) =`` n(s,f) exp{`` [s+``f]}\>\
            RowBox[{"{", 
             RowBox[{"0", ",", "1"}], "}"}], ",", "All"}], "}"}]}], ",", 
         RowBox[{"PlotRangeClipping", "\[Rule]", "True"}], ",", 
-        RowBox[{"PlotLabel", "\[Rule]", 
-         RowBox[{"\"\<Estimated \>\"", " ", "<>", "name"}]}], ",", 
+        RowBox[{"PlotLabel", "\[Rule]", "\"\<Estimated function\>\""}], ",", 
         RowBox[{"ImageSize", "\[Rule]", "Small"}], ",", 
         RowBox[{"AspectRatio", "\[Rule]", "1.0"}]}], "]"}]}], ";", 
      "\[IndentingNewLine]", 
@@ -9881,9 +9947,18 @@ sites on a circle in an external field:\\n ``(T) =`` n(s,f) exp{`` [s+``f]}\>\
    3.751413083107315*^9, 3.7514130879654016`*^9}, {3.751495866462874*^9, 
    3.751495900615265*^9}, {3.751495989305697*^9, 3.7514961032967873`*^9}, 
    3.751496633970166*^9, {3.7514967725797863`*^9, 3.751496777040188*^9}, {
-   3.7515024381144733`*^9, 3.751502438654847*^9}},
- CellLabel->
-  "In[111]:=",ExpressionUUID->"868cc705-9652-4bb2-bda2-aef866c41e8f"]
+   3.7515024381144733`*^9, 3.751502438654847*^9}, {3.751537818285037*^9, 
+   3.751537823379384*^9}, {3.751537921852923*^9, 3.751537948240361*^9}, {
+   3.751537994060628*^9, 3.75153804489296*^9}, {3.751538084361602*^9, 
+   3.751538095210515*^9}, {3.751538446384419*^9, 3.751538453481875*^9}, {
+   3.7515385051213512`*^9, 3.751538611073222*^9}, {3.751544296105434*^9, 
+   3.751544296448882*^9}, {3.7515445130611753`*^9, 3.751544513307205*^9}, {
+   3.751545283468165*^9, 3.7515453557442417`*^9}, {3.751545393357276*^9, 
+   3.751545413017947*^9}, 3.751549356775401*^9, {3.7515494686515512`*^9, 
+   3.7515494762998867`*^9}, {3.751549541204248*^9, 3.751549553585186*^9}, {
+   3.7515496056127872`*^9, 
+   3.75154960830787*^9}},ExpressionUUID->"868cc705-9652-4bb2-bda2-\
+aef866c41e8f"]
 }, Open  ]]
 },
 WindowSize->{1229, 905},
@@ -9904,159 +9979,167 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 112563, 2278, 7087, "Input",ExpressionUUID->"29bc60ee-6616-47ed-bdfa-7d135642a877"],
-Cell[113146, 2302, 55111, 1117, 625, "Output",ExpressionUUID->"94304a52-bca8-4e0e-9b02-337fc10d13ee"],
+Cell[580, 22, 113323, 2275, 7045, "Input",ExpressionUUID->"29bc60ee-6616-47ed-bdfa-7d135642a877"],
+Cell[113906, 2299, 54236, 1078, 703, "Output",ExpressionUUID->"5b3ba652-bc6c-4075-9d9b-42a62b3cd5b9"],
 Cell[CellGroupData[{
-Cell[168282, 3423, 586, 14, 24, "Print",ExpressionUUID->"f21a1bc1-4e99-4b21-9d17-d5a92dc29afe"],
-Cell[168871, 3439, 437, 9, 24, "Print",ExpressionUUID->"e1e38f5a-a714-46d2-b649-1d0d7d7d4ad0"],
-Cell[169311, 3450, 257, 6, 24, "Print",ExpressionUUID->"5e6e87a6-ac23-4f1e-86a8-f905ba0fde63"],
-Cell[169571, 3458, 306, 7, 24, "Print",ExpressionUUID->"be85e286-6173-477e-8383-cde3e1f467c8"],
-Cell[169880, 3467, 308, 7, 24, "Print",ExpressionUUID->"0e1867c2-ef29-4b9f-bb27-4dc471572b83"],
-Cell[170191, 3476, 373, 8, 24, "Print",ExpressionUUID->"b01d6244-ca08-49d4-b891-780eac049ace"],
-Cell[170567, 3486, 274, 6, 24, "Print",ExpressionUUID->"c836d083-944b-47bb-80f1-01ef5a0c0d5b"],
-Cell[170844, 3494, 278, 6, 24, "Print",ExpressionUUID->"c098592b-9b97-4344-9075-cf9d7362822f"],
-Cell[171125, 3502, 383, 8, 24, "Print",ExpressionUUID->"43aef6ed-31a0-4074-8e84-5fb78f3c0de7"],
-Cell[171511, 3512, 359, 8, 24, "Print",ExpressionUUID->"e110a335-34db-4661-8fae-b9088990e08f"],
-Cell[171873, 3522, 1127, 24, 24, "Print",ExpressionUUID->"50fc131a-b559-4107-ab7b-3da514d3a24f"],
-Cell[173003, 3548, 409, 9, 24, "Print",ExpressionUUID->"d8ca46d0-f5c8-4e6a-b98c-81da7e90d1e0"],
-Cell[173415, 3559, 425, 8, 24, "Print",ExpressionUUID->"97c50c1f-f129-4ccf-9ab5-ccceb5ab5cdc"],
-Cell[173843, 3569, 437, 8, 24, "Print",ExpressionUUID->"115fca8a-cfba-4e33-b0be-9d31c7f14dff"],
-Cell[174283, 3579, 298, 7, 24, "Print",ExpressionUUID->"a45785e7-4693-4ed7-b973-febf576d5c0e"],
-Cell[174584, 3588, 300, 7, 24, "Print",ExpressionUUID->"7a7fbd42-d6d5-4177-8f4d-6c4ef42cb0e6"],
-Cell[174887, 3597, 420, 10, 24, "Print",ExpressionUUID->"b6f52c93-a292-4eb0-98de-e905c385b287"],
-Cell[175310, 3609, 312, 6, 24, "Print",ExpressionUUID->"6205ea86-800c-4f80-80f2-68df5b0f52b8"],
-Cell[175625, 3617, 434, 10, 24, "Print",ExpressionUUID->"4053b5d9-1aab-4730-ad8d-b204633732c1"],
-Cell[176062, 3629, 1130, 24, 24, "Print",ExpressionUUID->"ac94c944-5a0f-440e-ab23-28ffcffb8bd0"],
-Cell[177195, 3655, 457, 10, 24, "Print",ExpressionUUID->"25e84e62-e745-4a35-9f13-f315e260456f"],
-Cell[177655, 3667, 423, 8, 24, "Print",ExpressionUUID->"02eaa2a9-9112-4cf6-88c0-ada52f10fb87"],
-Cell[178081, 3677, 439, 8, 24, "Print",ExpressionUUID->"72489987-bfaa-4e62-b193-c42007e6b947"],
-Cell[178523, 3687, 297, 7, 24, "Print",ExpressionUUID->"674f98f9-cbcb-4a96-bae2-faee8f2cacc6"],
-Cell[178823, 3696, 416, 9, 24, "Print",ExpressionUUID->"99199b36-e1d8-4018-848b-781f202362f3"],
-Cell[179242, 3707, 498, 12, 24, "Print",ExpressionUUID->"f1e96091-627f-49e2-b411-3830332472ae"],
-Cell[179743, 3721, 314, 6, 24, "Print",ExpressionUUID->"5d04061f-819c-4e65-ac56-da342dcaba30"],
-Cell[180060, 3729, 511, 13, 24, "Print",ExpressionUUID->"3e59d169-51a7-4ca5-9c26-2a56e6729873"],
-Cell[180574, 3744, 1128, 24, 24, "Print",ExpressionUUID->"d3484fd1-1a66-4375-9223-e50286b3c2e2"],
-Cell[181705, 3770, 556, 12, 24, "Print",ExpressionUUID->"1308902e-fca3-40fa-a067-edf5d2836a91"],
-Cell[182264, 3784, 423, 8, 24, "Print",ExpressionUUID->"87083b03-81df-4dcd-aa8d-51841ac48d58"],
-Cell[182690, 3794, 439, 8, 24, "Print",ExpressionUUID->"85feef04-d407-4176-93da-2be97532b9d6"],
-Cell[183132, 3804, 300, 7, 24, "Print",ExpressionUUID->"3e1d05f3-9b42-4a1c-b25b-01915d5811a6"],
-Cell[183435, 3813, 551, 13, 24, "Print",ExpressionUUID->"7bb5baa1-7eb2-459a-8b1e-ee6ff62208c4"],
-Cell[183989, 3828, 588, 14, 24, "Print",ExpressionUUID->"935aca87-6136-48f2-a7ac-948073bfe23b"],
-Cell[184580, 3844, 314, 6, 24, "Print",ExpressionUUID->"03bb502b-36ca-4d74-925c-d1a1191a7def"],
-Cell[184897, 3852, 582, 13, 24, "Print",ExpressionUUID->"4597a4b6-297d-4c99-bb02-afbf90087110"],
-Cell[185482, 3867, 1128, 24, 24, "Print",ExpressionUUID->"5a304d46-ddd1-4d67-92d3-81d11b2af42e"],
-Cell[186613, 3893, 666, 16, 24, "Print",ExpressionUUID->"ec895b8c-58b3-48d1-b3ec-5a0f6cd20cdf"],
-Cell[187282, 3911, 423, 8, 24, "Print",ExpressionUUID->"95910299-f4ac-4507-847b-985e858cbff8"],
-Cell[187708, 3921, 459, 9, 24, "Print",ExpressionUUID->"364ee1d6-8590-4f82-9289-aee623b2765c"],
-Cell[188170, 3932, 497, 12, 24, "Print",ExpressionUUID->"45d3de30-6218-43bd-a625-348e44868793"],
-Cell[188670, 3946, 551, 13, 24, "Print",ExpressionUUID->"41c88c05-7874-4865-8193-120ccd7a7eed"],
-Cell[189224, 3961, 1127, 24, 24, "Print",ExpressionUUID->"341744a0-7a40-410a-bb40-48db52627e2e"],
-Cell[190354, 3987, 608, 14, 24, "Print",ExpressionUUID->"b2031a42-f2b8-41fb-b975-9050d375f70b"],
-Cell[190965, 4003, 423, 8, 24, "Print",ExpressionUUID->"024049c8-184d-4b6b-8722-886d487ab2f3"],
-Cell[191391, 4013, 459, 9, 24, "Print",ExpressionUUID->"489765d7-c4df-4567-990d-32f2e1e06fa7"],
-Cell[191853, 4024, 415, 9, 24, "Print",ExpressionUUID->"04e5c680-6767-42ec-9908-bd3b89d3e37d"],
-Cell[192271, 4035, 551, 13, 24, "Print",ExpressionUUID->"c27acfd0-3739-4374-b4ea-5d14695e52c8"],
-Cell[192825, 4050, 1130, 24, 24, "Print",ExpressionUUID->"b58d6404-9012-4e51-9aa7-24d97181d2d1"],
-Cell[193958, 4076, 622, 14, 24, "Print",ExpressionUUID->"ea71b5a5-959d-464b-b671-5f77bb5f52bc"],
-Cell[194583, 4092, 423, 8, 24, "Print",ExpressionUUID->"146925a0-21c7-4f8f-ba69-5b46509bc6c7"],
-Cell[195009, 4102, 457, 9, 24, "Print",ExpressionUUID->"952351e5-d5d5-4706-ba54-355fec03c6ef"],
-Cell[195469, 4113, 415, 9, 24, "Print",ExpressionUUID->"7c0722d6-ea17-4fe2-9c86-41907ec4c920"],
-Cell[195887, 4124, 570, 13, 24, "Print",ExpressionUUID->"4941d51c-e88d-4c5d-a5dc-ab5ae670128d"]
+Cell[168167, 3381, 1049, 28, 24, "Print",ExpressionUUID->"e67591c0-1a3a-4649-ad2e-bc847ae6c626"],
+Cell[169219, 3411, 437, 9, 24, "Print",ExpressionUUID->"10729da4-66ae-4eb6-8fc5-73464837d1bf"],
+Cell[169659, 3422, 259, 6, 24, "Print",ExpressionUUID->"be0aa06c-3b40-4927-a4d9-e4709f23b357"],
+Cell[169921, 3430, 304, 7, 24, "Print",ExpressionUUID->"8f47e9e7-8c95-42a6-b497-a8374c87f7ff"],
+Cell[170228, 3439, 306, 7, 24, "Print",ExpressionUUID->"3aa39e67-3dba-4b02-bed5-7982cbea2449"],
+Cell[170537, 3448, 373, 8, 24, "Print",ExpressionUUID->"66628d93-9614-4f9f-bdb7-d68d0f0052cd"],
+Cell[170913, 3458, 272, 6, 24, "Print",ExpressionUUID->"3d8898f9-8094-4ad0-b176-8783e8f5cfa0"],
+Cell[171188, 3466, 278, 6, 24, "Print",ExpressionUUID->"57049d80-5653-47b0-be26-54b190a88d70"],
+Cell[171469, 3474, 383, 8, 24, "Print",ExpressionUUID->"8030c8d9-12dc-4797-958c-e8d63a1c5d1f"],
+Cell[171855, 3484, 359, 8, 24, "Print",ExpressionUUID->"53c43752-5aa2-4b9a-ac6f-fbc83e209e5f"],
+Cell[172217, 3494, 631, 17, 26, "Print",ExpressionUUID->"43d9001a-af3a-4b78-9d16-f933cb74bb7e"],
+Cell[172851, 3513, 411, 9, 24, "Print",ExpressionUUID->"eed10ccf-0722-4599-9d48-3470d03b78ee"],
+Cell[173265, 3524, 425, 8, 24, "Print",ExpressionUUID->"1a5e20f2-8980-482d-b667-6128f8109ef0"],
+Cell[173693, 3534, 437, 8, 24, "Print",ExpressionUUID->"6d38d1d3-2a89-4dbc-9263-f207b3861b37"],
+Cell[174133, 3544, 298, 7, 24, "Print",ExpressionUUID->"44699208-6d29-42a8-92f6-7fa9eddaa610"],
+Cell[174434, 3553, 300, 7, 24, "Print",ExpressionUUID->"86e294c7-d5b6-4c20-aa36-1947528d7b4f"],
+Cell[174737, 3562, 422, 10, 24, "Print",ExpressionUUID->"50b84c51-18b9-4a9e-88dc-9d6e881338aa"],
+Cell[175162, 3574, 316, 6, 24, "Print",ExpressionUUID->"0130e6b2-feb9-427c-874d-cf225445856b"],
+Cell[175481, 3582, 434, 10, 24, "Print",ExpressionUUID->"17b4526b-f6df-4840-8b3a-d56af52642f8"],
+Cell[175918, 3594, 631, 17, 26, "Print",ExpressionUUID->"ff4dfe7c-279c-4e45-aeda-4c17098a35c8"],
+Cell[176552, 3613, 472, 10, 24, "Print",ExpressionUUID->"e2f66cf5-be56-4d7b-a674-f7006073ff7f"],
+Cell[177027, 3625, 425, 8, 24, "Print",ExpressionUUID->"003b5032-ead7-4609-92a8-baf3be973c9c"],
+Cell[177455, 3635, 435, 8, 24, "Print",ExpressionUUID->"5338990d-d27a-44f4-9311-1c8c4c2187f0"],
+Cell[177893, 3645, 442, 11, 24, "Print",ExpressionUUID->"1d843839-d89e-4635-ae37-b3f3ed9ed860"],
+Cell[178338, 3658, 300, 7, 24, "Print",ExpressionUUID->"f488c029-60e3-4784-8dfe-1781ba505035"],
+Cell[178641, 3667, 505, 12, 24, "Print",ExpressionUUID->"5bfa0a99-bcd4-4e54-a981-84690e0829e1"],
+Cell[179149, 3681, 316, 6, 24, "Print",ExpressionUUID->"558e659a-2a8b-4af7-b4f3-4afa769a3c95"],
+Cell[179468, 3689, 553, 13, 24, "Print",ExpressionUUID->"66850ace-7d70-4882-9d32-332f46a5af7d"]
+}, Open  ]],
+Cell[180036, 3705, 405, 8, 24, "Message",ExpressionUUID->"5250d0a0-0ba3-48f8-899b-e2cb02282fc6"],
+Cell[180444, 3715, 396, 8, 24, "Message",ExpressionUUID->"ccb3ac9a-d380-41ee-99ba-dc921e72b8c3"],
+Cell[180843, 3725, 332, 7, 41, "Message",ExpressionUUID->"1a0fb4a6-87d6-4466-a456-086321e2a1fd"],
+Cell[181178, 3734, 370, 8, 24, "Message",ExpressionUUID->"6e753f54-9645-4f09-be36-306c6bba3bbd"],
+Cell[CellGroupData[{
+Cell[181573, 3746, 631, 17, 26, "Print",ExpressionUUID->"2b140a23-bcb9-479a-be9a-8d57e5d5839a"],
+Cell[182207, 3765, 465, 10, 24, "Print",ExpressionUUID->"e0e429d3-5600-4c0e-a366-5aaf808141aa"],
+Cell[182675, 3777, 423, 8, 24, "Print",ExpressionUUID->"1813ca69-a20e-4f40-a190-c8013a080e0f"],
+Cell[183101, 3787, 439, 8, 24, "Print",ExpressionUUID->"4db2de6d-1487-4457-bc91-687ab50da621"],
+Cell[183543, 3797, 441, 11, 24, "Print",ExpressionUUID->"518d262c-4db4-4778-b287-e882c9b510af"]
+}, Open  ]],
+Cell[183999, 3811, 413, 9, 24, "Message",ExpressionUUID->"637dee2b-d05b-41e3-8984-daaba1fcba34"],
+Cell[184415, 3822, 321, 8, 24, "Print",ExpressionUUID->"5d652da7-c85e-45cf-a627-bfaaf4d0841b"],
+Cell[184739, 3832, 353, 7, 24, "Message",ExpressionUUID->"a8b640f5-ccc4-4fa4-9492-b60021c8e229"],
+Cell[185095, 3841, 444, 9, 24, "Message",ExpressionUUID->"f3c80874-4c8f-41dc-9808-765dfdcbf10a"],
+Cell[CellGroupData[{
+Cell[185564, 3854, 558, 14, 24, "Print",ExpressionUUID->"ec177cba-b596-4a4a-8535-9cb2edde559d"],
+Cell[186125, 3870, 314, 6, 24, "Print",ExpressionUUID->"e9afad3e-df93-4811-86bb-753f07e12f04"],
+Cell[186442, 3878, 2301, 63, 76, "Print",ExpressionUUID->"52ffa58b-7039-44e5-add7-acdeac701787"]
+}, Open  ]],
+Cell[188758, 3944, 2885, 42, 42, "Message",ExpressionUUID->"4b8e71ef-eb94-4cb2-b254-47ab6971d005"],
+Cell[191646, 3988, 2884, 42, 42, "Message",ExpressionUUID->"f3af4a8c-3660-406c-9dc5-949c8ff1b3f9"],
+Cell[194533, 4032, 2885, 42, 42, "Message",ExpressionUUID->"a5c096e3-db76-4b47-8ac6-0c366aa2d1aa"],
+Cell[CellGroupData[{
+Cell[197443, 4078, 633, 17, 26, "Print",ExpressionUUID->"4ce4ba82-160d-4058-a4b4-311db0b8cc26"],
+Cell[198079, 4097, 523, 11, 24, "Print",ExpressionUUID->"6c6e02d2-a21c-4fc2-b538-e2eb6475276a"],
+Cell[198605, 4110, 423, 8, 24, "Print",ExpressionUUID->"abdfb698-ec7e-43d8-baf5-6272b09c573b"],
+Cell[199031, 4120, 437, 8, 24, "Print",ExpressionUUID->"f75834c4-b642-467c-ada2-000443284062"],
+Cell[199471, 4130, 442, 11, 24, "Print",ExpressionUUID->"79799c67-318a-4ba3-a4a8-9249389db53a"],
+Cell[199916, 4143, 417, 9, 24, "Print",ExpressionUUID->"be3f5190-a0f8-4569-bd81-ba96b2a6f30e"],
+Cell[200336, 4154, 585, 14, 24, "Print",ExpressionUUID->"01e971e7-2bbc-4b84-b236-617f075cb3fe"],
+Cell[200924, 4170, 314, 6, 24, "Print",ExpressionUUID->"93dce2cb-a91f-4653-a54a-67e9ef769bbc"],
+Cell[201241, 4178, 581, 13, 24, "Print",ExpressionUUID->"6c0c909b-e6e0-47d6-a274-de010be452d9"]
 }, Open  ]]
 }, Open  ]],
+Cell[201849, 4195, 147, 3, 30, "Input",ExpressionUUID->"3208b5e5-9466-4a34-84d1-b995ad42bf02"],
 Cell[CellGroupData[{
-Cell[196506, 4143, 362, 6, 67, "Section",ExpressionUUID->"16d87a1a-ef26-46a8-ad00-a98c5e7f6d77",
+Cell[202021, 4202, 362, 6, 67, "Section",ExpressionUUID->"16d87a1a-ef26-46a8-ad00-a98c5e7f6d77",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[196871, 4151, 1225, 28, 136, "Input",ExpressionUUID->"dea685b0-04ea-4907-9b24-c8aa287e43d0",
+Cell[202386, 4210, 1225, 28, 136, "Input",ExpressionUUID->"dea685b0-04ea-4907-9b24-c8aa287e43d0",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[198099, 4181, 396, 8, 54, "Subsection",ExpressionUUID->"dcbaf48a-6bdb-42d1-8bb1-8d94402723bf",
+Cell[203614, 4240, 396, 8, 54, "Subsection",ExpressionUUID->"dcbaf48a-6bdb-42d1-8bb1-8d94402723bf",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[198498, 4191, 2135, 41, 30, "Input",ExpressionUUID->"064303fe-ae23-43e0-8cf7-5e5a38eac2b1",
+Cell[204013, 4250, 2135, 41, 30, "Input",ExpressionUUID->"064303fe-ae23-43e0-8cf7-5e5a38eac2b1",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[200636, 4234, 2233, 65, 39, "Input",ExpressionUUID->"dc366a6c-782e-4ccb-ae1d-1a23c796e2eb",
+Cell[206151, 4293, 2233, 65, 39, "Input",ExpressionUUID->"dc366a6c-782e-4ccb-ae1d-1a23c796e2eb",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[202872, 4301, 1276, 28, 30, "Input",ExpressionUUID->"7165aa7b-d683-41b3-b68a-4a7fb4cf611c",
+Cell[208387, 4360, 1276, 28, 30, "Input",ExpressionUUID->"7165aa7b-d683-41b3-b68a-4a7fb4cf611c",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[204151, 4331, 697, 12, 54, "Subsection",ExpressionUUID->"d2a874a2-835f-4383-95ef-0d8615a7c691",
+Cell[209666, 4390, 697, 12, 54, "Subsection",ExpressionUUID->"d2a874a2-835f-4383-95ef-0d8615a7c691",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[204851, 4345, 10664, 195, 178, "Input",ExpressionUUID->"3c4ecaf1-ac97-4aff-a5c7-2bb139e970a2",
+Cell[210366, 4404, 10664, 195, 178, "Input",ExpressionUUID->"3c4ecaf1-ac97-4aff-a5c7-2bb139e970a2",
  Evaluatable->True,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[215518, 4542, 657, 12, 54, "Subsection",ExpressionUUID->"09f09975-f270-4334-9082-7e36d19f7745",
+Cell[221033, 4601, 657, 12, 54, "Subsection",ExpressionUUID->"09f09975-f270-4334-9082-7e36d19f7745",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[216178, 4556, 2520, 47, 52, "Input",ExpressionUUID->"142a8ebe-ae75-425d-8435-7bd41691686d",
+Cell[221693, 4615, 2520, 47, 52, "Input",ExpressionUUID->"142a8ebe-ae75-425d-8435-7bd41691686d",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[218701, 4605, 660, 12, 54, "Subsection",ExpressionUUID->"187c0d8d-02c7-4b3a-82ee-383bd0278fff",
+Cell[224216, 4664, 660, 12, 54, "Subsection",ExpressionUUID->"187c0d8d-02c7-4b3a-82ee-383bd0278fff",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[219364, 4619, 2055, 36, 30, "Input",ExpressionUUID->"1ce8f0ec-c91d-4b04-a00d-d16714d9a8d9",
+Cell[224879, 4678, 2055, 36, 30, "Input",ExpressionUUID->"1ce8f0ec-c91d-4b04-a00d-d16714d9a8d9",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[221422, 4657, 688, 13, 54, "Subsection",ExpressionUUID->"5474f71b-9149-4ba0-9fa2-f6a5ebf130f4",
+Cell[226937, 4716, 688, 13, 54, "Subsection",ExpressionUUID->"5474f71b-9149-4ba0-9fa2-f6a5ebf130f4",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[222113, 4672, 3479, 76, 157, "Input",ExpressionUUID->"c9de3287-64e6-400c-a7bb-568ce5cbdd77",
+Cell[227628, 4731, 3479, 76, 157, "Input",ExpressionUUID->"c9de3287-64e6-400c-a7bb-568ce5cbdd77",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[225595, 4750, 2917, 99, 39, "Input",ExpressionUUID->"a98fc5ef-6720-44d7-ac5e-77f7dafb307c",
+Cell[231110, 4809, 2917, 99, 39, "Input",ExpressionUUID->"a98fc5ef-6720-44d7-ac5e-77f7dafb307c",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[228515, 4851, 1177, 29, 52, "Input",ExpressionUUID->"641354c4-9c7d-4276-9e0e-e3c29873d8c0",
+Cell[234030, 4910, 1177, 29, 52, "Input",ExpressionUUID->"641354c4-9c7d-4276-9e0e-e3c29873d8c0",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[229695, 4882, 613, 14, 39, "Input",ExpressionUUID->"9ae67ab3-7f70-463e-89d0-1821b1bdacda",
+Cell[235210, 4941, 613, 14, 39, "Input",ExpressionUUID->"9ae67ab3-7f70-463e-89d0-1821b1bdacda",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[230311, 4898, 1076, 27, 30, "Input",ExpressionUUID->"fcc59a17-e52d-4cba-acbf-99574c213b67",
+Cell[235826, 4957, 1076, 27, 30, "Input",ExpressionUUID->"fcc59a17-e52d-4cba-acbf-99574c213b67",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[231390, 4927, 864, 16, 81, "Subsection",ExpressionUUID->"3cefbe79-62f9-4695-8740-80c2d0c4b008",
+Cell[236905, 4986, 864, 16, 81, "Subsection",ExpressionUUID->"3cefbe79-62f9-4695-8740-80c2d0c4b008",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[232257, 4945, 1390, 28, 30, "Input",ExpressionUUID->"2a257a59-73b3-4ec8-a4fd-8231d4a5ef26",
+Cell[237772, 5004, 1390, 28, 30, "Input",ExpressionUUID->"2a257a59-73b3-4ec8-a4fd-8231d4a5ef26",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[233650, 4975, 11406, 240, 577, "Input",ExpressionUUID->"18b3d33a-aa2e-4dfa-afcc-20e6a833c20a",
+Cell[239165, 5034, 11406, 240, 577, "Input",ExpressionUUID->"18b3d33a-aa2e-4dfa-afcc-20e6a833c20a",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[245059, 5217, 2657, 67, 199, "Input",ExpressionUUID->"c2b3cdea-026f-4914-94c1-e83a735a2320",
+Cell[250574, 5276, 2657, 67, 199, "Input",ExpressionUUID->"c2b3cdea-026f-4914-94c1-e83a735a2320",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[247719, 5286, 382, 8, 54, "Subsection",ExpressionUUID->"f1193937-2831-4499-902f-d744f31afe7a",
+Cell[253234, 5345, 382, 8, 54, "Subsection",ExpressionUUID->"f1193937-2831-4499-902f-d744f31afe7a",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[248104, 5296, 20294, 332, 451, "Input",ExpressionUUID->"a61d2732-4cdd-444f-ad24-eb326004a4a7",
+Cell[253619, 5355, 20294, 332, 451, "Input",ExpressionUUID->"a61d2732-4cdd-444f-ad24-eb326004a4a7",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[268401, 5630, 887, 16, 113, "Section",ExpressionUUID->"a5510937-ab3f-4f77-98c3-b845cad34b3e",
+Cell[273916, 5689, 887, 16, 113, "Section",ExpressionUUID->"a5510937-ab3f-4f77-98c3-b845cad34b3e",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[269291, 5648, 4741, 67, 39, "Input",ExpressionUUID->"26d808c6-894c-47c1-b731-a581a4f1aa5b",
+Cell[274806, 5707, 4741, 67, 39, "Input",ExpressionUUID->"26d808c6-894c-47c1-b731-a581a4f1aa5b",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[274035, 5717, 4754, 68, 66, "Input",ExpressionUUID->"7c800a8b-2baa-43e0-a6ac-a1a607fefb43",
+Cell[279550, 5776, 4754, 68, 66, "Input",ExpressionUUID->"7c800a8b-2baa-43e0-a6ac-a1a607fefb43",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[278792, 5787, 4761, 67, 39, "Input",ExpressionUUID->"f6d3e3a9-8a66-422c-9ecd-7dc1316c9cf4",
+Cell[284307, 5846, 4761, 67, 39, "Input",ExpressionUUID->"f6d3e3a9-8a66-422c-9ecd-7dc1316c9cf4",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[283556, 5856, 6082, 121, 94, "Input",ExpressionUUID->"717f0e45-6e94-442b-8c8f-170cad28960b",
+Cell[289071, 5915, 6082, 121, 94, "Input",ExpressionUUID->"717f0e45-6e94-442b-8c8f-170cad28960b",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[289641, 5979, 4761, 68, 39, "Input",ExpressionUUID->"42963a03-f091-4a8a-a04f-cc534687d2ec",
+Cell[295156, 6038, 4761, 68, 39, "Input",ExpressionUUID->"42963a03-f091-4a8a-a04f-cc534687d2ec",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[294405, 6049, 5875, 129, 262, "Input",ExpressionUUID->"fde643ac-9a6e-4471-a7f2-02bcaa16b461",
+Cell[299920, 6108, 5875, 129, 262, "Input",ExpressionUUID->"fde643ac-9a6e-4471-a7f2-02bcaa16b461",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[300283, 6180, 4771, 67, 66, "Input",ExpressionUUID->"79b7722b-7b53-4db9-a097-8f5364c62806",
+Cell[305798, 6239, 4771, 67, 66, "Input",ExpressionUUID->"79b7722b-7b53-4db9-a097-8f5364c62806",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[305057, 6249, 13194, 225, 117, "Input",ExpressionUUID->"9282c660-5c1c-4a36-b1ed-2026f6c3a45d",
+Cell[310572, 6308, 13194, 225, 117, "Input",ExpressionUUID->"9282c660-5c1c-4a36-b1ed-2026f6c3a45d",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[318254, 6476, 4672, 67, 39, "Input",ExpressionUUID->"aa8486ba-ccf6-4142-ac56-a8f490107daf",
+Cell[323769, 6535, 4672, 67, 39, "Input",ExpressionUUID->"aa8486ba-ccf6-4142-ac56-a8f490107daf",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[322929, 6545, 17852, 338, 682, "Input",ExpressionUUID->"4e38145c-3458-4689-b483-76bbaf6e53ad",
+Cell[328444, 6604, 17852, 338, 682, "Input",ExpressionUUID->"4e38145c-3458-4689-b483-76bbaf6e53ad",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[340784, 6885, 14796, 286, 388, "Input",ExpressionUUID->"9270e7d8-b4a1-4e8f-9174-d5aa8fad83c1",
+Cell[346299, 6944, 14796, 286, 388, "Input",ExpressionUUID->"9270e7d8-b4a1-4e8f-9174-d5aa8fad83c1",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[355583, 7173, 6052, 85, 39, "Input",ExpressionUUID->"e1728d24-0a41-421f-b74a-cd4ceb97dc2d",
+Cell[361098, 7232, 6052, 85, 39, "Input",ExpressionUUID->"e1728d24-0a41-421f-b74a-cd4ceb97dc2d",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[361638, 7260, 4513, 89, 115, "Input",ExpressionUUID->"842ce2c1-9def-4c1f-9f5c-92805a9fad18",
+Cell[367153, 7319, 4513, 89, 115, "Input",ExpressionUUID->"842ce2c1-9def-4c1f-9f5c-92805a9fad18",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[366154, 7351, 50906, 695, 39, "Input",ExpressionUUID->"c4331e61-41ac-4bd9-baf0-debd40913c74",
+Cell[371669, 7410, 50906, 695, 39, "Input",ExpressionUUID->"c4331e61-41ac-4bd9-baf0-debd40913c74",
  Evaluatable->False,
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[417063, 8048, 5270, 135, 262, "Input",ExpressionUUID->"6d52cfd7-544b-400b-9e31-786747660af6",
+Cell[422578, 8107, 5270, 135, 262, "Input",ExpressionUUID->"6d52cfd7-544b-400b-9e31-786747660af6",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}],
-Cell[422336, 8185, 89793, 1700, 4440, "Input",ExpressionUUID->"868cc705-9652-4bb2-bda2-aef866c41e8f",
+Cell[427851, 8244, 90819, 1716, 4532, "Input",ExpressionUUID->"868cc705-9652-4bb2-bda2-aef866c41e8f",
  CellGroupingRules->{GroupTogetherGrouping, 10000.}]
 }, Open  ]]
 }
