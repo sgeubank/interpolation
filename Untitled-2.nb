@@ -1,0 +1,1919 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     72733,       1911]
+NotebookOptionsPosition[     71179,       1881]
+NotebookOutlinePosition[     71533,       1897]
+CellTagsIndexPosition[     71490,       1894]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ StyleBox[
+  RowBox[{
+   RowBox[{"Unprotect", "[", "Power", "]"}], ";"}],
+  FontSize->16], "\n", 
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"Power", "[", 
+     RowBox[{"0", ",", "0"}], "]"}], "=", "1"}], ";"}],
+  FontSize->16], "\n", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"Protect", "[", "Power", "]"}], ";"}],
+  FontSize->16], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{"ClearAll", "[", 
+    RowBox[{
+    "compare", ",", "taylorToBezierMatrix", ",", "dataToTaylorMatrix", ",", 
+     "dataToBezierMatrix", ",", "f", ",", "g", ",", "sep"}], "]"}], ";"}],
+  FontSize->16], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"taylorToBezierMatrix", "[", 
+     RowBox[{
+      RowBox[{"n_Integer", "?", "NonNegative"}], ",", 
+      RowBox[{"u_Integer", "?", "NonNegative"}]}], "]"}], ":=", 
+    RowBox[{"Array", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"#1", "<", "#2"}], ",", "0", ",", 
+         RowBox[{
+          RowBox[{"Binomial", "[", 
+           RowBox[{
+            RowBox[{"n", "+", "1", "-", "#2"}], ",", 
+            RowBox[{"n", "+", "1", "-", "#1"}]}], "]"}], "/", 
+          RowBox[{"Binomial", "[", 
+           RowBox[{"n", ",", 
+            RowBox[{"#1", "-", "1"}]}], "]"}]}]}], 
+        RowBox[{"(*", 
+         RowBox[{"Factorial", "[", 
+          RowBox[{"#1", "-", "1"}], "]"}], "*)"}], "]"}], "&"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"u", ",", "u"}], "}"}]}], "]"}]}], ";"}],
+  FontSize->16], "\[IndentingNewLine]", 
+ RowBox[{
+  StyleBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"dataToTaylorMatrix", "[", 
+      RowBox[{
+       RowBox[{"n_Integer", "?", "NonNegative"}], ",", 
+       RowBox[{"u_Integer", "?", "NonNegative"}]}], "]"}], ":=", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Table", "[", " ", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"sep", "[", "n", "]"}], "^", 
+         RowBox[{"(", 
+          RowBox[{"-", "rowl"}], ")"}]}], 
+        RowBox[{"Table", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Sum", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"-", "1"}], ")"}], "^", 
+               RowBox[{"(", 
+                RowBox[{"colj", "+", "k"}], ")"}]}], " ", 
+              RowBox[{
+               RowBox[{"StirlingS1", "[", 
+                RowBox[{"k", ",", "rowl"}], "]"}], "/", " ", 
+               RowBox[{"Factorial", "[", 
+                RowBox[{"k", "-", "colj"}], "]"}]}]}], ",", 
+             RowBox[{"{", 
+              RowBox[{"k", ",", 
+               RowBox[{"Max", "[", 
+                RowBox[{"{", 
+                 RowBox[{"colj", ",", "rowl"}], "}"}], "]"}], ",", 
+               RowBox[{"u", "-", "1"}]}], "}"}]}], "]"}], "/", 
+           RowBox[{"Factorial", "[", "colj", "]"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"colj", ",", "0", ",", 
+            RowBox[{"u", "-", "1"}]}], "}"}]}], "]"}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"rowl", ",", "0", ",", 
+         RowBox[{"u", "-", "1"}]}], "}"}]}], "]"}]}], ";"}],
+   FontSize->16], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->16]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   StyleBox[
+    RowBox[{"dataToBezierMatrix", "[", 
+     RowBox[{
+      RowBox[{"n_Integer", "?", "NonNegative"}], ",", 
+      RowBox[{"u_Integer", "?", "NonNegative"}]}], "]"}],
+    FontSize->16], 
+   StyleBox[" ",
+    FontSize->16], 
+   StyleBox[":=",
+    FontSize->16], 
+   StyleBox[" ",
+    FontSize->16], 
+   RowBox[{
+    StyleBox[
+     RowBox[{"taylorToBezierMatrix", "[", 
+      RowBox[{"n", ",", "u"}], "]"}],
+     FontSize->16], 
+    StyleBox[" ",
+     FontSize->16], 
+    StyleBox[".",
+     FontSize->16], 
+    StyleBox[" ",
+     FontSize->16], 
+    RowBox[{
+     StyleBox["Table",
+      FontSize->16], 
+     StyleBox["[",
+      FontSize->16], 
+     RowBox[{
+      RowBox[{
+       StyleBox[
+        RowBox[{
+         RowBox[{"dataToTaylorMatrix", "[", 
+          RowBox[{"n", ",", "u"}], "]"}], "[", 
+         RowBox[{"[", 
+          RowBox[{"k", "+", "1"}], "]"}], "]"}],
+        FontSize->16], 
+       RowBox[{
+        StyleBox["n",
+         FontSize->16], "^", "k"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"k", ",", "0", ",", 
+        RowBox[{"u", "-", "1"}]}], "}"}]}], "]"}]}]}], 
+  StyleBox[";",
+   FontSize->16]}], "\[IndentingNewLine]", 
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"sep", "[", "n_", "]"}], "=", 
+    RowBox[{"1", "/", 
+     RowBox[{"(", 
+      RowBox[{"n", "-", "1"}], ")"}]}]}], ";"}],
+  FontSize->16], "\[IndentingNewLine]", 
+ RowBox[{
+  StyleBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"compare", "[", 
+      RowBox[{
+       RowBox[{"n_Integer", "?", "NonNegative"}], ",", " ", 
+       RowBox[{"u_Integer", "?", "NonNegative"}], ",", "func_"}], "]"}], " ", 
+     ":=", " ", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "d2t", ",", "d2b", ",", "t2b", ",", "vals", ",", "alpha", ",", 
+         "alpha2", ",", "bez", ",", "h", ",", "taylor", ",", "vals2"}], "}"}],
+        ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"h", "=", 
+         RowBox[{"sep", "[", "n", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"vals", " ", "=", " ", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"func", "[", 
+            RowBox[{"k", " ", "h"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"k", ",", "0", ",", 
+             RowBox[{"u", "-", "1"}]}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"d2t", " ", "=", " ", 
+         RowBox[{"dataToTaylorMatrix", "[", 
+          RowBox[{"n", ",", "u"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"alpha", "=", 
+         RowBox[{"d2t", ".", "vals"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"alpha2", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"Normal", "[", 
+            RowBox[{"SeriesCoefficient", "[", 
+             RowBox[{
+              RowBox[{"Refine", "[", 
+               RowBox[{"Series", "[", 
+                RowBox[{
+                 RowBox[{"func", "[", "x", "]"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"x", ",", "0", ",", "n"}], "}"}]}], "]"}], "]"}], 
+              ",", 
+              RowBox[{"k", "-", "1"}]}], "]"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"k", ",", "1", ",", 
+             RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"taylor", " ", "=", " ", 
+         RowBox[{"getTaylor", "[", "alpha", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"vals2", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"taylor", "[", 
+            RowBox[{"k", " ", "h"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"k", ",", "0", ",", 
+             RowBox[{"u", "-", "1"}]}], "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"t2b", "=", 
+         RowBox[{"taylorToBezierMatrix", "[", 
+          RowBox[{"n", ",", "u"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"d2b", " ", "=", " ", 
+         RowBox[{"dataToBezierMatrix", "[", 
+          RowBox[{"n", ",", "u"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"bez", " ", "=", " ", 
+         RowBox[{"d2b", " ", ".", " ", "vals"}]}], ";", "\[IndentingNewLine]",
+         "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", "\[IndentingNewLine]", 
+         RowBox[{
+         "n", ",", "\[IndentingNewLine]", "\"\< \>\"", ",", "u", ",", 
+          "\[IndentingNewLine]", "\"\<\\n data\>\"", ",", "vals", ",", 
+          "\[IndentingNewLine]", "\"\<\\n data to Taylor transform \>\"", ",", 
+          RowBox[{"MatrixForm", "[", "d2t", "]"}], ",", " ", 
+          "\[IndentingNewLine]", "\"\<\\n True Taylor coeffs \>\"", ",", 
+          "alpha2", ",", "\[IndentingNewLine]", 
+          "\"\<\\n estimated Taylor coeffs\>\"", ",", "alpha", ",", 
+          "\[IndentingNewLine]", "\"\<\\n data from Taylor \>\"", ",", 
+          "vals2", ",", "\[IndentingNewLine]", 
+          "\"\<\\n taylor to Bezier transform \>\"", ",", 
+          RowBox[{"MatrixForm", "[", "t2b", "]"}], ",", 
+          "\[IndentingNewLine]", "\"\<\\n data to Bezier transform \>\"", ",", 
+          RowBox[{"MatrixForm", "[", "d2b", "]"}], ",", 
+          "\[IndentingNewLine]", "\"\<\\n Bezier coeffs \>\"", ",", "bez"}], 
+         "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+      "]"}]}], ";"}],
+   FontSize->16], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->16]}], "\[IndentingNewLine]", 
+ RowBox[{
+  StyleBox[
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"A", " ", "degree"}], "-", 
+     RowBox[{
+     "d", " ", "polynomial", " ", "with", " ", "simple", " ", "Bernstein", 
+      " ", "coefficients"}]}], " ", "*)"}],
+   FontSize->16], 
+  StyleBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"d_Integer", "?", "NonNegative"}], "]"}], " ", ":=", " ", 
+     RowBox[{"Function", "[", 
+      RowBox[{"x", ",", 
+       RowBox[{"Sum", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"k", "+", "1"}], ")"}], "^", "2"}], " ", 
+          RowBox[{"Binomial", "[", 
+           RowBox[{"d", ",", "k"}], "]"}], 
+          RowBox[{"x", "^", "k"}], " ", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"1", "-", "x"}], ")"}], "^", 
+           RowBox[{"(", 
+            RowBox[{"d", "-", "k"}], ")"}]}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"k", ",", "0", ",", "d"}], "}"}]}], "]"}]}], "]"}]}], ";"}],
+   
+   FontSize->16], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->16]}], "\[IndentingNewLine]", 
+ RowBox[{
+  StyleBox[
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"A", " ", "degree"}], "-", 
+     RowBox[{
+     "d", " ", "polynomial", " ", "with", " ", "simple", " ", "Taylor", " ", 
+      "coefficients"}]}], " ", "*)"}],
+   FontSize->16], 
+  RowBox[{
+   RowBox[{
+    StyleBox[
+     RowBox[{"g", "[", 
+      RowBox[{"d_Integer", "?", "NonNegative"}], "]"}],
+     FontSize->16], 
+    StyleBox[" ",
+     FontSize->16], 
+    StyleBox[":=",
+     FontSize->16], 
+    StyleBox[" ",
+     FontSize->16], 
+    RowBox[{
+     StyleBox["Function",
+      FontSize->16], "[", 
+     RowBox[{"x", ",", 
+      RowBox[{"Sum", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"k", "+", "1"}], ")"}], 
+         RowBox[{"x", "^", "k"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "0", ",", "d"}], "}"}]}], "]"}]}], "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"compare", "[", 
+       RowBox[{"n", ",", "u", ",", 
+        RowBox[{"g", "[", "n", "]"}]}], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"u", ",", "1", ",", 
+        RowBox[{"n", "+", "1"}]}], "}"}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "2", ",", "4"}], "}"}]}], "]"}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.7548202847174187`*^9, 3.754820371435429*^9}, 
+   3.754820492950865*^9, {3.754820580100914*^9, 3.754820906784895*^9}, {
+   3.7548209482883053`*^9, 3.7548210767299747`*^9}, {3.754821185062035*^9, 
+   3.754821235494088*^9}, {3.754821284079426*^9, 3.7548213545905743`*^9}, {
+   3.754821384958242*^9, 3.75482151757451*^9}, {3.754821569488365*^9, 
+   3.754821599955958*^9}, {3.754821642498207*^9, 3.754821732809177*^9}, {
+   3.7548218204502077`*^9, 3.754821856271895*^9}, {3.754821926814472*^9, 
+   3.754821960217709*^9}, {3.7548221917194366`*^9, 3.754822239174951*^9}, {
+   3.7548223917812843`*^9, 3.754822408407288*^9}, 3.754822463620771*^9, {
+   3.754822532117895*^9, 3.754822560672533*^9}, {3.754822648347013*^9, 
+   3.7548227163276987`*^9}, {3.754822751746935*^9, 3.754822927473357*^9}, {
+   3.754822973498859*^9, 3.754822976556838*^9}, {3.75482303141978*^9, 
+   3.7548230860954247`*^9}, {3.7548267731333847`*^9, 3.754826790637574*^9}, {
+   3.7548268206430197`*^9, 3.754826844972681*^9}, {3.7548269870288877`*^9, 
+   3.754827158161519*^9}, {3.754827197096354*^9, 3.7548271987078953`*^9}, {
+   3.754827276403225*^9, 3.754827285807128*^9}, {3.754827415477481*^9, 
+   3.75482741902567*^9}, {3.7548274861154957`*^9, 3.754827495470278*^9}, 
+   3.754827547779451*^9, 3.7548275855278473`*^9, {3.754827673775631*^9, 
+   3.7548276922195463`*^9}, {3.754828078265345*^9, 3.7548280784053307`*^9}, {
+   3.754828123338242*^9, 3.7548281234661083`*^9}, {3.754833123222105*^9, 
+   3.754833148222019*^9}, {3.754833194818956*^9, 3.754833199794744*^9}, {
+   3.754833308479541*^9, 3.7548333086377068`*^9}, {3.7548333472347517`*^9, 
+   3.754833347421981*^9}, {3.7548334859505873`*^9, 3.7548334862433167`*^9}, {
+   3.754833580440626*^9, 3.754833581150937*^9}, 3.7548336239036427`*^9, {
+   3.7548337197441874`*^9, 3.7548337200113792`*^9}, {3.754834160808971*^9, 
+   3.754834161865953*^9}, {3.754834313976283*^9, 3.7548343142114563`*^9}, {
+   3.754834695366806*^9, 3.75483472984542*^9}, {3.754834769004785*^9, 
+   3.754834805479381*^9}, {3.754834920983613*^9, 3.7548349443307734`*^9}, {
+   3.754835151539791*^9, 3.754835168166931*^9}, {3.754835245309019*^9, 
+   3.754835271032082*^9}, 3.754841927806254*^9, {3.7548420557664747`*^9, 
+   3.754842188512748*^9}, {3.754842225649694*^9, 3.7548422466422653`*^9}, {
+   3.75484234915819*^9, 3.7548424410902033`*^9}, {3.7548424874638968`*^9, 
+   3.754842640663576*^9}, {3.754842682519164*^9, 3.754842693929003*^9}, {
+   3.754842764998598*^9, 3.7548427880590343`*^9}, {3.754842843164117*^9, 
+   3.754842899640955*^9}, {3.754842933109825*^9, 3.75484302357015*^9}, {
+   3.754843063432485*^9, 3.75484318608702*^9}, 3.754843231397232*^9, {
+   3.754843264360736*^9, 3.754843306562793*^9}, {3.754843445865725*^9, 
+   3.754843456078067*^9}, {3.754843508186759*^9, 3.754843535991795*^9}, {
+   3.7548435791791077`*^9, 3.754843594521675*^9}, {3.754843650561224*^9, 
+   3.7548436746208572`*^9}, {3.7548437839295263`*^9, 3.754843799347437*^9}, 
+   3.754843869587845*^9, {3.754843949765931*^9, 3.754843963894561*^9}, {
+   3.754844083269526*^9, 3.754844083979436*^9}, 3.754844147762858*^9, {
+   3.7548441936613607`*^9, 3.754844194328302*^9}, {3.75484424777402*^9, 
+   3.754844253108181*^9}, 3.754844440658424*^9, 3.7548445730176067`*^9, {
+   3.75484471877258*^9, 3.754844795837907*^9}, {3.7548448536085978`*^9, 
+   3.754844886639564*^9}, 3.7548449962969303`*^9, {3.754845035859013*^9, 
+   3.754845087236332*^9}, {3.754845136543515*^9, 3.7548451505581627`*^9}, {
+   3.754845317560527*^9, 3.754845380998233*^9}, {3.754845419910635*^9, 
+   3.754845425812644*^9}, {3.754845493312397*^9, 3.754845522042337*^9}, {
+   3.754845553715168*^9, 3.7548455631188583`*^9}, {3.7548456386194277`*^9, 
+   3.754845666870726*^9}, {3.754845723088152*^9, 3.754845726161953*^9}, {
+   3.754845830371986*^9, 3.754846059369815*^9}, {3.754846131071136*^9, 
+   3.754846173044022*^9}, {3.754846222583857*^9, 3.7548462286213903`*^9}, {
+   3.7548464392343683`*^9, 3.754846448107223*^9}, {3.754866219795532*^9, 
+   3.754866220261693*^9}, 3.7548662762723618`*^9, {3.754868585347085*^9, 
+   3.7548686024546423`*^9}, {3.7549046084199*^9, 3.754904608664112*^9}, {
+   3.754904647140633*^9, 3.7549046513618593`*^9}, {3.754904770797699*^9, 
+   3.754904849156684*^9}, {3.754904991752969*^9, 3.754904991928438*^9}, {
+   3.7549069486586037`*^9, 3.7549069822759047`*^9}, {3.754907065131493*^9, 
+   3.754907074700713*^9}, {3.754907129634259*^9, 3.7549071404879093`*^9}, {
+   3.754907308880781*^9, 3.7549073639554653`*^9}, {3.754907399710133*^9, 
+   3.75490740227997*^9}, {3.75490743665727*^9, 3.754907438087892*^9}, {
+   3.7549074770197687`*^9, 3.7549075025620413`*^9}, {3.7549075451523113`*^9, 
+   3.75490758587598*^9}, {3.7549079853391933`*^9, 3.754907989069519*^9}, {
+   3.754908053549409*^9, 3.754908056609849*^9}, {3.7549081052257566`*^9, 
+   3.754908127648172*^9}, {3.754908233487764*^9, 3.754908267048231*^9}, {
+   3.754908431476591*^9, 3.754908438592161*^9}, {3.754916034592198*^9, 
+   3.754916351545957*^9}, {3.754916473993239*^9, 3.754916607393465*^9}, {
+   3.754916644478601*^9, 3.754916940453143*^9}, 3.754916974784567*^9, {
+   3.7549170784138813`*^9, 3.754917248640388*^9}, {3.754917296320777*^9, 
+   3.7549173375494432`*^9}, {3.754917419235256*^9, 3.7549174193915997`*^9}, {
+   3.75491745162563*^9, 3.7549174619416733`*^9}, {3.754917498526127*^9, 
+   3.7549175347943993`*^9}, 3.754917643627212*^9, {3.7549179358190107`*^9, 
+   3.754917954401432*^9}, {3.7549180236890182`*^9, 3.754918041342383*^9}, {
+   3.754918167549816*^9, 3.7549181676786957`*^9}, {3.754918217003825*^9, 
+   3.754918223887699*^9}, {3.754918338559285*^9, 3.7549183925125513`*^9}, {
+   3.754918431979423*^9, 3.754918493361302*^9}, 3.75491874691282*^9, 
+   3.754919277407545*^9, {3.754919518789318*^9, 3.7549195190663767`*^9}, 
+   3.7549195995962133`*^9, 3.754919657374189*^9, {3.754919746247617*^9, 
+   3.754919750970779*^9}, {3.7549198579550333`*^9, 3.754919882711748*^9}, 
+   3.754920034606553*^9, {3.754920245161603*^9, 3.754920272242653*^9}, 
+   3.7549203299747267`*^9, 3.7549203885189943`*^9, {3.754920466933557*^9, 
+   3.754920479606967*^9}, {3.754921489185071*^9, 3.754921495790406*^9}, {
+   3.754957328936594*^9, 3.754957408515038*^9}, {3.75495767170583*^9, 
+   3.7549577727998466`*^9}, {3.754957814048327*^9, 3.754957920029673*^9}, {
+   3.755003867891365*^9, 3.755003956601256*^9}, {3.7550040339410467`*^9, 
+   3.7550041257546673`*^9}, {3.7550042179384747`*^9, 3.755004266955792*^9}, {
+   3.755004483396706*^9, 3.755004484217095*^9}, {3.755004588925557*^9, 
+   3.7550045890876093`*^9}, {3.7550047008860207`*^9, 3.755004701188695*^9}, {
+   3.755004962630746*^9, 3.755004974899774*^9}, {3.7550050076722116`*^9, 
+   3.755005034356189*^9}, {3.755005137918949*^9, 3.7550052153493834`*^9}, {
+   3.7550052882611523`*^9, 3.755005290858204*^9}, {3.755005397292511*^9, 
+   3.755005397517524*^9}, {3.7550054756822433`*^9, 3.755005559722185*^9}, {
+   3.7550055998336077`*^9, 3.7550056222764893`*^9}, {3.755005686736372*^9, 
+   3.755005697093575*^9}, {3.755005737766206*^9, 3.75500574207663*^9}, {
+   3.755005820513351*^9, 3.75500588128719*^9}, {3.755092377274406*^9, 
+   3.755092385030592*^9}, {3.755092464578657*^9, 3.755092464976021*^9}, {
+   3.755092498540069*^9, 3.75509249877602*^9}, {3.7550925325246277`*^9, 
+   3.755092535551567*^9}, {3.755092868836698*^9, 3.755092876185302*^9}, {
+   3.7550929160720387`*^9, 3.755092916458856*^9}, {3.7550932439764347`*^9, 
+   3.755093244074943*^9}, {3.7550933542686577`*^9, 3.7550933572566347`*^9}, {
+   3.7550934257242107`*^9, 3.755093439997692*^9}, 3.755093560162553*^9, {
+   3.7551162016380787`*^9, 3.7551162405093517`*^9}, {3.755116288222006*^9, 
+   3.755116288504468*^9}, {3.755116356663987*^9, 3.755116361569772*^9}, {
+   3.7551163979599447`*^9, 3.755116439732601*^9}},
+ CellLabel->
+  "In[310]:=",ExpressionUUID->"b8e1865e-2b94-4f3e-b2ca-74172de0274c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "1", "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", "1", "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", "1", "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "1", "}"}]}],
+  SequenceForm[2, " ", 1, "\n data", {1}, "\n data to Taylor transform ", 
+   MatrixForm[{{1}}], "\n True Taylor coeffs ", {1, 2, 3}, 
+   "\n estimated Taylor coeffs", {1}, "\n data from Taylor ", {1}, 
+   "\n taylor to Bezier transform ", 
+   MatrixForm[{{1}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1}}], "\n Bezier coeffs ", {1}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.755116455235629*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"4e1a8fa6-c767-4243-a323-bfcb18bd0826"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "6"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0"},
+       {
+        RowBox[{"-", "1"}], "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "5"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", 
+    RowBox[{"1", ",", "6"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0"},
+       {"1", 
+        FractionBox["1", "2"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0"},
+       {"0", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "6"}], "}"}]}],
+  SequenceForm[2, " ", 2, "\n data", {1, 6}, "\n data to Taylor transform ", 
+   MatrixForm[{{1, 0}, {-1, 1}}], "\n True Taylor coeffs ", {1, 2, 3}, 
+   "\n estimated Taylor coeffs", {1, 5}, "\n data from Taylor ", {1, 6}, 
+   "\n taylor to Bezier transform ", 
+   MatrixForm[{{1, 0}, {1, 
+      Rational[1, 2]}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1, 0}, {0, 1}}], "\n Bezier coeffs ", {1, 6}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.755116455247238*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"313c9ca5-eaf6-4aac-98ba-1cd270a299a4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "2", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "6", ",", "17"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["3", "2"]}], "2", 
+        RowBox[{"-", 
+         FractionBox["1", "2"]}]},
+       {
+        FractionBox["1", "2"], 
+        RowBox[{"-", "1"}], 
+        FractionBox["1", "2"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", 
+    RowBox[{"1", ",", "6", ",", "17"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {"1", 
+        FractionBox["1", "2"], "0"},
+       {"1", "1", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["1", "2"]}], "2", 
+        RowBox[{"-", 
+         FractionBox["1", "2"]}]},
+       {"0", "0", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "3", ",", "17"}], "}"}]}],
+  SequenceForm[
+  2, " ", 3, "\n data", {1, 6, 17}, "\n data to Taylor transform ", 
+   MatrixForm[{{1, 0, 0}, {
+      Rational[-3, 2], 2, 
+      Rational[-1, 2]}, {
+      Rational[1, 2], -1, 
+      Rational[1, 2]}}], "\n True Taylor coeffs ", {1, 2, 3}, 
+   "\n estimated Taylor coeffs", {1, 2, 3}, "\n data from Taylor ", {1, 6, 
+   17}, "\n taylor to Bezier transform ", 
+   MatrixForm[{{1, 0, 0}, {1, 
+      Rational[1, 2], 0}, {1, 1, 1}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1, 0, 0}, {
+      Rational[-1, 2], 2, 
+      Rational[-1, 2]}, {0, 0, 1}}], "\n Bezier coeffs ", {1, 3, 17}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.755116455256281*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"0febc669-6aa2-446c-a55e-f83e0fc304b1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "3", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "1", "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", "1", "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", "1", "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "1", "}"}]}],
+  SequenceForm[3, " ", 1, "\n data", {1}, "\n data to Taylor transform ", 
+   MatrixForm[{{1}}], "\n True Taylor coeffs ", {1, 2, 3, 4}, 
+   "\n estimated Taylor coeffs", {1}, "\n data from Taylor ", {1}, 
+   "\n taylor to Bezier transform ", 
+   MatrixForm[{{1}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1}}], "\n Bezier coeffs ", {1}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.755116455262082*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"a3184b5c-0f01-465a-a7c4-c53ce100b0b3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "3", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["13", "4"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0"},
+       {
+        RowBox[{"-", "2"}], "2"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["9", "2"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["13", "4"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0"},
+       {"1", 
+        FractionBox["1", "3"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0"},
+       {
+        RowBox[{"-", "1"}], "2"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["11", "2"]}], "}"}]}],
+  SequenceForm[3, " ", 2, "\n data", {1, 
+    Rational[13, 4]}, "\n data to Taylor transform ", 
+   MatrixForm[{{1, 0}, {-2, 2}}], "\n True Taylor coeffs ", {1, 2, 3, 4}, 
+   "\n estimated Taylor coeffs", {1, 
+    Rational[9, 2]}, "\n data from Taylor ", {1, 
+    Rational[13, 4]}, "\n taylor to Bezier transform ", 
+   MatrixForm[{{1, 0}, {1, 
+      Rational[1, 3]}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1, 0}, {-1, 2}}], "\n Bezier coeffs ", {1, 
+    Rational[11, 2]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.7551164552656307`*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"c5c4f4a2-450c-4c41-943e-f0f14911a29e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "3", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["13", "4"], ",", "10"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {
+        RowBox[{"-", "3"}], "4", 
+        RowBox[{"-", "1"}]},
+       {"2", 
+        RowBox[{"-", "4"}], "2"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", "9"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["13", "4"], ",", "10"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {"1", 
+        FractionBox["1", "3"], "0"},
+       {"1", 
+        FractionBox["2", "3"], 
+        FractionBox["1", "3"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {
+        RowBox[{"-", "2"}], "4", 
+        RowBox[{"-", "1"}]},
+       {"1", 
+        RowBox[{"-", "4"}], "4"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "28"}], "}"}]}],
+  SequenceForm[3, " ", 3, "\n data", {1, 
+    Rational[13, 4], 10}, "\n data to Taylor transform ", 
+   MatrixForm[{{1, 0, 0}, {-3, 4, -1}, {2, -4, 2}}], 
+   "\n True Taylor coeffs ", {1, 2, 3, 4}, "\n estimated Taylor coeffs", {1, 
+   0, 9}, "\n data from Taylor ", {1, 
+    Rational[13, 4], 10}, "\n taylor to Bezier transform ", 
+   MatrixForm[{{1, 0, 0}, {1, 
+      Rational[1, 3], 0}, {1, 
+      Rational[2, 3], 
+      Rational[1, 3]}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1, 0, 0}, {-2, 4, -1}, {1, -4, 4}}], "\n Bezier coeffs ", {1, 
+   1, 28}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.7551164552694817`*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"2e4371ad-ae12-41b8-a66d-82415e5e6074"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "3", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["13", "4"], ",", "10", ",", 
+     FractionBox["97", "4"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["11", "3"]}], "6", 
+        RowBox[{"-", "3"}], 
+        FractionBox["2", "3"]},
+       {"4", 
+        RowBox[{"-", "10"}], "8", 
+        RowBox[{"-", "2"}]},
+       {
+        RowBox[{"-", 
+         FractionBox["4", "3"]}], "4", 
+        RowBox[{"-", "4"}], 
+        FractionBox["4", "3"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["13", "4"], ",", "10", ",", 
+     FractionBox["97", "4"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0"},
+       {"1", 
+        FractionBox["1", "3"], "0", "0"},
+       {"1", 
+        FractionBox["2", "3"], 
+        FractionBox["1", "3"], "0"},
+       {"1", "1", "1", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["8", "3"]}], "6", 
+        RowBox[{"-", "3"}], 
+        FractionBox["2", "3"]},
+       {
+        FractionBox["17", "3"], 
+        RowBox[{"-", "18"}], "18", 
+        RowBox[{"-", 
+         FractionBox["14", "3"]}]},
+       {
+        RowBox[{"-", "10"}], "36", 
+        RowBox[{"-", "45"}], "20"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "3", ",", "14", ",", "142"}], "}"}]}],
+  SequenceForm[3, " ", 4, "\n data", {1, 
+    Rational[13, 4], 10, 
+    Rational[97, 4]}, "\n data to Taylor transform ", 
+   MatrixForm[{{1, 0, 0, 0}, {
+      Rational[-11, 3], 6, -3, 
+      Rational[2, 3]}, {4, -10, 8, -2}, {
+      Rational[-4, 3], 4, -4, 
+      Rational[4, 3]}}], "\n True Taylor coeffs ", {1, 2, 3, 4}, 
+   "\n estimated Taylor coeffs", {1, 2, 3, 4}, "\n data from Taylor ", {1, 
+    Rational[13, 4], 10, 
+    Rational[97, 4]}, "\n taylor to Bezier transform ", 
+   MatrixForm[{{1, 0, 0, 0}, {1, 
+      Rational[1, 3], 0, 0}, {1, 
+      Rational[2, 3], 
+      Rational[1, 3], 0}, {1, 1, 1, 1}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1, 0, 0, 0}, {
+      Rational[-8, 3], 6, -3, 
+      Rational[2, 3]}, {
+      Rational[17, 3], -18, 18, 
+      Rational[-14, 3]}, {-10, 36, -45, 20}}], "\n Bezier coeffs ", {1, 3, 14,
+    142}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.755116455273347*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"b17bb118-c4cd-4173-a1e0-746a71182b97"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "1", "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", "1", "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", "1", "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "1", "}"}]}],
+  SequenceForm[4, " ", 1, "\n data", {1}, "\n data to Taylor transform ", 
+   MatrixForm[{{1}}], "\n True Taylor coeffs ", {1, 2, 3, 4, 5}, 
+   "\n estimated Taylor coeffs", {1}, "\n data from Taylor ", {1}, 
+   "\n taylor to Bezier transform ", 
+   MatrixForm[{{1}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1}}], "\n Bezier coeffs ", {1}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.755116455277235*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"a7ef5bfd-b5cb-4445-ac05-8d59090226f4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["179", "81"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0"},
+       {
+        RowBox[{"-", "3"}], "3"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["98", "27"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["179", "81"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0"},
+       {"1", 
+        FractionBox["1", "4"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0"},
+       {
+        RowBox[{"-", "2"}], "3"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["125", "27"]}], "}"}]}],
+  SequenceForm[4, " ", 2, "\n data", {1, 
+    Rational[179, 81]}, "\n data to Taylor transform ", 
+   MatrixForm[{{1, 0}, {-3, 3}}], "\n True Taylor coeffs ", {1, 2, 3, 4, 5}, 
+   "\n estimated Taylor coeffs", {1, 
+    Rational[98, 27]}, "\n data from Taylor ", {1, 
+    Rational[179, 81]}, "\n taylor to Bezier transform ", 
+   MatrixForm[{{1, 0}, {1, 
+      Rational[1, 4]}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1, 0}, {-2, 3}}], "\n Bezier coeffs ", {1, 
+    Rational[125, 27]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.755116455280805*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"cfb33930-d4d1-4a70-af49-5783b8acc8ed"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["179", "81"], ",", 
+     FractionBox["473", "81"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["9", "2"]}], "6", 
+        RowBox[{"-", 
+         FractionBox["3", "2"]}]},
+       {
+        FractionBox["9", "2"], 
+        RowBox[{"-", "9"}], 
+        FractionBox["9", "2"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "0", ",", 
+     FractionBox["98", "9"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["179", "81"], ",", 
+     FractionBox["473", "81"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {"1", 
+        FractionBox["1", "4"], "0"},
+       {"1", 
+        FractionBox["1", "2"], 
+        FractionBox["1", "6"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["7", "2"]}], "6", 
+        RowBox[{"-", 
+         FractionBox["3", "2"]}]},
+       {"4", 
+        RowBox[{"-", "12"}], "9"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", 
+     FractionBox["811", "27"]}], "}"}]}],
+  SequenceForm[4, " ", 3, "\n data", {1, 
+    Rational[179, 81], 
+    Rational[473, 81]}, "\n data to Taylor transform ", 
+   MatrixForm[{{1, 0, 0}, {
+      Rational[-9, 2], 6, 
+      Rational[-3, 2]}, {
+      Rational[9, 2], -9, 
+      Rational[9, 2]}}], "\n True Taylor coeffs ", {1, 2, 3, 4, 5}, 
+   "\n estimated Taylor coeffs", {1, 0, 
+    Rational[98, 9]}, "\n data from Taylor ", {1, 
+    Rational[179, 81], 
+    Rational[473, 81]}, "\n taylor to Bezier transform ", 
+   MatrixForm[{{1, 0, 0}, {1, 
+      Rational[1, 4], 0}, {1, 
+      Rational[1, 2], 
+      Rational[1, 6]}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1, 0, 0}, {
+      Rational[-7, 2], 6, 
+      Rational[-3, 2]}, {4, -12, 9}}], "\n Bezier coeffs ", {1, 1, 
+    Rational[811, 27]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.7551164552847023`*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"2722df05-b7cc-400c-ab28-bbc7dcaae28d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["179", "81"], ",", 
+     FractionBox["473", "81"], ",", "15"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["11", "2"]}], "9", 
+        RowBox[{"-", 
+         FractionBox["9", "2"]}], "1"},
+       {"9", 
+        RowBox[{"-", 
+         FractionBox["45", "2"]}], "18", 
+        RowBox[{"-", 
+         FractionBox["9", "2"]}]},
+       {
+        RowBox[{"-", 
+         FractionBox["9", "2"]}], 
+        FractionBox["27", "2"], 
+        RowBox[{"-", 
+         FractionBox["27", "2"]}], 
+        FractionBox["9", "2"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["28", "9"], ",", 
+     RowBox[{"-", 
+      FractionBox["28", "9"]}], ",", "14"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["179", "81"], ",", 
+     FractionBox["473", "81"], ",", "15"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0"},
+       {"1", 
+        FractionBox["1", "4"], "0", "0"},
+       {"1", 
+        FractionBox["1", "2"], 
+        FractionBox["1", "6"], "0"},
+       {"1", 
+        FractionBox["3", "4"], 
+        FractionBox["1", "2"], 
+        FractionBox["1", "4"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["9", "2"]}], "9", 
+        RowBox[{"-", 
+         FractionBox["9", "2"]}], "1"},
+       {"14", 
+        RowBox[{"-", "42"}], "39", 
+        RowBox[{"-", "10"}]},
+       {
+        RowBox[{"-", 
+         FractionBox["31", "2"]}], "63", 
+        RowBox[{"-", 
+         FractionBox["171", "2"]}], "39"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["37", "9"], ",", 
+     RowBox[{"-", 
+      FractionBox["29", "27"]}], ",", 
+     FractionBox["1885", "9"]}], "}"}]}],
+  SequenceForm[4, " ", 4, "\n data", {1, 
+    Rational[179, 81], 
+    Rational[473, 81], 15}, "\n data to Taylor transform ", 
+   MatrixForm[{{1, 0, 0, 0}, {
+      Rational[-11, 2], 9, 
+      Rational[-9, 2], 1}, {9, 
+      Rational[-45, 2], 18, 
+      Rational[-9, 2]}, {
+      Rational[-9, 2], 
+      Rational[27, 2], 
+      Rational[-27, 2], 
+      Rational[9, 2]}}], "\n True Taylor coeffs ", {1, 2, 3, 4, 5}, 
+   "\n estimated Taylor coeffs", {1, 
+    Rational[28, 9], 
+    Rational[-28, 9], 14}, "\n data from Taylor ", {1, 
+    Rational[179, 81], 
+    Rational[473, 81], 15}, "\n taylor to Bezier transform ", 
+   MatrixForm[{{1, 0, 0, 0}, {1, 
+      Rational[1, 4], 0, 0}, {1, 
+      Rational[1, 2], 
+      Rational[1, 6], 0}, {1, 
+      Rational[3, 4], 
+      Rational[1, 2], 
+      Rational[1, 4]}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1, 0, 0, 0}, {
+      Rational[-9, 2], 9, 
+      Rational[-9, 2], 1}, {14, -42, 39, -10}, {
+      Rational[-31, 2], 63, 
+      Rational[-171, 2], 39}}], "\n Bezier coeffs ", {1, 
+    Rational[37, 9], 
+    Rational[-29, 27], 
+    Rational[1885, 9]}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.755116455288919*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"15c17910-592c-4a21-8033-9a1d5634feca"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+  "4", "\[InvisibleSpace]", "\<\" \"\>", "\[InvisibleSpace]", "5", 
+   "\[InvisibleSpace]", "\<\"\\n data\"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["179", "81"], ",", 
+     FractionBox["473", "81"], ",", "15", ",", 
+     FractionBox["2777", "81"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data to Taylor transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["25", "4"]}], "12", 
+        RowBox[{"-", "9"}], "4", 
+        RowBox[{"-", 
+         FractionBox["3", "4"]}]},
+       {
+        FractionBox["105", "8"], 
+        RowBox[{"-", "39"}], 
+        FractionBox["171", "4"], 
+        RowBox[{"-", "21"}], 
+        FractionBox["33", "8"]},
+       {
+        RowBox[{"-", 
+         FractionBox["45", "4"]}], 
+        FractionBox["81", "2"], 
+        RowBox[{"-", "54"}], 
+        FractionBox["63", "2"], 
+        RowBox[{"-", 
+         FractionBox["27", "4"]}]},
+       {
+        FractionBox["27", "8"], 
+        RowBox[{"-", 
+         FractionBox["27", "2"]}], 
+        FractionBox["81", "4"], 
+        RowBox[{"-", 
+         FractionBox["27", "2"]}], 
+        FractionBox["27", "8"]}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n True Taylor coeffs \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n estimated Taylor coeffs\"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4", ",", "5"}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n data from Taylor \"\>", "\[InvisibleSpace]", 
+   
+   RowBox[{"{", 
+    RowBox[{"1", ",", 
+     FractionBox["179", "81"], ",", 
+     FractionBox["473", "81"], ",", "15", ",", 
+     FractionBox["2777", "81"]}], "}"}], 
+   "\[InvisibleSpace]", "\<\"\\n taylor to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0", "0"},
+       {"1", 
+        FractionBox["1", "4"], "0", "0", "0"},
+       {"1", 
+        FractionBox["1", "2"], 
+        FractionBox["1", "6"], "0", "0"},
+       {"1", 
+        FractionBox["3", "4"], 
+        FractionBox["1", "2"], 
+        FractionBox["1", "4"], "0"},
+       {"1", "1", "1", "1", "1"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n data to Bezier transform \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"(", "\[NoBreak]", GridBox[{
+       {"1", "0", "0", "0", "0"},
+       {
+        RowBox[{"-", 
+         FractionBox["21", "4"]}], "12", 
+        RowBox[{"-", "9"}], "4", 
+        RowBox[{"-", 
+         FractionBox["3", "4"]}]},
+       {
+        FractionBox["47", "2"], 
+        RowBox[{"-", "80"}], "96", 
+        RowBox[{"-", "48"}], 
+        FractionBox["19", "2"]},
+       {
+        RowBox[{"-", 
+         FractionBox["371", "4"]}], "372", 
+        RowBox[{"-", "549"}], "348", 
+        RowBox[{"-", 
+         FractionBox["309", "4"]}]},
+       {"330", 
+        RowBox[{"-", "1440"}], "2376", 
+        RowBox[{"-", "1760"}], "495"}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Center}}, "ColumnsIndexed" -> {}, 
+        "Rows" -> {{Baseline}}, "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.4]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}], "\[NoBreak]", ")"}],
+    Function[BoxForm`e$, 
+     MatrixForm[BoxForm`e$]]], 
+   "\[InvisibleSpace]", "\<\"\\n Bezier coeffs \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "3", ",", "13", ",", "95", ",", "1593"}], "}"}]}],
+  SequenceForm[4, " ", 5, "\n data", {1, 
+    Rational[179, 81], 
+    Rational[473, 81], 15, 
+    Rational[2777, 81]}, "\n data to Taylor transform ", 
+   MatrixForm[{{1, 0, 0, 0, 0}, {
+      Rational[-25, 4], 12, -9, 4, 
+      Rational[-3, 4]}, {
+      Rational[105, 8], -39, 
+      Rational[171, 4], -21, 
+      Rational[33, 8]}, {
+      Rational[-45, 4], 
+      Rational[81, 2], -54, 
+      Rational[63, 2], 
+      Rational[-27, 4]}, {
+      Rational[27, 8], 
+      Rational[-27, 2], 
+      Rational[81, 4], 
+      Rational[-27, 2], 
+      Rational[27, 8]}}], "\n True Taylor coeffs ", {1, 2, 3, 4, 5}, 
+   "\n estimated Taylor coeffs", {1, 2, 3, 4, 5}, "\n data from Taylor ", {
+   1, 
+    Rational[179, 81], 
+    Rational[473, 81], 15, 
+    Rational[2777, 81]}, "\n taylor to Bezier transform ", 
+   MatrixForm[{{1, 0, 0, 0, 0}, {1, 
+      Rational[1, 4], 0, 0, 0}, {1, 
+      Rational[1, 2], 
+      Rational[1, 6], 0, 0}, {1, 
+      Rational[3, 4], 
+      Rational[1, 2], 
+      Rational[1, 4], 0}, {1, 1, 1, 1, 1}}], "\n data to Bezier transform ", 
+   MatrixForm[{{1, 0, 0, 0, 0}, {
+      Rational[-21, 4], 12, -9, 4, 
+      Rational[-3, 4]}, {
+      Rational[47, 2], -80, 96, -48, 
+      Rational[19, 2]}, {
+      Rational[-371, 4], 372, -549, 348, 
+      Rational[-309, 4]}, {330, -1440, 2376, -1760, 495}}], 
+   "\n Bezier coeffs ", {1, 3, 13, 95, 1593}],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.755093594344469*^9, 3.75511624293996*^9, 
+  3.755116289216761*^9, 3.755116362820466*^9, 3.755116411097629*^9, 
+  3.755116455293309*^9},
+ CellLabel->
+  "During evaluation of \
+In[310]:=",ExpressionUUID->"ae8bb9ab-eb4e-47df-a1de-1701b55d3b74"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 905},
+WindowMargins->{{Automatic, 304}, {Automatic, 0}},
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 5, \
+2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 19076, 437, 1231, "Input",ExpressionUUID->"b8e1865e-2b94-4f3e-b2ca-74172de0274c"],
+Cell[CellGroupData[{
+Cell[19681, 463, 3321, 84, 177, "Print",ExpressionUUID->"4e1a8fa6-c767-4243-a323-bfcb18bd0826"],
+Cell[23005, 549, 3610, 94, 241, "Print",ExpressionUUID->"313c9ca5-eaf6-4aac-98ba-1cd270a299a4"],
+Cell[26618, 645, 4210, 114, 334, "Print",ExpressionUUID->"0febc669-6aa2-446c-a55e-f83e0fc304b1"],
+Cell[30831, 761, 3334, 84, 177, "Print",ExpressionUUID->"a3184b5c-0f01-465a-a7c4-c53ce100b0b3"],
+Cell[34168, 847, 3820, 102, 306, "Print",ExpressionUUID->"c5c4f4a2-450c-4c41-943e-f0f14911a29e"],
+Cell[37991, 951, 4147, 111, 348, "Print",ExpressionUUID->"2e4371ad-ae12-41b8-a66d-82415e5e6074"],
+Cell[42141, 1064, 5036, 139, 453, "Print",ExpressionUUID->"b17bb118-c4cd-4173-a1e0-746a71182b97"],
+Cell[47180, 1205, 3347, 84, 177, "Print",ExpressionUUID->"a7ef5bfd-b5cb-4445-ac05-8d59090226f4"],
+Cell[50530, 1291, 3847, 102, 306, "Print",ExpressionUUID->"cfb33930-d4d1-4a70-af49-5783b8acc8ed"],
+Cell[54380, 1395, 4630, 129, 410, "Print",ExpressionUUID->"2722df05-b7cc-400c-ab28-bbc7dcaae28d"],
+Cell[59013, 1526, 5672, 164, 504, "Print",ExpressionUUID->"15c17910-592c-4a21-8033-9a1d5634feca"],
+Cell[64688, 1692, 6463, 185, 556, "Print",ExpressionUUID->"ae8bb9ab-eb4e-47df-a1de-1701b55d3b74"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
